@@ -3,7 +3,6 @@ package ecnu.testing.meethere.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
