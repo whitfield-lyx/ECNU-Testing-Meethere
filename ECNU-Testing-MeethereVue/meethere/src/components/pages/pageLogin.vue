@@ -32,7 +32,7 @@ export default {
   methods: {
     login () {
       this.$router.push({
-        name: 'Main',
+        path: '/Main/Booking',
         params: {
           username: this.userName,
           userType: this.userType

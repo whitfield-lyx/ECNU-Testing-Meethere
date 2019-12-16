@@ -3,13 +3,17 @@
     <el-container>
       <el-aside>
         <el-menu default-active="" class="el-menu-vertical-demo" :router="true">
-          <el-menu-item index="News" :class="{'isActive': active}" >
+          <el-menu-item index="Message" :class="{'isActive': active}" >
             <i class="el-icon-menu"></i>
-            <span slot="title">查看新闻</span>
+            <span slot="title">查看留言</span>
           </el-menu-item>
-          <el-menu-item index="PublishNews" :class="{'isActive': active}" >
+          <el-menu-item index="Publish" :class="{'isActive': active}" >
             <i class="el-icon-menu"></i>
-            <span slot="title">发布新闻</span>
+            <span slot="title">发布留言</span>
+          </el-menu-item>
+          <el-menu-item index="Verify" :class="{'isActive': active}" >
+            <i class="el-icon-menu"></i>
+            <span slot="title">审核留言</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
@@ -17,8 +21,9 @@
         <el-main>
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>管理员1</span>
-              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+              <span>用户1</span>
+              <el-button style="float: right; padding: 3px 0" type="text">审核通过</el-button>
+              <el-button style="float: right; padding: 3px 15px" type="text">删除</el-button>
             </div>
             <div v-for="o in 4" :key="o" class="text item">
               {{'列表内容 ' + o }}
@@ -40,7 +45,7 @@
 
 <script>
 export default {
-  name: 'pageNews'
+  name: 'pageVerifyMessage'
 }
 </script>
 

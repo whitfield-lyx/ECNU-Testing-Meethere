@@ -3,13 +3,13 @@
     <el-container>
       <el-aside>
         <el-menu default-active="" class="el-menu-vertical-demo" :router="true">
-          <el-menu-item index="Message" :class="{'isActive': active}" >
+          <el-menu-item index="News" :class="{'isActive': active}" >
             <i class="el-icon-menu"></i>
-            <span slot="title">查看留言</span>
+            <span slot="title">查看新闻</span>
           </el-menu-item>
           <el-menu-item index="Publish" :class="{'isActive': active}" >
             <i class="el-icon-menu"></i>
-            <span slot="title">发布留言</span>
+            <span slot="title">发布新闻</span>
           </el-menu-item>
         </el-menu>
       </el-aside>

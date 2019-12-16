@@ -11,6 +11,10 @@
             <i class="el-icon-menu"></i>
             <span slot="title">发布留言</span>
           </el-menu-item>
+          <el-menu-item index="Verify" :class="{'isActive': active}" >
+            <i class="el-icon-menu"></i>
+            <span slot="title">审核留言</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <el-container>
@@ -22,24 +26,6 @@
           </div>
           <div v-for="o in 4" :key="o" class="text item">
             {{'列表内容 ' + o }}
-          </div>
-        </el-card>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>用户1</span>
-            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-          </div>
-          <div v-for="o in 4" :key="o" class="text item">
-            {{'列表内容 ' + o }}
-          </div>
-        </el-card>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>用户2</span>
-            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-          </div>
-          <div v-for="o in 4" :key="o" class="text item">
-            {{'列表内容 '}}
           </div>
         </el-card>
       </el-main>

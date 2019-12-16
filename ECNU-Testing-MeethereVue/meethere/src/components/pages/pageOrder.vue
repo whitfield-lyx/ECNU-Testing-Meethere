@@ -42,13 +42,8 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <edit-button></edit-button>
+          <delete-button></delete-button>
         </template>
       </el-table-column>
     </el-table>
@@ -56,8 +51,11 @@
 </template>
 
 <script>
+import EditButton from '../buttons/editButton'
+import DeleteButton from '../buttons/deleteButton'
 export default {
   name: 'pageOrder',
+  components: {DeleteButton, EditButton},
   data () {
     return {
       tableData: [{

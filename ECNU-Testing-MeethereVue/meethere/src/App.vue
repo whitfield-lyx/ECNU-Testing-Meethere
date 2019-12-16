@@ -4,7 +4,7 @@
       <el-link href="#/" style = "font-size: 30px" type="primary" >Welcome to the MeetHere System！</el-link>
       <el-row v-if="$route.meta.keepalive">
         <el-col :span="24">
-          <el-menu default-active="5" class="el-menu-demo" mode="horizontal"  :router="true">
+          <el-menu default-active="/Main/Booking" class="el-menu-demo" mode="horizontal"  :router="true">
             <el-menu-item index= "/Main/Booking">
               <i class="el-icon-star-on"></i>
               场馆预约
