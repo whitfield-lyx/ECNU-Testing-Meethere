@@ -15,7 +15,9 @@
       </el-aside>
       <el-container>
         <el-main>
-        <news-card class="box-card"></news-card>
+          <el-form v-for="news in News">
+            <news-card class="box-card" v-bind:news-data="news"></news-card>
+          </el-form>
         </el-main>
         <el-footer>
           <el-pagination
@@ -37,7 +39,17 @@ export default {
   components: {NewsCard},
   data () {
     return {
-      tableData: [{}]
+      News: [{
+        username: '废柴阿翔',
+        context: 'Hello!Hello!Hello!Hello!Hello!',
+        time: '2019-12-17'
+      },
+      {
+        username: '废柴阿翔2',
+        context: 'Hello!Hello!Hello!Hello!Hello!',
+        time: '2019-12-17'
+      }
+      ]
     }
   },
   mounted () {
@@ -67,5 +79,6 @@ export default {
 <style scoped>
   .box-card {
     width: 1080px;
+    margin-bottom: 20px;
   }
 </style>

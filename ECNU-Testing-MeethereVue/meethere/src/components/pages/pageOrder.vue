@@ -66,7 +66,7 @@ export default {
       }]
     }
   },
-  methods:{
+  methods: {
     deleteOrder () {
       this.$message({
         type: 'success',

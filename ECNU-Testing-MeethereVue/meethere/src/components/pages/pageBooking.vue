@@ -10,19 +10,19 @@
       </el-menu>
     </div>
     <!-- 右侧主内容区 -->
-        <div  class="main-right" >
+        <div class="main-right" >
           <div class="block">
-            <el-row :gutter="30" type="flex" class="row-bg">
-              <el-col :span="12">
+            <el-row :gutter="30" type="flex" class="row-bg" style="margin-bottom: 20px">
+              <el-col :span="12" align="auto">
                 <div class="grid-content bg-purple">
                   <span>名称：</span>
                   <el-input v-model="input" placeholder="请输入场地名称" clearable style="width: 200px"></el-input>
                 </div>
               </el-col>
-              <el-col :span="2">
+              <el-col align="auto" :span="2">
                 <el-button type="warning" round @click="SearchStadium">搜索</el-button>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="8" align="auto">
                   <el-date-picker
                     v-model="day"
                     type="date"
@@ -30,7 +30,7 @@
                     :picker-options="pickerOptions">
                   </el-date-picker>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="8" align="auto">
                 <el-time-select
                   v-model="hour"
                   :picker-options="{
@@ -40,14 +40,14 @@
                   placeholder="选择时间">
                 </el-time-select>
               </el-col>
-              <el-col :span="5">
+              <el-col :span="8" align="auto">
                 <el-input-number v-model="timeLength" @change="handleChange" :min="1" :max="8" label="时长"></el-input-number>
               </el-col>
             </el-row>
             <template>
               <el-table
                 :data="placeData"
-                style="width: 100%; margin-top: 20px"
+                style="margin-top: 20px"
                 :row-class-name="tableRowClassName">
                 <el-table-column
                   prop="placeName"

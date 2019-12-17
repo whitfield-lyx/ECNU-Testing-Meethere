@@ -19,7 +19,9 @@
       </el-aside>
       <el-container>
       <el-main>
-        <message-card class="box-card"></message-card>
+        <el-form v-for="message in Messages">
+          <message-card class="box-card" v-bind:messages-data="message"></message-card>
+        </el-form>
       </el-main>
       <el-footer>
         <el-pagination
@@ -41,7 +43,17 @@ export default {
   components: {MessageCard},
   data () {
     return {
-      tableData: [{}]
+      Messages: [{
+        username: '废柴阿翔',
+        context: 'Hello!Hello!Hello!Hello!Hello!',
+        time: '2019-12-17'
+      },
+      {
+        username: '废柴阿翔2',
+        context: 'Hello!Hello!Hello!Hello!Hello!',
+        time: '2019-12-17'
+      }
+      ]
     }
   },
   mounted () {
@@ -70,5 +82,6 @@ export default {
 <style scoped>
   .box-card {
     width: 1080px;
+    margin-bottom: 20px;
   }
 </style>

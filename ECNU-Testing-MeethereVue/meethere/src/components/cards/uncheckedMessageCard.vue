@@ -20,11 +20,13 @@
 <script>
 export default {
   name: 'uncheckedMessageCard',
+  props: [
+    'messagesData'],
   data () {
     return {
-      username: '废柴阿翔',
-      context: 'Hello!Hello!Hello!Hello!Hello!',
-      time: '2019-12-17'
+      username: this.messagesData.username,
+      context: this.messagesData.context,
+      time: this.messagesData.time
     }
   }
 }

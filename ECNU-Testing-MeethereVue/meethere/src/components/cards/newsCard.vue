@@ -13,11 +13,13 @@
 <script>
 export default {
   name: 'newsCard',
+  props: [
+    'newsData'],
   data () {
     return {
-      username: '废柴阿翔',
-      context: 'Hello!Hello!Hello!Hello!Hello!',
-      time: '2019-12-17'
+      username: this.newsData.username,
+      context: this.newsData.context,
+      time: this.newsData.time
     }
   }
 }
