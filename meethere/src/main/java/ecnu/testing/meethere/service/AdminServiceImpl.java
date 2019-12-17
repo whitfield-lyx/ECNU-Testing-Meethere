@@ -26,6 +26,7 @@ public class AdminServiceImpl implements AdminService {
      *  说明：保存一个实体，null的属性也会保存，不会使用数据库默认值 *
      *  @param entity
      *  @return */
+    @Override
     public int save(Admin entity) {
         return adminMapper.insert(entity);
     }

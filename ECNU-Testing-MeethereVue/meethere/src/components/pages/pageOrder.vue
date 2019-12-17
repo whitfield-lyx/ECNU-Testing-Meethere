@@ -6,7 +6,7 @@
       style="width: 100%"
       :row-class-name="tableRowClassName">
       <el-table-column
-        prop="number"
+        prop="orderId"
         label="订单号"
         width="100">
       </el-table-column>
@@ -59,7 +59,7 @@ export default {
   data () {
     return {
       tableData: [{
-        number: '1',
+        orderId: '1',
         place: '大学生活动中心',
         startTime: '2019-12-13 11:00',
         endTime: '2019-12-13 14:00',
@@ -69,11 +69,25 @@ export default {
       }]
     }
   },
-  methods: {
-    handleEdit () {
-    },
-    handleDelete () {
-    }
+  mounted () {
+    var self = this
+    var order = []
+    self.$axios
+      .get('/orders')
+      .then(res => {
+        for (let i = 0; i < res.data.length; i++) {
+          var obj = {}
+          obj.orderId = res.data[i].orderId
+          obj.startTime = res.data[i].time
+          obj.money = res.data[i].money
+          order[i] = obj
+        }
+        self.tableData = order
+        console.log('数据获取成功', res)
+      })
+      .catch(function (error) {
+        console.log('数据获取失败', error)
+      })
   }
 }
 </script>
