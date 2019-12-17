@@ -3,7 +3,7 @@
     <!-- 左侧导航 -->
     <div class="main-left">
       <el-menu default-active="" class="el-menu-vertical-demo" :router="true">
-        <el-menu-item index="" :class="{'isActive': active}" >
+        <el-menu-item index="" >
           <i class="el-icon-menu"></i>
           <span slot="title">场馆列表</span>
         </el-menu-item>
@@ -12,25 +12,23 @@
     <!-- 右侧主内容区 -->
         <div  class="main-right" >
           <div class="block">
-            <el-row type="flex" class="row-bg">
+            <el-row :gutter="30" type="flex" class="row-bg">
               <el-col :span="12">
                 <div class="grid-content bg-purple">
                   <span>名称：</span>
                   <el-input v-model="input" placeholder="请输入场地名称" clearable style="width: 200px"></el-input>
-                  <search-button style="margin-left: 30px"></search-button>
                 </div>
               </el-col>
-              <el-col :span="12">
-                <div class=" ">
-                <span>请选择预约时间： </span>
+              <el-col :span="2">
+                <search-button></search-button>
+              </el-col>
+              <el-col :span="8">
                   <el-date-picker
                     v-model="day"
-                    align="right"
                     type="date"
                     placeholder="选择日期"
                     :picker-options="pickerOptions">
                   </el-date-picker>
-                </div>
               </el-col>
               <el-col :span="8">
                 <el-time-select
@@ -41,6 +39,9 @@
                    end: '24:00'}"
                   placeholder="选择时间">
                 </el-time-select>
+              </el-col>
+              <el-col :span="5">
+                <el-input-number v-model="timeLength" @change="handleChange" :min="1" :max="8" label="时长"></el-input-number>
               </el-col>
             </el-row>
             <template>
@@ -112,6 +113,7 @@ export default {
           address: '上海市普陀区金沙江路 1518 弄'
         }]
       },
+      timeLength: '',
       day: '',
       hour: '',
       placeData: [{
@@ -141,6 +143,9 @@ export default {
         return 'success-row'
       }
       return ''
+    },
+    handleChange (value) {
+      console.log(value)
     }
   }
 }

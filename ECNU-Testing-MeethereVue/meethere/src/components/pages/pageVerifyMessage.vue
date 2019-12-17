@@ -19,16 +19,7 @@
       </el-aside>
       <el-container>
         <el-main>
-          <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>用户1</span>
-              <el-button style="float: right; padding: 3px 0" type="text">审核通过</el-button>
-              <el-button style="float: right; padding: 3px 15px" type="text">删除</el-button>
-            </div>
-            <div v-for="o in 4" :key="o" class="text item">
-              {{'列表内容 ' + o }}
-            </div>
-          </el-card>
+          <unchecked-message-card class="box-card"></unchecked-message-card>
         </el-main>
         <el-footer>
           <el-pagination
@@ -44,32 +35,15 @@
 </template>
 
 <script>
+import UncheckedMessageCard from '../cards/uncheckedMessageCard'
 export default {
-  name: 'pageVerifyMessage'
+  name: 'pageVerifyMessage',
+  components: {UncheckedMessageCard}
 }
 </script>
 
 <style scoped>
-  .text {
-    font-size: 14px;
-  }
-  .box-card{
-    margin-bottom:20px;
-  }
-  .item {
-    margin-bottom: 18px;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
-  }
-
   .box-card {
-    width: 1100px;
+    width: 1080px;
   }
 </style>
