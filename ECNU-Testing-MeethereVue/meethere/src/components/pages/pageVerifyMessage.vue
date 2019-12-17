@@ -18,24 +18,25 @@
         </el-menu>
       </el-aside>
       <el-container>
-      <el-main>
-        <el-card class="box-card">
-          <div slot="header" class="clearfix">
-            <span>用户1</span>
-            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-          </div>
-          <div v-for="o in 4" :key="o" class="text item">
-            {{'列表内容 ' + o }}
-          </div>
-        </el-card>
-      </el-main>
-      <el-footer>
-        <el-pagination
-          small
-          layout="prev, pager, next"
-          :total="50">
-        </el-pagination>
-      </el-footer>
+        <el-main>
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>用户1</span>
+              <el-button style="float: right; padding: 3px 0" type="text">审核通过</el-button>
+              <el-button style="float: right; padding: 3px 15px" type="text">删除</el-button>
+            </div>
+            <div v-for="o in 4" :key="o" class="text item">
+              {{'列表内容 ' + o }}
+            </div>
+          </el-card>
+        </el-main>
+        <el-footer>
+          <el-pagination
+            small
+            layout="prev, pager, next"
+            :total="50">
+          </el-pagination>
+        </el-footer>
       </el-container>
     </el-container>
     <router-view></router-view>
@@ -44,7 +45,7 @@
 
 <script>
 export default {
-  name: 'pageMessage'
+  name: 'pageVerifyMessage'
 }
 </script>
 

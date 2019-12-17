@@ -5,9 +5,12 @@
         <el-col :span="12">
           <div>
             <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-              <el-form-item label="用户名" prop="userName">
+              <el-form-item label="账号" prop="userName">
                 <el-input v-model="ruleForm.userName"></el-input>
               </el-form-item>
+              <el-form-item label="昵称" prop="userNickName">
+              <el-input v-model="ruleForm.userName"></el-input>
+            </el-form-item>
               <el-form-item label="密码" prop="pass">
                 <el-input type="passWords" v-model="ruleForm.pass" autocomplete="off"></el-input>
               </el-form-item>
@@ -53,7 +56,8 @@ export default {
       ruleForm: {
         pass: '',
         checkPass: '',
-        userName: ''
+        userName: '',
+        userNickName: ''
       },
       rules: {
         pass: [

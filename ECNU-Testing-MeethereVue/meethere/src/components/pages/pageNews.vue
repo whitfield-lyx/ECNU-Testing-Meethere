@@ -17,29 +17,11 @@
         <el-main>
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>管理员1</span>
+              <span>标题</span>
               <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
             </div>
             <div v-for="o in 4" :key="o" class="text item">
               {{'列表内容 ' + o }}
-            </div>
-          </el-card>
-          <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>管理员1</span>
-              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-            </div>
-            <div v-for="o in 4" :key="o" class="text item">
-              {{'列表内容 ' + o }}
-            </div>
-          </el-card>
-          <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>管理员2</span>
-              <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-            </div>
-            <div v-for="o in 4" :key="o" class="text item">
-              {{'列表内容 '}}
             </div>
           </el-card>
         </el-main>
@@ -58,7 +40,32 @@
 
 <script>
 export default {
-  name: 'pageNews'
+  name: 'pageNews',
+  data () {
+    return {
+      tableData: [{}],
+      mounted () {
+        var self = this
+        var news = []
+        self.$axios
+          .get('/news')
+          .then(res => {
+            for (let i = 0; i < res.data.length; i++) {
+              var obj = {}
+              obj.title = res.data[i].title
+              obj.content = res.data[i].content
+              obj.time = res.data[i].time
+              news[i] = obj
+            }
+            self.tableData = news
+            console.log('新闻获取成功', res)
+          })
+          .catch(function (error) {
+            console.log('新闻获取失败', error)
+          })
+      }
+    }
+  }
 }
 </script>
 

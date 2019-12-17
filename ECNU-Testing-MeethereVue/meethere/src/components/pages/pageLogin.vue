@@ -9,7 +9,7 @@
             </div>
           <div>
             <el-input v-model="userName" placeholder="请输入用户名" clearable class="input_style"> </el-input>
-            <el-input v-model="passWords" placeholder="请输入密码" show-password class="input_style"> </el-input>
+            <el-input v-model="passWord" placeholder="请输入密码" show-password class="input_style"> </el-input>
             <el-button type="primary" @click="login" class="login_style">登录</el-button>
             <el-button  @click="signIn" class="login_style">注册</el-button>
           </div>
@@ -25,19 +25,43 @@ export default {
   data () {
     return {
       userName: '',
-      passWords: '',
-      userType: 'user'
+      passWord: '',
+      userType: 'user',
+      responseResult: ''
     }
   },
   methods: {
     login () {
-      this.$router.push({
-        name: 'Main',
-        params: {
-          username: this.userName,
-          userType: this.userType
-        }
-      })
+      this.$router.replace({path: '/Main/Booking'})
+      if (this.userType === 'user') {
+        this.$axios
+          .post('/user/login', {
+            userName: this.userName,
+            passWord: this.passWord
+          })
+          .then(successResponse => {
+            this.responseResult = JSON.stringify(successResponse.data)
+            if (successResponse.data.code === 200) {
+              this.$router.replace({path: '/Main/Booking'})
+            }
+          })
+          .catch(failResponse => {
+          })
+      } else {
+        this.$axios
+          .post('/admin/login', {
+            userName: this.userName,
+            passWord: this.passWord
+          })
+          .then(successResponse => {
+            this.responseResult = JSON.stringify(successResponse.data)
+            if (successResponse.data.code === 200) {
+              this.$router.replace({path: '/Main/Booking'})
+            }
+          })
+          .catch(failResponse => {
+          })
+      }
     },
     signIn () {
       this.$router.push({

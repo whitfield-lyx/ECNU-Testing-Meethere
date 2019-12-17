@@ -10,6 +10,10 @@
           <i class="el-icon-menu"></i>
           <span slot="title">发布留言</span>
         </el-menu-item>
+      <el-menu-item index="Verify" :class="{'isActive': active}" >
+        <i class="el-icon-menu"></i>
+        <span slot="title">审核留言</span>
+      </el-menu-item>
       </el-menu>
   </el-aside>
   <el-main>

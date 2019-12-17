@@ -10,6 +10,7 @@ import pageOrder from '../components/pages/pageOrder'
 import pagePublishMessage from '../components/pages/pagePublishMessage'
 import pagePublishNews from '../components/pages/pagePublishNews'
 import pageSignIn from '../components/pages/pageSignIn'
+import pageVerifyMessage from '../components/pages/pageVerifyMessage'
 
 Vue.use(Router)
 
@@ -93,6 +94,14 @@ export default new Router({
           component: pageSignIn,
           meta: {
             keepalive: false
+          }
+        },
+        {
+          path: 'Verify',
+          name: 'Verify',
+          component: pageVerifyMessage,
+          meta: {
+            keepalive: true
           }
         }
       ]

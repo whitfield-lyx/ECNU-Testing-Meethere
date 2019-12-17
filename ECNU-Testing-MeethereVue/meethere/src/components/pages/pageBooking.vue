@@ -13,31 +13,40 @@
         <div  class="main-right" >
           <div class="block">
             <el-row type="flex" class="row-bg">
-              <el-col :span="10">
+              <el-col :span="12">
                 <div class="grid-content bg-purple">
                   <span>名称：</span>
                   <el-input v-model="input" placeholder="请输入场地名称" clearable style="width: 200px"></el-input>
-                </div></el-col>
-              <el-col :span="15">
+                  <search-button style="margin-left: 30px"></search-button>
+                </div>
+              </el-col>
+              <el-col :span="12">
                 <div class=" ">
-                <span>日期: </span>
+                <span>请选择预约时间： </span>
                   <el-date-picker
-                    v-model="value2"
-                    type="datetimerange"
+                    v-model="day"
                     align="right"
-                    unlink-panels
-                    range-separator="至"
-                    start-placeholder="开始日期"
-                    end-placeholder="结束日期"
+                    type="date"
+                    placeholder="选择日期"
                     :picker-options="pickerOptions">
                   </el-date-picker>
                 </div>
+              </el-col>
+              <el-col :span="8">
+                <el-time-select
+                  v-model="hour"
+                  :picker-options="{
+                  start: '08:00',
+                  step: '01:00',
+                   end: '24:00'}"
+                  placeholder="选择时间">
+                </el-time-select>
               </el-col>
             </el-row>
             <template>
               <el-table
                 :data="placeData"
-                style="width: 100%"
+                style="width: 100%; margin-top: 20px"
                 :row-class-name="tableRowClassName">
                 <el-table-column
                   prop="placeName"
@@ -56,10 +65,10 @@
                 <el-table-column
                   fixed="right"
                   label="操作"
-                  width="100">
+                  width="200">
                   <template slot-scope="scope">
-                    <el-button @click="checkClick(scope.row)" type="text" size="small">查看</el-button>
-                    <el-button @click="bookClick(scope.row)" type="text" size="small">预约</el-button>
+                    <view-button></view-button>
+                    <book-button></book-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -71,33 +80,18 @@
 </template>
 
 <script>
+import SearchButton from '../buttons/searchButton'
+import ViewButton from '../buttons/viewButton'
+import BookButton from '../buttons/bookButton'
 export default {
+  components: {BookButton, ViewButton, SearchButton},
   data () {
     return {
       pickerOptions: {
         shortcuts: [{
-          text: '最近一周',
+          text: '今天',
           onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近一个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-            picker.$emit('pick', [start, end])
-          }
-        }, {
-          text: '最近三个月',
-          onClick (picker) {
-            const end = new Date()
-            const start = new Date()
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-            picker.$emit('pick', [start, end])
+            picker.$emit('pick', new Date())
           }
         }],
         placeData: [{
@@ -118,8 +112,8 @@ export default {
           address: '上海市普陀区金沙江路 1518 弄'
         }]
       },
-      value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
-      value2: '',
+      day: '',
+      hour: '',
       placeData: [{
         placeName: '体育馆',
         price: '400',
@@ -147,18 +141,6 @@ export default {
         return 'success-row'
       }
       return ''
-    },
-    checkClick (row) {
-      this.$message({
-        message: '查看场馆',
-        type: 'success'
-      })
-    },
-    bookClick (row) {
-      this.$message({
-        message: '预约场馆',
-        type: 'success'
-      })
     }
   }
 }
