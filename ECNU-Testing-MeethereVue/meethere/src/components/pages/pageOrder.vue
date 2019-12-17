@@ -42,8 +42,8 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <edit-button></edit-button>
-          <delete-button></delete-button>
+          <el-button type="primary" icon="el-icon-edit" circle  @click="editOrder"></el-button>
+          <el-button type="danger" icon="el-icon-delete" circle @click="deleteOrder"></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -51,11 +51,8 @@
 </template>
 
 <script>
-import EditButton from '../buttons/editButton'
-import DeleteButton from '../buttons/deleteButton'
 export default {
   name: 'pageOrder',
-  components: {DeleteButton, EditButton},
   data () {
     return {
       tableData: [{
@@ -67,6 +64,20 @@ export default {
         address: '普陀区中山北路3663号',
         money: '400'
       }]
+    }
+  },
+  methods:{
+    deleteOrder () {
+      this.$message({
+        type: 'success',
+        message: '删除成功!'
+      })
+    },
+    editOrder () {
+      this.$message({
+        type: 'success',
+        message: '编辑成功!'
+      })
     }
   },
   mounted () {

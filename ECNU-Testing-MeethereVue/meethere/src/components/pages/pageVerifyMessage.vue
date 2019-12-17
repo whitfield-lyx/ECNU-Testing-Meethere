@@ -38,7 +38,6 @@
 import UncheckedMessageCard from '../cards/uncheckedMessageCard'
 export default {
   name: 'pageVerifyMessage',
-  components: {UncheckedMessageCard}
 }
 </script>
 

@@ -27,24 +27,23 @@
             </el-input>
           </el-col>
         </el-row>
-        <PublishButton @click="publishNews" class="button"></PublishButton>
+        <el-button type="warning" round @click="PublishNews">发布！</el-button>
       </el-main>
     </el-container>
   </div>
 </template>
 
 <script>
-import PublishButton from '../buttons/publishButton'
+
 export default {
   name: 'pagePublishNews',
-  components: {PublishButton},
   data () {
     return {
       textarea: ''
     }
   },
   methods: {
-    publishNews () {
+    PublishNews () {
       this.$confirm('确认发布吗？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

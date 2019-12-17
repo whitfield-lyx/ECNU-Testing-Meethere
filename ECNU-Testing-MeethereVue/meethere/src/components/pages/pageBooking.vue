@@ -20,7 +20,7 @@
                 </div>
               </el-col>
               <el-col :span="2">
-                <search-button></search-button>
+                <el-button type="warning" round @click="SearchStadium">搜索</el-button>
               </el-col>
               <el-col :span="8">
                   <el-date-picker
@@ -68,8 +68,8 @@
                   label="操作"
                   width="200">
                   <template slot-scope="scope">
-                    <view-button></view-button>
-                    <book-button></book-button>
+                    <el-button type="info" round @click="ViewStadium">查看</el-button>
+                    <el-button type="primary" round @click="BookStadium">预约</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -81,11 +81,7 @@
 </template>
 
 <script>
-import SearchButton from '../buttons/searchButton'
-import ViewButton from '../buttons/viewButton'
-import BookButton from '../buttons/bookButton'
 export default {
-  components: {BookButton, ViewButton, SearchButton},
   data () {
     return {
       pickerOptions: {
@@ -146,8 +142,27 @@ export default {
     },
     handleChange (value) {
       console.log(value)
+    },
+    BookStadium () {
+      this.$message({
+        type: 'success',
+        message: '预约成功!'
+      })
+    },
+    ViewStadium () {
+      this.$message({
+        type: 'success',
+        message: '查看成功!'
+      })
+    },
+    SearchStadium () {
+      this.$message({
+        type: 'success',
+        message: '搜索成功!'
+      })
     }
   }
+
 }
 </script>
 
