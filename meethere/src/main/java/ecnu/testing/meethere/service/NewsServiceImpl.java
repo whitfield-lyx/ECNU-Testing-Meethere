@@ -41,4 +41,9 @@ public class NewsServiceImpl implements NewsService {
     public List<News> selectByExample(NewsExample example) {
         return newsMapper.selectByExample(example);
     }
+
+    @Override
+    public List<News> selectAllNews(){
+        return  newsMapper.selectAllNews();
+    }
 }

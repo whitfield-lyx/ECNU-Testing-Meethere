@@ -63,4 +63,6 @@ public interface NewsMapper {
      * @mbg.generated Mon Dec 16 21:18:55 CST 2019
      */
     int updateByPrimaryKey(News record);
+
+    List<News> selectAllNews();
 }

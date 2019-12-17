@@ -12,4 +12,6 @@ public interface NewsService{
     public int updateAll(News entity);
     public int updateNotNull(News entity);
     public List<News> selectByExample(NewsExample example);
+
+    public List<News> selectAllNews();
 }

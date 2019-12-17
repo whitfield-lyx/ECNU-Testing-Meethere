@@ -63,4 +63,6 @@ public interface MessageMapper {
      * @mbg.generated Mon Dec 16 21:18:55 CST 2019
      */
     int updateByPrimaryKey(Message record);
+
+    List<Message> selectAllMessage();
 }
