@@ -12,4 +12,6 @@ public interface MessageService {
     public int updateAll(Message entity);
     public int updateNotNull(Message entity);
     public List<Message> selectByExample(MessageExample example);
+
+    public List<Message> selectAllMessage();
 }

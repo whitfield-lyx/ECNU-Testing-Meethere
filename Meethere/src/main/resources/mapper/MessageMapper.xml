@@ -178,4 +178,7 @@
       is_checked = #{isChecked,jdbcType=TINYINT}
     where message_id = #{messageId,jdbcType=INTEGER}
   </update>
+  <select id="selectAllMessage" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from meethere.message order by time DESC
+  </select>
 </mapper>

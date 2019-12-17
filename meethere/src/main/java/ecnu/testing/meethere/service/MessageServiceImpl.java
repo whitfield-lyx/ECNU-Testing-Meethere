@@ -42,4 +42,9 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> selectByExample(MessageExample example) {
         return messageMapper.selectByExample(example);
     }
+
+    @Override
+    public List<Message> selectAllMessage(){
+        return  messageMapper.selectAllMessage();
+    }
 }

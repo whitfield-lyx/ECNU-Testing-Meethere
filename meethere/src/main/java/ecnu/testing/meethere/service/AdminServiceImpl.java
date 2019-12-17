@@ -3,6 +3,7 @@ package ecnu.testing.meethere.service;
 import ecnu.testing.meethere.mapper.AdminMapper;
 import ecnu.testing.meethere.model.Admin;
 import ecnu.testing.meethere.model.AdminExample;
+import ecnu.testing.meethere.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,4 +65,18 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.selectByExample(example);
     }
 
+    @Override
+    public Result login(Admin admin){
+        Integer id = admin.getAdminId();
+        System.out.println("user id is "+id+" password is "+admin.getPassword());
+        Admin myUser = selectByKey(id);
+        if(myUser == null){
+            return ResultFactory.buildFailResult("不存在该管理员名");
+        }
+        if(!myUser.getPassword().equals(admin.getPassword())){
+            return ResultFactory.buildFailResult("管理员名或密码错误");
+        }else {
+            return ResultFactory.buildSuccessResult("管理员登录成功");
+        }
+    }
 }

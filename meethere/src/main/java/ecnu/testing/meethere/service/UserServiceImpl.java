@@ -3,6 +3,7 @@ package ecnu.testing.meethere.service;
 import ecnu.testing.meethere.mapper.UserMapper;
 import ecnu.testing.meethere.model.User;
 import ecnu.testing.meethere.model.UserExample;
+import ecnu.testing.meethere.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> selectByExample(UserExample example) {
         return userMapper.selectByExample(example);
+    }
+
+    @Override
+    public Result login(User user){
+        Integer id = user.getUserId();
+        System.out.println("user id is "+id+" password is "+user.getPassword());
+        User myUser = selectByKey(id);
+        if(myUser == null){
+            return ResultFactory.buildFailResult("不存在该用户名");
+        }
+        if(!myUser.getPassword().equals(user.getPassword())){
+            return ResultFactory.buildFailResult("用户名或密码错误");
+        }else {
+            return ResultFactory.buildSuccessResult("用户登录成功");
+        }
     }
 }
