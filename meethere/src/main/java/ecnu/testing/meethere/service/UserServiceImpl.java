@@ -45,9 +45,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result login(User user){
-        Integer id = user.getUserId();
-        System.out.println("user id is "+id+" password is "+user.getPassword());
-        User myUser = selectByKey(id);
+        Integer userId = user.getUserId();
+        System.out.println("user id is "+userId+" password is "+user.getPassword());
+        User myUser = selectByKey(userId);
         if(myUser == null){
             return ResultFactory.buildFailResult("不存在该用户名");
         }
@@ -56,5 +56,12 @@ public class UserServiceImpl implements UserService {
         }else {
             return ResultFactory.buildSuccessResult("用户登录成功");
         }
+    }
+
+    @Override
+    public int updatePassword(Integer userId, String password) {
+        User user = selectByKey(userId);
+        user.setPassword(password);
+        return userMapper.updateByPrimaryKey(user);
     }
 }

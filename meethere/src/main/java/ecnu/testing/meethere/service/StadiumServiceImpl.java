@@ -12,8 +12,9 @@ import java.util.List;
 public class StadiumServiceImpl implements StadiumService {
     @Autowired
     private StadiumMapper stadiumMapper;
+
     @Override
-    public Stadium selectByKey(Integer key) {
+    public Stadium selectByKey(String key) {
         return stadiumMapper.selectByPrimaryKey(key);
     }
 
@@ -23,7 +24,7 @@ public class StadiumServiceImpl implements StadiumService {
     }
 
     @Override
-    public int delete(Integer key) {
+    public int delete(String key) {
         return stadiumMapper.deleteByPrimaryKey(key);
     }
 
@@ -41,4 +42,10 @@ public class StadiumServiceImpl implements StadiumService {
     public List<Stadium> selectByExample(StadiumExample example) {
         return stadiumMapper.selectByExample(example);
     }
+
+    @Override
+    public List<Stadium> selectAllStadium() {
+        return stadiumMapper.selectAllStadium();
+    }
+
 }

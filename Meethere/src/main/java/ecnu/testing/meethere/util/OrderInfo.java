@@ -1,0 +1,87 @@
+package ecnu.testing.meethere.util;
+
+import ecnu.testing.meethere.model.Order;
+import ecnu.testing.meethere.model.Stadium;
+
+import java.util.Date;
+
+public class OrderInfo {
+    private Integer orderId;
+    private Integer userId;
+    private String stadiumId;
+    private Date time;
+    private Byte isChecked;
+    private String address;
+    private Integer price;
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getStadiumId() {
+        return stadiumId;
+    }
+
+    public void setStadiumId(String stadiumId) {
+        this.stadiumId = stadiumId;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public Byte getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(Byte isChecked) {
+        this.isChecked = isChecked;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public OrderInfo(Order order, Stadium stadium){
+        this.orderId = order.getOrderId();
+        this.userId = order.getUserId();
+        this.stadiumId = order.getStadiumId();
+        this.time = order.getTime();
+        this.isChecked = order.getIsChecked();
+        this.address = stadium.getAddress();
+        this.price = stadium.getPrice();
+    }
+
+    public void display(){
+        System.out.println("orderId: "+orderId+" userId: "+userId+" stadiumId: "+stadiumId+" time: "
+                +time+" isChecked: "+isChecked+" address: "+address+" price: "+price);
+    }
+}

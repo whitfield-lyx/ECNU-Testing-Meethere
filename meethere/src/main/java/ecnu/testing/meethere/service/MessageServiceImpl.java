@@ -45,6 +45,6 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> selectAllMessage(){
-        return  messageMapper.selectAllMessage();
+        return messageMapper.selectAllMessage();
     }
 }
