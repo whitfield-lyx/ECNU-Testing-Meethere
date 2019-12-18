@@ -19,16 +19,9 @@
       </el-aside>
       <el-container>
         <el-main>
-          <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>用户1</span>
-              <el-button style="float: right; padding: 3px 0" type="text">审核通过</el-button>
-              <el-button style="float: right; padding: 3px 15px" type="text">删除</el-button>
-            </div>
-            <div v-for="o in 4" :key="o" class="text item">
-              {{'列表内容 ' + o }}
-            </div>
-          </el-card>
+          <el-form v-for="message in Messages">
+            <unchecked-message-card class="box-card" v-bind:messages-data="message"></unchecked-message-card>
+          </el-form>
         </el-main>
         <el-footer>
           <el-pagination
@@ -44,32 +37,52 @@
 </template>
 
 <script>
+
+import UncheckedMessageCard from '../cards/uncheckedMessageCard'
 export default {
-  name: 'pageVerifyMessage'
+  name: 'pageVerifyMessage',
+  components: {UncheckedMessageCard},
+  data () {
+    return {
+      Messages: [{
+        username: '废柴阿翔',
+        context: 'Hello!Hello!Hello!Hello!Hello!',
+        time: '2019-12-17'
+      },
+      {
+        username: '废柴阿翔2',
+        context: 'Hello!Hello!Hello!Hello!Hello!',
+        time: '2019-12-17'
+      }
+      ]
+    }
+  },
+  mounted () {
+    var self = this
+    var news = []
+    self.$axios
+      .get('/messages')
+      .then(res => {
+        for (let i = 0; i < res.data.length; i++) {
+          var obj = {}
+          obj.userNickname = res.data[i].userNickname
+          obj.content = res.data[i].content
+          obj.time = res.data[i].time
+          news[i] = obj
+        }
+        self.tableData = news
+        console.log('留言获取成功', res)
+      })
+      .catch(function (error) {
+        console.log('留言获取失败', error)
+      })
+  }
 }
 </script>
 
 <style scoped>
-  .text {
-    font-size: 14px;
-  }
-  .box-card{
-    margin-bottom:20px;
-  }
-  .item {
-    margin-bottom: 18px;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-    display: table;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
-  }
-
   .box-card {
-    width: 1100px;
+    width: 1080px;
+    margin-bottom: 20px;
   }
 </style>

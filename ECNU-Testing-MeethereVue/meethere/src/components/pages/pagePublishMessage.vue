@@ -2,15 +2,15 @@
   <div><el-container>
   <el-aside>
     <el-menu default-active="" class="el-menu-vertical-demo" :router="true">
-        <el-menu-item index="Message" :class="{'isActive': active}" >
+        <el-menu-item index="Message" >
           <i class="el-icon-menu"></i>
           <span slot="title">查看留言</span>
         </el-menu-item>
-        <el-menu-item index="Publish" :class="{'isActive': active}" >
+        <el-menu-item index="Publish">
           <i class="el-icon-menu"></i>
           <span slot="title">发布留言</span>
         </el-menu-item>
-      <el-menu-item index="Verify" :class="{'isActive': active}" >
+      <el-menu-item index="Verify">
         <i class="el-icon-menu"></i>
         <span slot="title">审核留言</span>
       </el-menu-item>
@@ -31,21 +31,38 @@
          </el-input>
         </el-col>
       </el-row>
-    <PublishButton class="button"></PublishButton>
+    <el-button type="warning" round @click="PublishMessage">发布！</el-button>
   </el-main>
   </el-container>
   </div>
 </template>
 
 <script>
-import PublishButton from '../buttons/publishButton'
+
 export default {
   name: 'pagePublishMessage',
-  components: {PublishButton},
   data () {
     return {
       text: '',
       textarea: ''
+    }
+  },
+  methods: {
+    PublishMessage () {
+      this.$confirm('确认发布吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        var self = this
+        self.$axios
+          .post('/messages', {
+            context: '1',
+            userId: '1'
+          })
+      }).catch(function (error) {
+        console.log('失败', error)
+      })
     }
   }
 }

@@ -3,36 +3,34 @@
     <!-- 左侧导航 -->
     <div class="main-left">
       <el-menu default-active="" class="el-menu-vertical-demo" :router="true">
-        <el-menu-item index="" :class="{'isActive': active}" >
+        <el-menu-item index="" >
           <i class="el-icon-menu"></i>
           <span slot="title">场馆列表</span>
         </el-menu-item>
       </el-menu>
     </div>
     <!-- 右侧主内容区 -->
-        <div  class="main-right" >
+        <div class="main-right" >
           <div class="block">
-            <el-row type="flex" class="row-bg">
-              <el-col :span="12">
+            <el-row :gutter="30" type="flex" class="row-bg" style="margin-bottom: 20px">
+              <el-col :span="12" align="auto">
                 <div class="grid-content bg-purple">
                   <span>名称：</span>
                   <el-input v-model="input" placeholder="请输入场地名称" clearable style="width: 200px"></el-input>
-                  <search-button style="margin-left: 30px"></search-button>
                 </div>
               </el-col>
-              <el-col :span="12">
-                <div class=" ">
-                <span>请选择预约时间： </span>
+              <el-col align="auto" :span="2">
+                <el-button type="warning" round @click="SearchStadium">搜索</el-button>
+              </el-col>
+              <el-col :span="8" align="auto">
                   <el-date-picker
                     v-model="day"
-                    align="right"
                     type="date"
                     placeholder="选择日期"
                     :picker-options="pickerOptions">
                   </el-date-picker>
-                </div>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="8" align="auto">
                 <el-time-select
                   v-model="hour"
                   :picker-options="{
@@ -42,11 +40,14 @@
                   placeholder="选择时间">
                 </el-time-select>
               </el-col>
+              <el-col :span="8" align="auto">
+                <el-input-number v-model="timeLength" @change="handleChange" :min="1" :max="8" label="时长"></el-input-number>
+              </el-col>
             </el-row>
             <template>
               <el-table
                 :data="placeData"
-                style="width: 100%; margin-top: 20px"
+                style="margin-top: 20px"
                 :row-class-name="tableRowClassName">
                 <el-table-column
                   prop="placeName"
@@ -67,8 +68,8 @@
                   label="操作"
                   width="200">
                   <template slot-scope="scope">
-                    <view-button></view-button>
-                    <book-button></book-button>
+                    <el-button type="info" round @click="ViewStadium">查看</el-button>
+                    <el-button type="primary" round @click="BookStadium">预约</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -80,11 +81,7 @@
 </template>
 
 <script>
-import SearchButton from '../buttons/searchButton'
-import ViewButton from '../buttons/viewButton'
-import BookButton from '../buttons/bookButton'
 export default {
-  components: {BookButton, ViewButton, SearchButton},
   data () {
     return {
       pickerOptions: {
@@ -112,6 +109,7 @@ export default {
           address: '上海市普陀区金沙江路 1518 弄'
         }]
       },
+      timeLength: '',
       day: '',
       hour: '',
       placeData: [{
@@ -141,8 +139,30 @@ export default {
         return 'success-row'
       }
       return ''
+    },
+    handleChange (value) {
+      console.log(value)
+    },
+    BookStadium () {
+      this.$message({
+        type: 'success',
+        message: '预约成功!'
+      })
+    },
+    ViewStadium () {
+      this.$message({
+        type: 'success',
+        message: '查看成功!'
+      })
+    },
+    SearchStadium () {
+      this.$message({
+        type: 'success',
+        message: '搜索成功!'
+      })
     }
   }
+
 }
 </script>
 

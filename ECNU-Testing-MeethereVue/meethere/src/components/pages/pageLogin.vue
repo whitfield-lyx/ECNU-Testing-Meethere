@@ -42,6 +42,7 @@ export default {
           .then(successResponse => {
             this.responseResult = JSON.stringify(successResponse.data)
             if (successResponse.data.code === 200) {
+              localStorage.setItem('userName', this.userName)
               this.$router.replace({path: '/Main/Booking'})
             }
           })
