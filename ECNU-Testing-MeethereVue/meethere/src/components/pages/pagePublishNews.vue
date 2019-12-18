@@ -18,8 +18,16 @@
           <el-col>
             <el-input
               type="textarea"
+              placeholder="请输入标题"
+              v-model="title"
+              maxlength="20"
+              show-word-limit
+              class = "text-input">
+            </el-input>
+            <el-input
+              type="textarea"
               placeholder="请输入内容"
-              v-model="textarea"
+              v-model="content"
               maxlength="150"
               :autosize="{ minRows: 15}"
               show-word-limit
@@ -37,9 +45,11 @@
 
 export default {
   name: 'pagePublishNews',
+  inject: ['reload'],
   data () {
     return {
-      textarea: ''
+      title: '',
+      content: ''
     }
   },
   methods: {
@@ -53,11 +63,20 @@ export default {
         var self = this
         self.$axios
           .post('/news', {
-            context: this.textarea,
-            userId: '1'
+            newsId: '0',
+            title: this.title,
+            content: this.content,
+            name: 'test',
+            time: new Date()
           })
+        console.log('发布新闻成功')
+        this.$message({
+          message: '发布新闻成功',
+          type: 'success'
+        })
       }).catch(function (error) {
-        console.log('获取Player的Money失败', error)
+        console.log('发布新闻失败', error)
+        this.$message.error('发布失败')
       })
     }
   }

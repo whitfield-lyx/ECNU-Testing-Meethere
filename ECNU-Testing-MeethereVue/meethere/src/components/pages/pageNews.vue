@@ -15,16 +15,13 @@
       </el-aside>
       <el-container>
         <el-main>
-          <el-form v-for="news in News">
-            <news-card class="box-card" v-bind:news-data="news"></news-card>
+          <el-form >
+            <div v-for="news in News" v-bind:key="news.newsId">
+              <news-card class="box-card" v-bind:news-data="news"></news-card>
+            </div>
           </el-form>
         </el-main>
         <el-footer>
-          <el-pagination
-            small
-            layout="prev, pager, next"
-            :total="50">
-          </el-pagination>
         </el-footer>
       </el-container>
     </el-container>
@@ -40,13 +37,15 @@ export default {
   data () {
     return {
       News: [{
-        username: '废柴阿翔',
-        context: 'Hello!Hello!Hello!Hello!Hello!',
+        newsId: '1',
+        title: '废柴阿翔',
+        content: 'Hello!',
         time: '2019-12-17'
       },
       {
-        username: '废柴阿翔2',
-        context: 'Hello!Hello!Hello!Hello!Hello!',
+        newsId: '2',
+        title: '废柴阿翔2',
+        content: 'Hello!Hello!Hello!Hello!Hello!',
         time: '2019-12-17'
       }
       ]
@@ -60,12 +59,13 @@ export default {
       .then(res => {
         for (let i = 0; i < res.data.length; i++) {
           var obj = {}
+          obj.newsId = res.data[i].newsId
           obj.title = res.data[i].title
           obj.content = res.data[i].content
           obj.time = res.data[i].time
           news[i] = obj
         }
-        self.tableData = news
+        self.News = news
         console.log('新闻获取成功', res)
       })
       .catch(function (error) {

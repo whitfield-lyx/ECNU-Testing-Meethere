@@ -28,7 +28,7 @@ public class NewsController {
         return newsServiceImpl.selectByKey(id);
     }
 
-    @RequestMapping("/news")
+    @PostMapping("/news")
     @ResponseStatus(HttpStatus.CREATED)
     public int addNews(@RequestBody News news)
     {
