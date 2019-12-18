@@ -22,7 +22,7 @@
           <el-input
             type="textarea"
             placeholder="请输入内容"
-            v-model="textarea"
+            v-model="content"
             maxlength="150"
             :autosize="{ minRows: 15}"
             show-word-limit
@@ -41,10 +41,10 @@
 
 export default {
   name: 'pagePublishMessage',
+  inject: ['reload'],
   data () {
     return {
-      text: '',
-      textarea: ''
+      content: ''
     }
   },
   methods: {
@@ -54,14 +54,24 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        this.reload()
         var self = this
         self.$axios
-          .post('/messages', {
-            context: '1',
-            userId: '1'
+          .post('/message', {
+            messageId: '0',
+            userId: '0',
+            content: this.content,
+            time: new Date(),
+            isChecked: '0'
           })
+        console.log('发布留言成功')
+        this.$message({
+          message: '发布留言成功',
+          type: 'success'
+        })
       }).catch(function (error) {
-        console.log('失败', error)
+        console.log('发布留言失败', error)
+        this.$message.error('发布留言')
       })
     }
   }
