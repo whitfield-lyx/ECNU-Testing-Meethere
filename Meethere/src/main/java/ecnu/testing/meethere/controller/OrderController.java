@@ -47,7 +47,7 @@ public class OrderController {
     /**
      * 对用户 新增一个订单
      */
-    @RequestMapping("/newOrder")
+    @PutMapping("/newOrder")
     public Result addOrder(@RequestBody Order order){
         return orderServiceImpl.addOrder(order);
     }

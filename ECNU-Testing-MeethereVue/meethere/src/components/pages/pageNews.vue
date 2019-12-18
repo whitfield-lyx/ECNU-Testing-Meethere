@@ -72,7 +72,6 @@ export default {
         console.log('新闻获取失败', error)
       })
   }
-
 }
 </script>
 

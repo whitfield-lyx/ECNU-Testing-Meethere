@@ -34,7 +34,7 @@
                 <el-time-select
                   v-model="hour"
                   :picker-options="{
-                  start: '08:00',
+                  start: '00:00',
                   step: '01:00',
                    end: '24:00'}"
                   placeholder="选择时间">
@@ -50,7 +50,7 @@
                 style="margin-top: 20px"
                 :row-class-name="tableRowClassName">
                 <el-table-column
-                  prop="placeName"
+                  prop="stadiumId"
                   label="场馆"
                   width="180">
                 </el-table-column>
@@ -90,46 +90,50 @@ export default {
           onClick (picker) {
             picker.$emit('pick', new Date())
           }
-        }],
-        placeData: [{
-          placeName: '体育馆',
-          price: '400',
-          address: '上海市普陀区金沙江路 1515 弄'
-        }, {
-          placeName: '东操场',
-          price: '60',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          placeName: '大学生活动中心',
-          price: '40',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          placeName: '篮球场',
-          price: '200',
-          address: '上海市普陀区金沙江路 1518 弄'
         }]
       },
       timeLength: '',
       day: '',
       hour: '',
       placeData: [{
-        placeName: '体育馆',
+        stadiumId: '体育馆',
         price: '400',
         address: '上海市普陀区金沙江路 1515 弄'
       }, {
-        placeName: '东操场',
+        stadiumId: '东操场',
         price: '60',
         address: '上海市普陀区金沙江路 1516 弄'
       }, {
-        placeName: '大学生活动中心',
+        stadiumId: '大学生活动中心',
         price: '40',
         address: '上海市普陀区金沙江路 1517 弄'
       }, {
-        placeName: '篮球场',
+        stadiumId: '篮球场',
         price: '200',
         address: '上海市普陀区金沙江路 1518 弄'
       }]
     }
+  },
+  mounted () {
+    var self = this
+    var stadiums = []
+    self.$axios
+      .get('/stadium')
+      .then(res => {
+        for (let i = 0; i < res.data.length; i++) {
+          var obj = {}
+          obj.stadiumId = res.data[i].stadiumId
+          obj.time = res.data[i].time
+          obj.price = res.data[i].price
+          obj.address = res.data[i].address
+          stadiums[i] = obj
+        }
+        self.placeData = stadiums
+        console.log('场馆获取成功', res)
+      })
+      .catch(function (error) {
+        console.log('场馆获取失败', error)
+      })
   },
   methods: {
     tableRowClassName ({row, rowIndex}) {

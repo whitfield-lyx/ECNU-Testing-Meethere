@@ -14,6 +14,16 @@ public class OrderInfo {
     private String address;
     private Integer price;
 
+    public Integer getHour() {
+        return hour;
+    }
+
+    public void setHour(Integer hour) {
+        this.hour = hour;
+    }
+
+    private Integer hour;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -78,6 +88,7 @@ public class OrderInfo {
         this.isChecked = order.getIsChecked();
         this.address = stadium.getAddress();
         this.price = stadium.getPrice();
+        this.hour = order.getHour();
     }
 
     public void display(){
