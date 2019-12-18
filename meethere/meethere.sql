@@ -41,20 +41,20 @@ PRIMARY KEY(message_id)
 
 DROP TABLE IF EXISTS `stadium`;
 CREATE table stadium(
-auto_incr int NOT NULL AUTO_INCREMENT,
 stadium_id VARCHAR(20) NOT NULL,
-time DATETIME NOT NULL,
+time VARCHAR(500) DEFAULT NULL,
 price int NOT NULL,
 address VARCHAR(45) NOT NULL,
-PRIMARY KEY(auto_incr)
+PRIMARY KEY(stadium_id)
 );
 
 DROP TABLE IF EXISTS `order`;
 CREATE table order(
 order_id int NOT NULL AUTO_INCREMENT,
 user_id INT NOT NULL,
-stadium_id INT NOT NULL,
+stadium_id VARCHAR(20) NOT NULL,
 time DATETIME NOT NULL,
+hour INT NOT NULL DEFAULT 1,
 is_checked TINYINT NOT NULL DEFAULT 0,
 PRIMARY KEY(order_id)
 );
@@ -72,3 +72,8 @@ INSERT INTO news VALUES(3,'南京大屠杀死难者国家公祭仪式','近日�
 INSERT INTO user VALUES (1,'111111','user01','apple');
 INSERT INTO user VALUES (2,'111111','2_user','banana');
 INSERT INTO user VALUES (7,'123123','my333');
+
+INSERT INTO stadium VALUES ('东操场',NULL ,1000,'上海市中山北路3664号');
+INSERT INTO stadium VALUES ('中北乒乓球馆',NULL ,200,'上海市中山北路3663号');
+INSERT INTO stadium VALUES ('大活羽毛球馆',NULL ,300,'上海市金沙江路1556号');
+INSERT INTO stadium VALUES ('篮球馆',NULL ,400,'上海市金沙江路1567号');

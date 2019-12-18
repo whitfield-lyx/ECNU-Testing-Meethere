@@ -84,6 +84,7 @@ public class OrderServiceImpl implements OrderService {
         for(int i=0; i<order.getHour(); i++){
             String time = DateUtils.addHours(sdf.format(order.getTime()),i);
             if(bookedTime==null){
+                bookedTime="";
                 break;
             }
             if(bookedTime.contains(time)){
@@ -95,7 +96,7 @@ public class OrderServiceImpl implements OrderService {
         //并在bookedTime中加入新的时间
         for(int i=0; i<order.getHour(); i++){
             String time = DateUtils.addHours(sdf.format(order.getTime()),i);
-            bookedTime = bookedTime + time;
+            bookedTime = bookedTime + "\t" + time;
         }
         stadium.setTime(bookedTime);
         //更新stadium中的time字段
