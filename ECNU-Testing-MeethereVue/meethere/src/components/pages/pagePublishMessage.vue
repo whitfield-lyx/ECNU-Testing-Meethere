@@ -59,7 +59,7 @@ export default {
         self.$axios
           .post('/message', {
             messageId: '0',
-            userId: '0',
+            userId: '111',
             content: this.content,
             time: new Date(),
             isChecked: '0'

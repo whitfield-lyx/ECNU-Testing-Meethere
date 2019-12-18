@@ -29,8 +29,7 @@ public class MessageController {
         return messageServiceImpl.selectByKey(id);
     }
 
-
-    @PutMapping("/message")
+    @PostMapping("/message")
     @ResponseStatus(HttpStatus.CREATED)
     public void addMessage(@RequestBody Message message)
     {
