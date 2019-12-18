@@ -19,16 +19,11 @@
       </el-aside>
       <el-container>
       <el-main>
-        <el-form v-for="message in Messages">
-          <message-card class="box-card" v-bind:messages-data="message"></message-card>
-        </el-form>
+          <div v-for="message in messages" v-bind:key="message.time">
+            <message-card class="box-card" v-bind:messages-data="message"></message-card>
+          </div>
       </el-main>
       <el-footer>
-        <el-pagination
-          small
-          layout="prev, pager, next"
-          :total="50">
-        </el-pagination>
       </el-footer>
       </el-container>
     </el-container>
@@ -43,33 +38,37 @@ export default {
   components: {MessageCard},
   data () {
     return {
-      Messages: [{
-        username: '废柴阿翔',
+      messages: [{
+        userNickname: '废柴阿翔',
         context: 'Hello!Hello!Hello!Hello!Hello!',
         time: '2019-12-17'
       },
       {
-        username: '废柴阿翔2',
+        messageId: '1',
+        userId: '1',
         context: 'Hello!Hello!Hello!Hello!Hello!',
-        time: '2019-12-17'
+        time: '2019-12-17',
+        isChecked: '1'
       }
       ]
     }
   },
   mounted () {
     var self = this
-    var news = []
+    var messages = []
     self.$axios
-      .get('/messages')
+      .get('/message')
       .then(res => {
         for (let i = 0; i < res.data.length; i++) {
           var obj = {}
-          obj.userNickname = res.data[i].userNickname
+          obj.messageId = res.data[i].messageId
+          obj.userId = res.data[i].userId
           obj.content = res.data[i].content
           obj.time = res.data[i].time
-          news[i] = obj
+          obj.isChecked = res.data[i].isChecked
+          messages[i] = obj
         }
-        self.tableData = news
+        self.messages = messages
         console.log('留言获取成功', res)
       })
       .catch(function (error) {

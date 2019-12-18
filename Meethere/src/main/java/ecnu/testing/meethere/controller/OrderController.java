@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/api")
 public class OrderController {
     @Autowired
     private OrderServiceImpl orderServiceImpl;

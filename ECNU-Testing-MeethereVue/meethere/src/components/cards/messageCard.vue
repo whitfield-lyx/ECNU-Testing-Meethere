@@ -1,10 +1,10 @@
 <template>
   <el-card class="box-card">
     <div slot="header" >
-      <p class="publisher-text"><span>{{username}}</span></p>
+      <p class="publisher-text"><span>{{userId}}</span></p>
     </div>
-    <div >
-      {{context}}
+    <div style="text-align: left;text-indent:2em;">
+      {{content}}
     </div>
     <p style="text-align: right;"><span>{{time}}</span></p>
   </el-card>
@@ -17,8 +17,10 @@ export default {
     'messagesData'],
   data () {
     return {
-      username: this.messagesData.username,
-      context: this.messagesData.context,
+      messageId: this.messagesData.messageId,
+      userId: this.messagesData.userId,
+      isChecked: this.messagesData.isChecked,
+      content: this.messagesData.content,
       time: this.messagesData.time
     }
   }

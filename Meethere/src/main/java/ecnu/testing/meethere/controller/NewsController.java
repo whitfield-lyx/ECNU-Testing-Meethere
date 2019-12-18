@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 public class NewsController {
     @Autowired
     NewsServiceImpl newsServiceImpl;
@@ -29,7 +29,7 @@ public class NewsController {
         return newsServiceImpl.selectByKey(id);
     }
 
-    @RequestMapping("/news")
+    @PostMapping("/news")
     @ResponseStatus(HttpStatus.CREATED)
     public int addNews(@RequestBody News news)
     {
