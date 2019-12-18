@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `news`;
 CREATE table news(
 news_id int NOT NULL AUTO_INCREMENT,
 title VARCHAR(45) NOT NULL,
-content VARCHAR(45) NOT NULL,
+content VARCHAR(500) NOT NULL,
 time DATETIME NOT NULL,
 name  VARCHAR(20) NOT NULL,
 PRIMARY KEY(news_id)
@@ -53,7 +53,7 @@ DROP TABLE IF EXISTS `order`;
 CREATE table order(
 order_id int NOT NULL AUTO_INCREMENT,
 user_id INT NOT NULL,
-stadium_id INT(20) NOT NULL,
+stadium_id INT NOT NULL,
 time DATETIME NOT NULL,
 is_checked TINYINT NOT NULL DEFAULT 0,
 PRIMARY KEY(order_id)

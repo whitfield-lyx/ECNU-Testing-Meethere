@@ -15,4 +15,5 @@ public interface UserService {
     public List<User> selectByExample(UserExample example);
 
     public Result login(User user);
+    public int updatePassword(Integer userId, String password);
 }

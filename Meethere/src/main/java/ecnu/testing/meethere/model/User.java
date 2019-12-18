@@ -132,4 +132,5 @@ public class User {
     public void setNickname(String nickname) {
         this.nickname = nickname == null ? null : nickname.trim();
     }
+
 }
