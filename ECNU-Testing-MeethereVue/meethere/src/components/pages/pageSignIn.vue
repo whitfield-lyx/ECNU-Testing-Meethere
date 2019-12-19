@@ -87,6 +87,7 @@ export default {
                 message: '用户注册成功',
                 type: 'success'
               })
+              this.$refs[formName].resetFields()
             })
             .catch(failResponse => {
               console.log(this.ruleForm.userName, this.ruleForm.userNickName, this.ruleForm.pass)
