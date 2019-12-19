@@ -44,22 +44,6 @@
 export default {
   name: 'pageInformation',
   data () {
-    var checkAge = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('年龄不能为空'))
-      }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error('请输入数字值'))
-        } else {
-          if (value < 18) {
-            callback(new Error('必须年满18岁'))
-          } else {
-            callback()
-          }
-        }
-      }, 1000)
-    }
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'))
@@ -82,8 +66,8 @@ export default {
     return {
       personForm: {
         userNickname: '废柴阿翔',
-        userName: 'user123',
-        userType: 'admin'
+        userName: sessionStorage.getItem('userName'),
+        userType: sessionStorage.getItem('userType')
       },
       ruleForm: {
         pass: '',
@@ -96,9 +80,6 @@ export default {
         ],
         checkPass: [
           { validator: validatePass2, trigger: 'blur' }
-        ],
-        age: [
-          { validator: checkAge, trigger: 'blur' }
         ]
       }
     }

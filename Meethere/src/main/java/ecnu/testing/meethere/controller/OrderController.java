@@ -28,7 +28,7 @@ public class OrderController {
     /**
      * 对管理员 审核通过某个订单
      */
-    @PostMapping("/check/{id}")
+    @PutMapping("/check/{id}")
     public int checkOrder(@PathVariable("id") Integer orderId)
     {
         return orderServiceImpl.checkOrder(orderId);

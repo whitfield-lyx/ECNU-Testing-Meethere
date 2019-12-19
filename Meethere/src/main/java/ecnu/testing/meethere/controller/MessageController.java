@@ -58,7 +58,7 @@ public class MessageController {
     /**
      * 管理员 审核通过某个留言
      */
-    @PostMapping("/check/{id}")
+    @PutMapping("/message/check/{id}")
     public int checkMessage(@PathVariable("id") Integer messageId)
     {
         return messageServiceImpl.checkMessage(messageId);

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 //@SessionAttributes("userId")
 public class UserController {
     @Autowired
@@ -19,11 +19,11 @@ public class UserController {
     /**
      * 用户登录
      */
-    @RequestMapping("/login")
+    @PostMapping("/login")
     @ResponseBody
     public Result Login(@RequestBody User user, HttpSession session){
         Result result = userServiceImpl.login(user);
-        if(result.getCode()==200/*SUCCESS CODE*/){
+        if(result.getCode()==200 /*SUCCESS CODE*/){
             session.setAttribute("userId",user.getUserId());
         }
         return result;

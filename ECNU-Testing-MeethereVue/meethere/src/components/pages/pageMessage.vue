@@ -3,15 +3,15 @@
     <el-container>
       <el-aside>
         <el-menu default-active="" class="el-menu-vertical-demo" :router="true">
-          <el-menu-item index="Message" :class="{'isActive': active}" >
+          <el-menu-item index="Message" >
             <i class="el-icon-menu"></i>
             <span slot="title">查看留言</span>
           </el-menu-item>
-          <el-menu-item index="Publish" :class="{'isActive': active}" >
+          <el-menu-item index="Publish" >
             <i class="el-icon-menu"></i>
             <span slot="title">发布留言</span>
           </el-menu-item>
-          <el-menu-item index="Verify" :class="{'isActive': active}" >
+          <el-menu-item index="Verify" >
             <i class="el-icon-menu"></i>
             <span slot="title">审核留言</span>
           </el-menu-item>

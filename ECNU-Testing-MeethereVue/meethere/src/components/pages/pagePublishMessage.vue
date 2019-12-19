@@ -61,7 +61,7 @@ export default {
             messageId: '0',
             userId: '1',
             content: this.content,
-            time: new Date(),
+            time: '2019-08-08 08:00:00',
             isChecked: '0'
           })
         console.log('发布留言成功')

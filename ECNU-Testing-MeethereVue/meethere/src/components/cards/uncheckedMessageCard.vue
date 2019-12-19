@@ -2,13 +2,13 @@
   <el-card class="box-card">
     <div slot="header" >
         <el-row >
-          <el-col :span="6">
+          <el-col :span=6>
             <span class="publisher-text">{{nickname}}</span>
           </el-col>
-          <el-col :span="4">
+          <el-col :span=4>
             <span class="publisher-text">{{checked}}</span>
           </el-col>
-          <el-col :span="8" :offset="6">
+          <el-col :span=8 :offset=6>
             <el-button type="primary" icon="el-icon-check" @click="checkMessage"  circle ></el-button>
             <el-button type="danger" icon="el-icon-close" @click="deleteMessage"  circle ></el-button>
           </el-col>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  inject:['reload'],
+  inject: ['reload'],
   name: 'uncheckedMessageCard',
   props: [
     'messagesData'],
@@ -52,7 +52,7 @@ export default {
         this.reload()
         var self = this
         self.$axios
-          .post('/message/check/' + this.messageId)
+          .put('/message/check/' + this.messageId)
         console.log('审核留言成功')
         this.$message({
           message: '审核留言成功',

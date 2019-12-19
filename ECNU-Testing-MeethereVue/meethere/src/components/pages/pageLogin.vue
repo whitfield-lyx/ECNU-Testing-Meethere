@@ -8,8 +8,8 @@
               <el-radio v-model="userType" label="admin" border size="medium" class="chooseUser">管理员</el-radio>
             </div>
           <div>
-            <el-input v-model="userName" placeholder="请输入用户名" clearable class="input_style"> </el-input>
-            <el-input v-model="passWord" placeholder="请输入密码" show-password class="input_style"> </el-input>
+            <el-input v-model="username" placeholder="请输入用户名" clearable class="input_style"> </el-input>
+            <el-input v-model="password" placeholder="请输入密码" show-password class="input_style"> </el-input>
             <el-button type="primary" @click="login" class="login_style">登录</el-button>
             <el-button  @click="signIn" class="login_style">注册</el-button>
           </div>
@@ -24,29 +24,40 @@ export default {
   name: 'pageLogin',
   data () {
     return {
-      userName: '',
-      passWord: '',
+      username: '',
+      password: '',
       userType: 'user',
       responseResult: ''
     }
   },
   methods: {
     login () {
-      this.$router.replace({path: '/Main/Booking'})
       if (this.userType === 'user') {
         this.$axios
           .post('/user/login', {
-            userName: this.userName,
-            passWord: this.passWord
+            userId: this.username,
+            password: this.password
           })
           .then(successResponse => {
             this.responseResult = JSON.stringify(successResponse.data)
             if (successResponse.data.code === 200) {
-              localStorage.setItem('userName', this.userName)
+              sessionStorage.setItem('userName', this.username)
+              sessionStorage.setItem('userType', this.userType)
               this.$router.replace({path: '/Main/Booking'})
+              this.$message({
+                message: '用户登录成功',
+                type: 'success'
+              })
             }
           })
           .catch(failResponse => {
+            console.log(this.username, this.password)
+            console.log('用户登录失败')
+            console.log(failResponse)
+            this.$message({
+              message: '用户登录失败',
+              type: 'warning'
+            })
           })
       } else {
         this.$axios
@@ -58,9 +69,14 @@ export default {
             this.responseResult = JSON.stringify(successResponse.data)
             if (successResponse.data.code === 200) {
               this.$router.replace({path: '/Main/Booking'})
+              this.$message({
+                message: '管理员登录成功',
+                type: 'success'
+              })
             }
           })
           .catch(failResponse => {
+            console.log('管理员登录失败')
           })
       }
     },
