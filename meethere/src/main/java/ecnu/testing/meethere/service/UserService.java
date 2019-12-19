@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserService {
     public User selectByKey(Integer key);
-    public int save(User entity);
+    public Result save(User user);
     public int delete(Integer key);
     public int updateAll(User entity);
     public int updateNotNull(User entity);

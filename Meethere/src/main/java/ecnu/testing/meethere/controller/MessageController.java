@@ -52,7 +52,7 @@ public class MessageController {
     @DeleteMapping("/message/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public int deleteMessageByID(@PathVariable("id") Integer id){
-        return  messageServiceImpl.delete(id);
+        return messageServiceImpl.delete(id);
     }
 
     /**

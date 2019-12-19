@@ -67,16 +67,29 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Result login(Admin admin){
-        Integer id = admin.getAdminId();
-        System.out.println("user id is "+id+" password is "+admin.getPassword());
-        Admin myUser = selectByKey(id);
-        if(myUser == null){
+        /* 此处只含有name与password信息 */
+        String name = admin.getName();
+        System.out.println("admin name is "+name+" password is "+admin.getPassword());
+        Admin myAdmin = adminMapper.selectByName(name);
+        if(myAdmin == null){
             return ResultFactory.buildFailResult("不存在该管理员名");
         }
-        if(!myUser.getPassword().equals(admin.getPassword())){
+        if(!myAdmin.getPassword().equals(admin.getPassword())){
             return ResultFactory.buildFailResult("管理员名或密码错误");
         }else {
             return ResultFactory.buildSuccessResult("管理员登录成功");
+        }
+    }
+
+    @Override
+    public Integer getIdByName(String name) {
+        Admin admin = adminMapper.selectByName(name);
+        if(admin==null){
+            System.out.println("不存在该管理员名");
+            return 0;
+        }
+        else{
+            return admin.getAdminId();
         }
     }
 }

@@ -1,6 +1,7 @@
 package ecnu.testing.meethere.controller;
 
 import ecnu.testing.meethere.model.News;
+import ecnu.testing.meethere.service.AdminServiceImpl;
 import ecnu.testing.meethere.service.NewsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,8 @@ import java.util.List;
 public class NewsController {
     @Autowired
     NewsServiceImpl newsServiceImpl;
+    @Autowired
+    AdminServiceImpl adminServiceImpl;
 
     /**
      * 获取所有新闻
@@ -39,8 +42,10 @@ public class NewsController {
      */
     @PostMapping("/news")
     @ResponseStatus(HttpStatus.CREATED)
-    public int addNews(@RequestBody News news)
+    public int addNews(@SessionAttribute Integer adminId, @RequestBody News news)
     {
+        /* 根据session中adminId设定news的admin name */
+        news.setName(adminServiceImpl.selectByKey(adminId).getName());
         System.out.println("Title of news is "+news.getTitle());
         System.out.println("Content of news is "+news.getContent());
         System.out.println("Time of news is "+news.getTime());
@@ -54,6 +59,6 @@ public class NewsController {
     @DeleteMapping("/news/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public int deleteNewsByID(@PathVariable("id") Integer id){
-        return  newsServiceImpl.delete(id);
+        return newsServiceImpl.delete(id);
     }
 }
