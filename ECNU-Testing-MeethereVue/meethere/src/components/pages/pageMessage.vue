@@ -20,7 +20,7 @@
       <el-container>
       <el-main>
           <div v-for="message in messages" v-bind:key="message.time">
-            <message-card class="box-card" v-bind:messages-data="message"></message-card>
+            <message-card class="box-card" v-bind:messages-data="message" v-if="message.isChecked==1"></message-card>
           </div>
       </el-main>
       <el-footer>

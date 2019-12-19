@@ -10,10 +10,10 @@
         <div>
           <el-form ref="form" :model="personForm" label-width="100px" >
             <el-form-item label="昵称:">
-              <el-input  :disabled="true" v-model="personForm.userNickname"></el-input>
+              <span>{{personForm.userNickname}}</span>
             </el-form-item>
             <el-form-item label="账号:">
-              <el-input :disabled="true" v-model="personForm.userName"></el-input>
+              <span>{{personForm.userName}}</span>
             </el-form-item>
             <el-form-item label="用户类型:">
               <el-radio-group v-model="personForm.userType" disabled>
