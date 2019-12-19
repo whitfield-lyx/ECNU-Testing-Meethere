@@ -29,6 +29,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public int delete(Integer key) {
+        Order order = selectByKey(key);
+        Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());
+        String deleteTime = "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(int i=0; i<order.getHour(); i++){
+            String time = DateUtils.addHours(sdf.format(order.getTime()),i);
+            deleteTime = deleteTime + "\t" + time;
+
+        }
+        String time = stadium.getTime();
+        stadium.setTime(time.replace(deleteTime,""));
+        stadiumMapper.updateByPrimaryKey(stadium);
         return orderMapper.deleteByPrimaryKey(key);
     }
 

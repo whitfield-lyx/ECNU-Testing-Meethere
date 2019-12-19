@@ -26,7 +26,7 @@ public class MessageController {
     }
 
     /**
-     * 获取特定留言 仅测试用
+     * 获取指定留言 仅测试用
      */
     @GetMapping("/message/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -40,8 +40,9 @@ public class MessageController {
      */
     @PostMapping("/message")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addMessage(@RequestBody Message message)
+    public void addMessage(@SessionAttribute Integer userId, @RequestBody Message message)
     {
+        message.setUserId(userId);
         messageServiceImpl.save(message);
     }
 
