@@ -1,5 +1,6 @@
 package ecnu.testing.meethere.util;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import ecnu.testing.meethere.model.Order;
 import ecnu.testing.meethere.model.Stadium;
 
@@ -9,6 +10,7 @@ public class OrderInfo {
     private Integer orderId;
     private Integer userId;
     private String stadiumId;
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date time;
     private Byte isChecked;
     private String address;
