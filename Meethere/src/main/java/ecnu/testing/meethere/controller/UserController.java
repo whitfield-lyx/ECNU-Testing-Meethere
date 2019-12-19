@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 //@SessionAttributes("userId")
 public class UserController {
     @Autowired
@@ -19,7 +19,7 @@ public class UserController {
     /**
      * 用户登录
      */
-    @RequestMapping("/login")
+    @PostMapping("/login")
     @ResponseBody
     public Result Login(@RequestBody User user/*此处只含有name与password信息*/, HttpSession session){
         Result result = userServiceImpl.login(user);

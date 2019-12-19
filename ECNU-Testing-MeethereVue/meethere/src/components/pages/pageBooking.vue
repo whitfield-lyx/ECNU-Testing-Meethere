@@ -16,7 +16,7 @@
               <el-col :span="12" align="auto">
                 <div class="grid-content bg-purple">
                   <span>名称：</span>
-                  <el-input v-model="input" placeholder="请输入场地名称" clearable style="width: 200px"></el-input>
+                  <el-input v-model="stadiumId" placeholder="请输入场地名称" clearable style="width: 200px"></el-input>
                 </div>
               </el-col>
               <el-col align="auto" :span="2">
@@ -68,7 +68,7 @@
                   label="操作"
                   width="200">
                   <template slot-scope="scope">
-                    <el-button type="info" round @click="ViewStadium">查看</el-button>
+                    <el-button type="info" round @click="ViewStadium">查看详情</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -94,6 +94,7 @@ export default {
       timeLength: '',
       day: '',
       hour: '',
+      stadiumId: '',
       placeData: [{
         stadiumId: '体育馆',
         price: '400',

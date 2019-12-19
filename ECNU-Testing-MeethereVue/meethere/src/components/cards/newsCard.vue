@@ -2,11 +2,11 @@
   <el-card class="box-card">
     <div slot="header" >
       <el-row>
-        <el-col span="18">
+        <el-col :span=18>
           <span class="publisher-text">{{title}}</span>
         </el-col>
-        <el-col offset="4" span="2">
-          <el-button type="danger" icon="el-icon-close" circle @click="deleteNews" ></el-button>
+        <el-col :offset=4 :span=2>
+          <el-button v-if="userType==='admin' " type="danger" icon="el-icon-close" circle @click="deleteNews" ></el-button>
         </el-col>
       </el-row>
     </div>
@@ -28,7 +28,8 @@ export default {
       title: this.newsData.title,
       content: this.newsData.content,
       time: this.newsData.time,
-      newsId: this.newsData.newsId
+      newsId: this.newsData.newsId,
+      userType: sessionStorage.getItem('userType')
     }
   },
   methods: {

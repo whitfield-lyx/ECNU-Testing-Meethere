@@ -7,7 +7,7 @@
             <i class="el-icon-menu"></i>
             <span slot="title">查看新闻</span>
           </el-menu-item>
-          <el-menu-item index="PublishNews" >
+          <el-menu-item index="PublishNews" v-if="userType==='admin'" >
             <i class="el-icon-menu"></i>
             <span slot="title">发布新闻</span>
           </el-menu-item>
@@ -48,7 +48,8 @@ export default {
         content: 'Hello!Hello!Hello!Hello!Hello!',
         time: '2019-12-17'
       }
-      ]
+      ],
+      userType: sessionStorage.getItem('userType')
     }
   },
   mounted () {

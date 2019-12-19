@@ -10,7 +10,7 @@
           <i class="el-icon-menu"></i>
           <span slot="title">发布留言</span>
         </el-menu-item>
-      <el-menu-item index="Verify">
+      <el-menu-item index="Verify" v-if="userType==='admin'">
         <i class="el-icon-menu"></i>
         <span slot="title">审核留言</span>
       </el-menu-item>
@@ -44,7 +44,8 @@ export default {
   inject: ['reload'],
   data () {
     return {
-      content: ''
+      content: '',
+      userType: sessionStorage.getItem('userType')
     }
   },
   methods: {
@@ -59,9 +60,9 @@ export default {
         self.$axios
           .post('/message', {
             messageId: '0',
-            userId: '1',
+            userId: sessionStorage.getItem('username'),
             content: this.content,
-            time: new Date(),
+            time: '2019-08-08 08:00:00',
             isChecked: '0'
           })
         console.log('发布留言成功')

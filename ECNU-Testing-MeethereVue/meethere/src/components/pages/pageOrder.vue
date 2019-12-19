@@ -3,8 +3,7 @@
     <el-table
       :data="tableData"
       stripe
-      style="width: 100%"
-      :row-class-name="tableRowClassName">
+      style="width: 100%">
       <el-table-column
         prop="orderId"
         label="订单号"
@@ -24,6 +23,7 @@
         prop="isChecked"
         label="是否审核"
         width="180">
+        <span>{{checked}}</span>
       </el-table-column>
       <el-table-column
         prop="hour"
@@ -42,8 +42,7 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-check"  circle @click="checkOrder(scope.row)" ></el-button>
-          <el-button type="primary" icon="el-icon-edit" circle  @click="editOrder(scope.row)"></el-button>
+          <el-button type="primary"  v-if="userType==='admin'" icon="el-icon-check"  circle @click="checkOrder(scope.row)" ></el-button>
           <el-button type="danger" icon="el-icon-delete" circle @click="deleteOrder(scope.row)"></el-button>
         </template>
       </el-table-column>
@@ -65,36 +64,17 @@ export default {
         isChecked: '0',
         hour: '3',
         address: '普陀区中山北路3663号',
-        price: '400',
-        computed: {
-          checked: function () {
-            if (this.isChecked == 0) { return '未审核' } else { return '已审核' }
-          }
-        }
-      }]
+        price: '400'
+      }],
+      userType: sessionStorage.getItem('userType')
+    }
+  },
+  computed: {
+    checked: function () {
+      if (this.isChecked === 0) { return '未审核' } else { return '已审核' }
     }
   },
   methods: {
-    editOrder (row) {
-      this.$confirm('确认编辑吗？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.reload()
-        var self = this
-        self.$axios
-          .post('/order/check/' + row.orderId)
-        console.log('编辑订单成功')
-        this.$message({
-          message: '编辑订单成功',
-          type: 'success'
-        })
-      }).catch(function (error) {
-        console.log('编辑订单失败', error)
-        this.$message.error('编辑订单失败')
-      })
-    },
     checkOrder (row) {
       this.$confirm('确认审核吗？', '提示', {
         confirmButtonText: '确定',
@@ -104,7 +84,7 @@ export default {
         this.reload()
         var self = this
         self.$axios
-          .post('/order/check/' + row.orderId)
+          .put('/order/check/' + row.orderId)
         console.log('审核订单成功')
         this.$message({
           message: '审核订单成功',

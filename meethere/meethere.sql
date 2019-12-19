@@ -77,3 +77,6 @@ INSERT INTO stadium VALUES ('东操场',NULL ,1000,'上海市中山北路3664号
 INSERT INTO stadium VALUES ('中北乒乓球馆',NULL ,200,'上海市中山北路3663号');
 INSERT INTO stadium VALUES ('大活羽毛球馆',NULL ,300,'上海市金沙江路1556号');
 INSERT INTO stadium VALUES ('篮球馆',NULL ,400,'上海市金沙江路1567号');
+
+INSERT INTO `order` VALUES (1,'1','中北乒乓球馆','2019-10-12 13:00:00',2,0);
+INSERT INTO `order` VALUES (2,'7','大活羽毛球馆','2019-12-12 15:00:00',1,1);

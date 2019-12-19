@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/api/admin")
 public class AdminController {
     @Autowired
     private AdminServiceImpl adminServiceImpl;
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     @ResponseBody
     public Result Login(@RequestBody Admin admin){
         return adminServiceImpl.login(admin);
