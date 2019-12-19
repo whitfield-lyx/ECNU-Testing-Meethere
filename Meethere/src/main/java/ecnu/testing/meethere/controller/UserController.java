@@ -21,10 +21,11 @@ public class UserController {
      */
     @RequestMapping("/login")
     @ResponseBody
-    public Result Login(@RequestBody User user, HttpSession session){
+    public Result Login(@RequestBody User user/*此处只含有name与password信息*/, HttpSession session){
         Result result = userServiceImpl.login(user);
         if(result.getCode()==200/*SUCCESS CODE*/){
-            session.setAttribute("userId",user.getUserId());
+            Integer userId = userServiceImpl.getIdByName(user.getName());
+            session.setAttribute("userId",userId);
         }
         return result;
     }

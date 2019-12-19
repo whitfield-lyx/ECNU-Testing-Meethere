@@ -45,12 +45,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result login(User user){
-        Integer userId = user.getUserId();
-        System.out.println("user id is "+userId+" password is "+user.getPassword());
-        User myUser = selectByKey(userId);
-        if(myUser == null){
+        /* 此处只含有name与password信息 */
+        String name= user.getName();
+        //System.out.println("user name is "+name+" password is "+user.getPassword());
+        List<User> userList = userMapper.selectByName(name);
+        /* post condition: userList长度为0或1 */
+        if(userList == null){
             return ResultFactory.buildFailResult("不存在该用户名");
         }
+        User myUser = userList.get(0);
         if(!myUser.getPassword().equals(user.getPassword())){
             return ResultFactory.buildFailResult("用户名或密码错误");
         }else {
@@ -70,5 +73,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getNickname(Integer userId) {
         return selectByKey(userId).getNickname();
+    }
+
+    @Override
+    public Integer getIdByName(String name) {
+        List<User> userList = userMapper.selectByName(name);
+        /* post condition: userList长度为0或1 */
+        if(userList==null){
+            System.out.println("不存在该用户名");
+            return 0;
+        }
+        else if(userList.size()==1&&userList.get(0)!=null){
+            return userList.get(0).getUserId();
+        }
+        return -1;
     }
 }
