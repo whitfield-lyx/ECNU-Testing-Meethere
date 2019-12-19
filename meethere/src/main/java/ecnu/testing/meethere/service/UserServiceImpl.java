@@ -61,7 +61,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updatePassword(Integer userId, String password) {
         User user = selectByKey(userId);
+        //System.out.println("userId: "+userId+" old password: "+user.getPassword());
         user.setPassword(password);
+        //System.out.println("userId: "+userId+" new password: "+password);
         return userMapper.updateByPrimaryKey(user);
     }
 

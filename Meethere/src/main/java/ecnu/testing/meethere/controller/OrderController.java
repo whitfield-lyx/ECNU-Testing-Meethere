@@ -47,7 +47,8 @@ public class OrderController {
      * 对用户 新增一个订单
      */
     @PostMapping("/newOrder")
-    public Result addOrder(@RequestBody Order order){
+    public Result addOrder(@SessionAttribute Integer userId, @RequestBody Order order){
+        order.setUserId(userId);
         return orderServiceImpl.addOrder(order);
     }
 

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/user")
 //@SessionAttributes("userId")
@@ -19,8 +21,12 @@ public class UserController {
      */
     @RequestMapping("/login")
     @ResponseBody
-    public Result Login(@RequestBody User user){
-        return userServiceImpl.login(user);
+    public Result Login(@RequestBody User user, HttpSession session){
+        Result result = userServiceImpl.login(user);
+        if(result.getCode()==200/*SUCCESS CODE*/){
+            session.setAttribute("userId",user.getUserId());
+        }
+        return result;
     }
 
     /**
@@ -45,7 +51,7 @@ public class UserController {
      * 用户修改密码
      */
     @RequestMapping("/info")
-    public int updatePassword(@SessionAttribute Integer userId, String password){
+    public int updatePassword(@SessionAttribute Integer userId, @RequestBody String password){
         return userServiceImpl.updatePassword(userId, password);
     }
 

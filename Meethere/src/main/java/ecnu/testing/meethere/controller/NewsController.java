@@ -14,6 +14,9 @@ public class NewsController {
     @Autowired
     NewsServiceImpl newsServiceImpl;
 
+    /**
+     * 获取所有新闻
+     */
     @GetMapping("/news")
     @ResponseStatus(HttpStatus.OK)
     public List<News> getNewsList()
@@ -21,6 +24,9 @@ public class NewsController {
         return newsServiceImpl.selectAllNews();
     }
 
+    /**
+     * 获取指定新闻 仅测试用
+     */
     @GetMapping("/news/{id}")
     @ResponseStatus(HttpStatus.OK)
     public News getNewsByID(@PathVariable("id") Integer id)
@@ -28,6 +34,9 @@ public class NewsController {
         return newsServiceImpl.selectByKey(id);
     }
 
+    /**
+     * 管理员 发布新闻
+     */
     @PostMapping("/news")
     @ResponseStatus(HttpStatus.CREATED)
     public int addNews(@RequestBody News news)
@@ -39,6 +48,9 @@ public class NewsController {
         return newsServiceImpl.save(news);
     }
 
+    /**
+     * 管理员 删除指定新闻
+     */
     @DeleteMapping("/news/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public int deleteNewsByID(@PathVariable("id") Integer id){
