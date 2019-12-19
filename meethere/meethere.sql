@@ -71,7 +71,7 @@ INSERT INTO news VALUES(3,'南京大屠杀死难者国家公祭仪式','近日�
 
 INSERT INTO user VALUES (1,'111111','user01','apple');
 INSERT INTO user VALUES (2,'111111','2_user','banana');
-INSERT INTO user VALUES (7,'123123','my333');
+INSERT INTO user VALUES (7,'123123','my333','');
 
 INSERT INTO stadium VALUES ('东操场',NULL ,1000,'上海市中山北路3664号');
 INSERT INTO stadium VALUES ('中北乒乓球馆',NULL ,200,'上海市中山北路3663号');

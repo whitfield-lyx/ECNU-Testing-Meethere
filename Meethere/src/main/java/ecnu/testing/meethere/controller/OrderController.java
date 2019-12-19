@@ -38,8 +38,7 @@ public class OrderController {
      * 对用户 显示该用户的所有订单
      */
     @GetMapping("/myOrder")
-    //@SessionAttribute()
-    public List<OrderInfo> getMyOrderList(Integer userId)
+    public List<OrderInfo> getMyOrderList(@SessionAttribute Integer userId)
     {
         return orderServiceImpl.selectMyOrder(userId);
     }

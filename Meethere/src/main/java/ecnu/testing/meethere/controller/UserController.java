@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+//@SessionAttributes("userId")
 public class UserController {
     @Autowired
     private UserServiceImpl userServiceImpl;
@@ -36,7 +37,7 @@ public class UserController {
      * 用户个人信息页
      */
     @GetMapping("/info")
-    public User UserInfo(/*@SessionAttribute*/ Integer userId){
+    public User UserInfo(@SessionAttribute Integer userId){
         return userServiceImpl.selectByKey(userId);
     }
 
@@ -44,7 +45,7 @@ public class UserController {
      * 用户修改密码
      */
     @RequestMapping("/info")
-    public int updatePassword(/*@SessionAttribute*/ Integer userId, String password){
+    public int updatePassword(@SessionAttribute Integer userId, String password){
         return userServiceImpl.updatePassword(userId, password);
     }
 
