@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header" >
-      <p class="publisher-text"><span>{{userId}}</span></p>
+      <p class="publisher-text"><span>{{nickname}}</span></p>
     </div>
     <div style="text-align: left;text-indent:2em;">
       {{content}}
@@ -21,7 +21,8 @@ export default {
       userId: this.messagesData.userId,
       isChecked: this.messagesData.isChecked,
       content: this.messagesData.content,
-      time: this.messagesData.time
+      time: this.messagesData.time,
+      nickname: this.messagesData.nickname
     }
   }
 }

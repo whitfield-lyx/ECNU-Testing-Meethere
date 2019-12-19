@@ -38,18 +38,15 @@ export default {
   components: {MessageCard},
   data () {
     return {
-      messages: [{
-        userNickname: '废柴阿翔',
-        context: 'Hello!Hello!Hello!Hello!Hello!',
-        time: '2019-12-17'
-      },
-      {
-        messageId: '1',
-        userId: '1',
-        context: 'Hello!Hello!Hello!Hello!Hello!',
-        time: '2019-12-17',
-        isChecked: '1'
-      }
+      messages: [
+        {
+          messageId: '1',
+          userId: '1',
+          context: 'Hello!Hello!Hello!Hello!Hello!',
+          time: '2019-12-17',
+          isChecked: '1',
+          nickname: '我是nickname'
+        }
       ]
     }
   },
@@ -66,6 +63,7 @@ export default {
           obj.content = res.data[i].content
           obj.time = res.data[i].time
           obj.isChecked = res.data[i].isChecked
+          obj.nickname = res.data[i].nickname
           messages[i] = obj
         }
         self.messages = messages

@@ -68,6 +68,7 @@ export default {
           obj.content = res.data[i].content
           obj.time = res.data[i].time
           obj.isChecked = res.data[i].isChecked
+          obj.nickname = res.data[i].nickname
           messages[i] = obj
         }
         self.messages = messages

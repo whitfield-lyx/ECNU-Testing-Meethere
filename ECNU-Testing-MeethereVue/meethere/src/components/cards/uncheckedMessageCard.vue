@@ -3,7 +3,7 @@
     <div slot="header" >
         <el-row >
           <el-col :span="6">
-            <span class="publisher-text">{{userId}}</span>
+            <span class="publisher-text">{{nickname}}</span>
           </el-col>
           <el-col :span="4">
             <span class="publisher-text">{{checked}}</span>
@@ -33,12 +33,13 @@ export default {
       userId: this.messagesData.userId,
       isChecked: this.messagesData.isChecked,
       content: this.messagesData.content,
-      time: this.messagesData.time
+      time: this.messagesData.time,
+      nickname: this.messagesData.nickname
     }
   },
   computed: {
     checked: function () {
-      if (this.isChecked == 0) { return '未审核' } else { return '已审核' }
+      if (this.isChecked === 0) { return '未审核' } else { return '已审核' }
     }
   },
   methods: {

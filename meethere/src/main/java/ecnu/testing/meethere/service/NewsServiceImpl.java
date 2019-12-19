@@ -20,6 +20,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public int save(News entity) {
+        entity.setTime(new Date());
         return newsMapper.insert(entity);
     }
 
