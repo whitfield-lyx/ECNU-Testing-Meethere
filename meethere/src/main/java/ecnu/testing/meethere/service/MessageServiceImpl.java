@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,6 +24,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public int save(Message entity) {
+        entity.setTime(new Date());
         return messageMapper.insert(entity);
     }
 
