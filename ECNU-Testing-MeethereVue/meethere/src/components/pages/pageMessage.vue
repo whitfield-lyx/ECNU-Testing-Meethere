@@ -11,7 +11,7 @@
             <i class="el-icon-menu"></i>
             <span slot="title">发布留言</span>
           </el-menu-item>
-          <el-menu-item index="Verify" >
+          <el-menu-item index="Verify" v-if="userType==='admin'" >
             <i class="el-icon-menu"></i>
             <span slot="title">审核留言</span>
           </el-menu-item>
@@ -46,8 +46,8 @@ export default {
           time: '2019-12-17',
           isChecked: '1',
           nickname: '我是nickname'
-        }
-      ]
+        }],
+        userType: sessionStorage.getItem('userType')
     }
   },
   mounted () {

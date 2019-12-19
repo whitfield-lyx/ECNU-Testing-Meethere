@@ -8,7 +8,7 @@
             <span slot="title">查看新闻</span>
           </el-menu-item>
           <el-menu-item index="Publish">
-            <i class="el-icon-menu"></i>
+            <i class="el-icon-menu" ></i>
             <span slot="title">发布新闻</span>
           </el-menu-item>
         </el-menu>
