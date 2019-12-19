@@ -62,10 +62,15 @@ export default {
         userId: '123',
         stadiumId: '大学生活动中心',
         startTime: '2019-12-13 11:00',
-        isChecked: '未审核',
+        isChecked: '0',
         hour: '3',
         address: '普陀区中山北路3663号',
-        price: '400'
+        price: '400',
+        computed: {
+          checked: function () {
+            if (this.isChecked == 0) { return '未审核' } else { return '已审核' }
+          }
+        }
       }]
     }
   },

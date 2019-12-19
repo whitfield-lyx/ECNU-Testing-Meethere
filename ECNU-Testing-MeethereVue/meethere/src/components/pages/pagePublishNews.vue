@@ -67,7 +67,7 @@ export default {
             title: this.title,
             content: this.content,
             name: 'test',
-            time: new Date()
+            time: '2019-08-08 08:00:00'
           })
         console.log('发布新闻成功')
         this.$message({
