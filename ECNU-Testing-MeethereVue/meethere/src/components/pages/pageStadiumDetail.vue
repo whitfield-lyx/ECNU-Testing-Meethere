@@ -3,9 +3,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'pageStadiumDetail'
-  }
+export default {
+  name: 'pageStadiumDetail'
+}
 </script>
 
 <style scoped>

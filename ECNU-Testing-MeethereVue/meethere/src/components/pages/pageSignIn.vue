@@ -9,7 +9,7 @@
                 <el-input v-model="ruleForm.userName"></el-input>
               </el-form-item>
               <el-form-item label="昵称" prop="userNickName">
-              <el-input v-model="ruleForm.userName"></el-input>
+              <el-input v-model="ruleForm.userNickName"></el-input>
             </el-form-item>
               <el-form-item label="密码" prop="pass">
                 <el-input type="passWords" v-model="ruleForm.pass" autocomplete="off"></el-input>
@@ -73,7 +73,29 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          this.$axios
+            .post('/user/register', {
+              nickname: this.ruleForm.userNickName,
+              password: this.ruleForm.pass,
+              name: this.ruleForm.userName,
+              userID: '1'
+            })
+            .then(res => {
+              console.log(this.username, this.password)
+              console.log('用户注册成功', res)
+              this.$message({
+                message: '用户注册成功',
+                type: 'success'
+              })
+            })
+            .catch(failResponse => {
+              console.log(this.ruleForm.userName, this.ruleForm.userNickName, this.ruleForm.pass)
+              console.log('用户注册失败', failResponse)
+              this.$message({
+                message: '用户注册失败',
+                type: 'error'
+              })
+            })
         } else {
           console.log('error submit!!')
           return false

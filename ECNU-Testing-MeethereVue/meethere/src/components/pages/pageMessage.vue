@@ -47,7 +47,7 @@ export default {
           isChecked: '1',
           nickname: '我是nickname'
         }],
-        userType: sessionStorage.getItem('userType')
+      userType: sessionStorage.getItem('userType')
     }
   },
   mounted () {

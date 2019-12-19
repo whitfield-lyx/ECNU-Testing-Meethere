@@ -35,7 +35,7 @@ export default {
       if (this.userType === 'user') {
         this.$axios
           .post('/user/login', {
-            userId: this.username,
+            name: this.username,
             password: this.password
           })
           .then(successResponse => {

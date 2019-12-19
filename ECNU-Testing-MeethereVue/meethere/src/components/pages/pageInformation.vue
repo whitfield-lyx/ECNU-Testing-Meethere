@@ -84,6 +84,21 @@ export default {
       }
     }
   },
+  mounted () {
+    var self = this
+    self.$axios
+      .get('/user/info')
+      .then(res => {
+        var obj = {}
+        obj.nickname = res.data.nickname
+        console.log('昵称获取成功', res)
+        this.personForm.userNickname = obj.nickname
+      })
+      .catch(function (error) {
+        console.log('昵称获取失败', error)
+        this.personForm.userNickname = '无名'
+      })
+  },
   methods: {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
