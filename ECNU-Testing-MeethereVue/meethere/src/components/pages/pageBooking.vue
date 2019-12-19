@@ -69,7 +69,6 @@
                   width="200">
                   <template slot-scope="scope">
                     <el-button type="info" round @click="ViewStadium">查看</el-button>
-                    <el-button type="primary" round @click="BookStadium">预约</el-button>
                   </template>
                 </el-table-column>
               </el-table>
