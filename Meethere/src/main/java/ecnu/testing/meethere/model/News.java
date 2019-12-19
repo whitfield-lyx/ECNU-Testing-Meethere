@@ -1,5 +1,7 @@
 package ecnu.testing.meethere.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class News {
@@ -37,6 +39,7 @@ public class News {
      *
      * @mbg.generated Mon Dec 16 21:18:55 CST 2019
      */
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     /**

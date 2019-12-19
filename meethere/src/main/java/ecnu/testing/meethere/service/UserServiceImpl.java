@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
         user.setPassword(password);
         return userMapper.updateByPrimaryKey(user);
     }
+
+    @Override
+    public String getNickname(Integer userId) {
+        return selectByKey(userId).getNickname();
+    }
 }

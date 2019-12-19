@@ -16,4 +16,5 @@ public interface UserService {
 
     public Result login(User user);
     public int updatePassword(Integer userId, String password);
+    public String getNickname(Integer userId);
 }

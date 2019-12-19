@@ -68,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderInfo> selectMyOrder(Integer userId) {
         List<Order> orderList = orderMapper.selectMyOrder(userId);
-        List<OrderInfo> orderInfoList = null;
+        List<OrderInfo> orderInfoList = new ArrayList<OrderInfo>();
         for(Order order : orderList){
             Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());
             orderInfoList.add(new OrderInfo(order, stadium));

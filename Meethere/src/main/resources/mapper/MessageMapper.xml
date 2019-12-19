@@ -181,4 +181,9 @@
   <select id="selectAllMessage" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" /> from meethere.message order by time DESC
   </select>
+  <update id="updateIsChecked" parameterType="java.lang.Integer">
+    update meethere.message
+    set is_checked = 1
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
 </mapper>

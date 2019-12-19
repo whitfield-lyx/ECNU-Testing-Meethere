@@ -65,4 +65,5 @@ public interface MessageMapper {
     int updateByPrimaryKey(Message record);
 
     List<Message> selectAllMessage();
+    int updateIsChecked(Integer messageId);
 }
