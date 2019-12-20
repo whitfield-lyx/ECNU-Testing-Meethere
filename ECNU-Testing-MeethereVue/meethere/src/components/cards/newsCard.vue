@@ -44,7 +44,8 @@ export default {
       time: this.newsData.time,
       newsId: this.newsData.newsId,
       userType: sessionStorage.getItem('userType'),
-      isEdit: '0'
+      isEdit: '0',
+      userId: sessionStorage.getItem('userId')
     }
   },
   methods: {
@@ -75,6 +76,7 @@ export default {
       var self = this
       self.$axios
         .put('/news/update/' + this.newsId, {
+          adminId: this.userId,
           content: this.content
         })
       console.log('修改新闻成功')

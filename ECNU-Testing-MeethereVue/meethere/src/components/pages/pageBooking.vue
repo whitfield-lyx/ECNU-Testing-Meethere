@@ -3,7 +3,7 @@
     <!-- 左侧导航 -->
     <div class="main-left">
       <el-menu default-active="" class="el-menu-vertical-demo" :router="true">
-        <el-menu-item index="" >
+        <el-menu-item index="Booking" >
           <i class="el-icon-menu"></i>
           <span slot="title">场馆列表</span>
         </el-menu-item>
@@ -12,38 +12,6 @@
     <!-- 右侧主内容区 -->
         <div class="main-right" >
           <div class="block">
-            <el-row :gutter="30" type="flex" class="row-bg" style="margin-bottom: 20px">
-              <el-col :span="12" align="auto">
-                <div class="grid-content bg-purple">
-                  <span>名称：</span>
-                  <el-input v-model="stadiumId" placeholder="请输入场地名称" clearable style="width: 200px"></el-input>
-                </div>
-              </el-col>
-              <el-col align="auto" :span="2">
-                <el-button type="warning" round @click="SearchStadium">搜索</el-button>
-              </el-col>
-              <el-col :span="8" align="auto">
-                  <el-date-picker
-                    v-model="day"
-                    type="date"
-                    placeholder="选择日期"
-                    :picker-options="pickerOptions">
-                  </el-date-picker>
-              </el-col>
-              <el-col :span="8" align="auto">
-                <el-time-select
-                  v-model="hour"
-                  :picker-options="{
-                  start: '00:00',
-                  step: '01:00',
-                   end: '24:00'}"
-                  placeholder="选择时间">
-                </el-time-select>
-              </el-col>
-              <el-col :span="8" align="auto">
-                <el-input-number v-model="timeLength" @change="handleChange" :min="1" :max="8" label="时长"></el-input-number>
-              </el-col>
-            </el-row>
             <template>
               <el-table
                 :data="placeData"
@@ -143,20 +111,11 @@ export default {
       }
       return ''
     },
-    handleChange (value) {
-      console.log(value)
-    },
     ViewStadium () {
-      this.$router.replace({path: '/Main/Booking/StadiumDetail'})
+      this.$router.replace({path: '/Main/StadiumDetail'})
       this.$message({
         type: 'success',
         message: '查看成功!'
-      })
-    },
-    SearchStadium () {
-      this.$message({
-        type: 'success',
-        message: '搜索成功!'
       })
     }
   }
@@ -183,7 +142,7 @@ export default {
     -ms-flex: 1;
     flex: 1;
     background-color: #fff;
-    padding: 30px 70px;
+    padding: 0px 20px;
     text-align:left;
     text-indent: 5%
   }

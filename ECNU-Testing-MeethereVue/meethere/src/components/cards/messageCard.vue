@@ -48,17 +48,18 @@ export default {
       this.isEdit = '1'
     },
     editMessageComplete () {
-      this.isEdit = '0'
       var self = this
       self.$axios
-        .put('/messages/update/' + this.newsId, {
+        .put('/messages/update/' + this.messageId, {
+          userId: this.userId,
           content: this.content
         })
-      console.log('修改新闻成功')
+      console.log('修改留言成功')
       this.$message({
-        message: '修改新闻成功',
+        message: '修改留言成功',
         type: 'success'
       })
+      this.isEdit = '0'
     }
   }
 }

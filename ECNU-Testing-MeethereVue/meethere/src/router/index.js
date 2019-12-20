@@ -39,17 +39,7 @@ export default new Router({
           component: pageBooking,
           meta: {
             keepalive: true
-          },
-          children: [
-            {
-              path: 'StadiumDetail',
-              name: 'StadiumDetail',
-              component: pageStadiumDetail,
-              meta: {
-                keepalive: true
-              }
-            }
-          ]
+          }
         },
         {
           path: 'Information',
@@ -114,8 +104,15 @@ export default new Router({
           meta: {
             keepalive: true
           }
-        }
-      ]
+        },
+        {
+          path: 'StadiumDetail',
+          name: 'StadiumDetail',
+          component: pageStadiumDetail,
+          meta: {
+            keepalive: true
+          }
+        }]
     }
   ]
 })
