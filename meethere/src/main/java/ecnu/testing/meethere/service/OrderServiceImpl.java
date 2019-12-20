@@ -122,7 +122,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Result updateMyOrder(Integer userId, Integer orderId, Integer hour) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
-        System.out.println("orderId: "+orderId+" user id: "+order.getUserId());
+        //System.out.println("orderId: "+orderId+" user id: "+order.getUserId());
         if(!userId.equals(order.getUserId())){
             return ResultFactory.buildFailResult("用户只能修改自己的订单");
         }
