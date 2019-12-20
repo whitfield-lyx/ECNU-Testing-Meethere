@@ -46,6 +46,6 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public List<News> selectAllNews(){
-        return  newsMapper.selectAllNews();
+        return newsMapper.selectAllNews();
     }
 }

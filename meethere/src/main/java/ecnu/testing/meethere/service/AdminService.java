@@ -15,4 +15,5 @@ public interface AdminService {
         public List<Admin> selectByExample(AdminExample example);
 
         public Result login(Admin admin);
+        public Integer getIdByName(String name);
 }

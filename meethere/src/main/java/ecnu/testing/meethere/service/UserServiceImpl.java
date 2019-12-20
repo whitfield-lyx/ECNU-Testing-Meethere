@@ -19,8 +19,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int save(User entity) {
-        return userMapper.insert(entity);
+    public Result save(User user) {
+        List<User> userList = userMapper.selectByName(user.getName());
+        if(userList==null){
+            userMapper.insert(user);
+            return ResultFactory.buildSuccessResult("用户注册成功");
+        }
+        else {
+            return ResultFactory.buildFailResult("已存在该用户名的用户");
+        }
     }
 
     @Override

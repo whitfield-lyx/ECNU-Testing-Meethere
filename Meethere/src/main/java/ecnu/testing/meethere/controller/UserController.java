@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/user")
-//@SessionAttributes("userId")
 public class UserController {
     @Autowired
     private UserServiceImpl userServiceImpl;
@@ -21,9 +20,9 @@ public class UserController {
      */
     @PostMapping("/login")
     @ResponseBody
-    public Result Login(@RequestBody User user/*此处只含有name与password信息*/, HttpSession session){
+    public Result Login(@RequestBody User user /* 此处只含有name与password信息 */, HttpSession session){
         Result result = userServiceImpl.login(user);
-        if(result.getCode()==200/*SUCCESS CODE*/){
+        if(result.getCode()==200 /* SUCCESS CODE */){
             Integer userId = userServiceImpl.getIdByName(user.getName());
             session.setAttribute("userId",userId);
         }
@@ -36,8 +35,7 @@ public class UserController {
     @RequestMapping("/register")
     @ResponseBody
     public Result Register(@RequestBody User user) {
-        userServiceImpl.save(user);
-        return ResultFactory.buildSuccessResult("注册成功。");
+        return userServiceImpl.save(user);
     }
 
     /**
