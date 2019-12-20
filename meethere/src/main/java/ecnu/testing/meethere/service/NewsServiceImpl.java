@@ -3,6 +3,8 @@ package ecnu.testing.meethere.service;
 import ecnu.testing.meethere.mapper.NewsMapper;
 import ecnu.testing.meethere.model.News;
 import ecnu.testing.meethere.model.NewsExample;
+import ecnu.testing.meethere.util.Result;
+import ecnu.testing.meethere.util.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +49,17 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<News> selectAllNews(){
         return newsMapper.selectAllNews();
+    }
+
+    @Override
+    public Result updateNews(Integer newsId, String content) {
+        News news = newsMapper.selectByPrimaryKey(newsId);
+        if(news==null){
+            return ResultFactory.buildFailResult("不存在新闻，修改失败");
+        }
+        news.setContent(content);
+        news.setTime(new Date());
+        newsMapper.updateByPrimaryKey(news);
+        return ResultFactory.buildSuccessResult("修改新闻成功");
     }
 }

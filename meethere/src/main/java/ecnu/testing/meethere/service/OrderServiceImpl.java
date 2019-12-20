@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -33,9 +34,10 @@ public class OrderServiceImpl implements OrderService {
         Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());
         String deleteTime = "";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+0"));
         for(int i=0; i<order.getHour(); i++){
             String time = DateUtils.addHours(sdf.format(order.getTime()),i);
-            deleteTime = deleteTime + "\t" + time;
+            deleteTime = deleteTime + time;
 
         }
         String time = stadium.getTime();
@@ -93,6 +95,7 @@ public class OrderServiceImpl implements OrderService {
         Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());
         String bookedTime = stadium.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+0"));
         for(int i=0; i<order.getHour(); i++){
             String time = DateUtils.addHours(sdf.format(order.getTime()),i);
             if(bookedTime==null){
@@ -108,11 +111,30 @@ public class OrderServiceImpl implements OrderService {
         //并在bookedTime中加入新的时间
         for(int i=0; i<order.getHour(); i++){
             String time = DateUtils.addHours(sdf.format(order.getTime()),i);
-            bookedTime = bookedTime + "\t" + time;
+            bookedTime = bookedTime + time;
         }
         stadium.setTime(bookedTime);
         //更新stadium中的time字段
         stadiumMapper.updateByPrimaryKey(stadium);
         return ResultFactory.buildSuccessResult("新增订单成功");
+    }
+
+    @Override
+    public Result updateMyOrder(Integer userId, Integer orderId, Integer hour) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        System.out.println("orderId: "+orderId+" user id: "+order.getUserId());
+        if(!userId.equals(order.getUserId())){
+            return ResultFactory.buildFailResult("用户只能修改自己的订单");
+        }
+        Order newOrder = order; /* newOrder is not redundant */
+        newOrder.setHour(hour);
+        delete(orderId);
+        if(addOrder(newOrder).getCode()==200 /* SUCCESS CODE */){
+            return ResultFactory.buildSuccessResult("修改订单时长成功");
+        }
+        else {
+            addOrder(order);
+            return ResultFactory.buildFailResult("该时间已被预约，修改订单失败，请选择其他时间");
+        }
     }
 }

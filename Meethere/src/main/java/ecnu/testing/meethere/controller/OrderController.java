@@ -61,4 +61,13 @@ public class OrderController {
         return orderServiceImpl.delete(orderId);
     }
 
+    /**
+     * 对用户 显示该用户的所有订单页面中
+     * 可以修改且只能修改自己订单的时长
+     */
+    @RequestMapping("/myOrder/{id}")
+    public Result updateMyOrder(@SessionAttribute Integer userId, @PathVariable("id") Integer orderId, @RequestBody Integer hour)
+    {
+        return orderServiceImpl.updateMyOrder(userId, orderId, hour);
+    }
 }

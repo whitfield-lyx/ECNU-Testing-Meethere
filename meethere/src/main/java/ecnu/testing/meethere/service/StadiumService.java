@@ -2,6 +2,7 @@ package ecnu.testing.meethere.service;
 
 import ecnu.testing.meethere.model.Stadium;
 import ecnu.testing.meethere.model.StadiumExample;
+import ecnu.testing.meethere.util.Result;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface StadiumService {
     public List<Stadium> selectByExample(StadiumExample example);
 
     public List<Stadium> selectAllStadium();
+    public Result updateStadium(Stadium stadium);
 }

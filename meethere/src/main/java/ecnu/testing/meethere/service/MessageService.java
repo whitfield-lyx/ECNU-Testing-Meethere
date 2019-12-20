@@ -3,6 +3,7 @@ package ecnu.testing.meethere.service;
 import ecnu.testing.meethere.model.Message;
 import ecnu.testing.meethere.model.MessageExample;
 import ecnu.testing.meethere.util.MessageInfo;
+import ecnu.testing.meethere.util.Result;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface MessageService {
 
     public List<MessageInfo> selectAllMessage();
     public int checkMessage(Integer messageId);
+    public Result updateMessage(Integer userId,Integer messageId,String content);
 }

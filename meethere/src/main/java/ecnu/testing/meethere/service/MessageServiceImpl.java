@@ -3,6 +3,8 @@ package ecnu.testing.meethere.service;
 import ecnu.testing.meethere.mapper.*;
 import ecnu.testing.meethere.model.*;
 import ecnu.testing.meethere.util.MessageInfo;
+import ecnu.testing.meethere.util.Result;
+import ecnu.testing.meethere.util.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,5 +65,17 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public int checkMessage(Integer messageId) {
         return messageMapper.updateIsChecked(messageId);
+    }
+
+    @Override
+    public Result updateMessage(Integer userId, Integer messageId, String content) {
+        Message message = messageMapper.selectByPrimaryKey(messageId);
+        if(!userId.equals(message.getUserId())){
+            return ResultFactory.buildFailResult("只能修改自己发布的留言！");
+        }
+        message.setContent(content);
+        message.setTime(new Date());
+        messageMapper.updateByPrimaryKey(message);
+        return ResultFactory.buildSuccessResult("修改留言成功");
     }
 }

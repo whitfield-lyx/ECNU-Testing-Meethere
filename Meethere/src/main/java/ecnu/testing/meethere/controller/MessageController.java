@@ -3,6 +3,7 @@ package ecnu.testing.meethere.controller;
 import ecnu.testing.meethere.model.*;
 import ecnu.testing.meethere.service.MessageServiceImpl;
 import ecnu.testing.meethere.util.MessageInfo;
+import ecnu.testing.meethere.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -62,5 +63,13 @@ public class MessageController {
     public int checkMessage(@PathVariable("id") Integer messageId)
     {
         return messageServiceImpl.checkMessage(messageId);
+    }
+
+    /**
+     * 用户 修改留言 仅可修改自己发表的留言
+     */
+    @RequestMapping("/message/update/{id}")
+    public Result updateMessage(@SessionAttribute Integer userId, @PathVariable("id") Integer messageId, @RequestBody String content){
+        return messageServiceImpl.updateMessage(userId, messageId, content);
     }
 }

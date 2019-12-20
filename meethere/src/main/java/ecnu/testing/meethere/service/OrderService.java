@@ -19,4 +19,5 @@ public interface OrderService{
     public int checkOrder(Integer orderId);
     public List<OrderInfo> selectMyOrder(Integer userId);
     public Result addOrder(Order order);
+    public Result updateMyOrder(Integer userId, Integer orderId, Integer hour);
 }
