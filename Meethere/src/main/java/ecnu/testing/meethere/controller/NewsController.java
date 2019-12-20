@@ -68,9 +68,11 @@ public class NewsController {
     /**
      * 管理员 修改新闻
      */
+
     @PutMapping("/news/update/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Result updateNews(@PathVariable("id") Integer newsId, @RequestBody String content){
+    public Result updateNews(@SessionAttribute Integer adminId, @PathVariable("id") Integer newsId, @RequestBody String content){
+
         return newsServiceImpl.updateNews(newsId, content);
     }
 }
