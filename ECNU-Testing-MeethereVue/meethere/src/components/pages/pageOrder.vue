@@ -44,6 +44,7 @@
         <template slot-scope="scope">
           <el-button type="primary"  v-if="userType==='admin'" icon="el-icon-check"  circle @click="checkOrder(scope.row)" ></el-button>
           <el-button type="danger" icon="el-icon-delete" circle @click="deleteOrder(scope.row)"></el-button>
+          <el-button type="info"  icon="el-icon-edit"  circle @click="editOrder(scope.row)" ></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -66,7 +67,8 @@ export default {
         address: '普陀区中山北路3663号',
         price: '400'
       }],
-      userType: sessionStorage.getItem('userType')
+      userType: sessionStorage.getItem('userType'),
+      userId: sessionStorage.getItem('userId'),
     }
   },
   computed: {
@@ -114,6 +116,8 @@ export default {
         console.log('删除订单失败', error)
         this.$message.error('删除订单失败')
       })
+    },
+    editOrder (row) {
     }
   },
   mounted () {
@@ -124,15 +128,17 @@ export default {
       .then(res => {
         for (let i = 0; i < res.data.length; i++) {
           var obj = {}
-          obj.orderId = res.data[i].orderId
           obj.userId = res.data[i].userId
+          obj.orderId = res.data[i].orderId
           obj.stadiumId = res.data[i].stadiumId
           obj.isChecked = res.data[i].isChecked
           obj.address = res.data[i].address
           obj.startTime = res.data[i].time
           obj.price = res.data[i].price
           obj.hour = res.data[i].hour
-          order[i] = obj
+          if ( obj.userId == this.userId) {
+            order[i] = obj
+          }
         }
         self.tableData = order
         console.log('数据获取成功', res)

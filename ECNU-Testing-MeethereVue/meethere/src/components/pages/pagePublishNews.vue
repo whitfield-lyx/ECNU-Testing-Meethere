@@ -7,7 +7,7 @@
             <i class="el-icon-menu"></i>
             <span slot="title">查看新闻</span>
           </el-menu-item>
-          <el-menu-item index="Publish">
+          <el-menu-item index="PublishNews">
             <i class="el-icon-menu" ></i>
             <span slot="title">发布新闻</span>
           </el-menu-item>
@@ -49,7 +49,8 @@ export default {
   data () {
     return {
       title: '',
-      content: ''
+      content: '',
+      userType: sessionStorage.getItem('userType')
     }
   },
   methods: {

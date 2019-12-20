@@ -51,7 +51,7 @@ public class UserController {
     /**
      * 用户修改密码
      */
-    @RequestMapping("/info")
+    @PostMapping("/info")
     public int updatePassword(@SessionAttribute Integer userId, @RequestBody String password){
         return userServiceImpl.updatePassword(userId, password);
     }

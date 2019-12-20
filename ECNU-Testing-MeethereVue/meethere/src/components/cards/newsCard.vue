@@ -2,17 +2,31 @@
   <el-card class="box-card">
     <div slot="header" >
       <el-row>
-        <el-col :span=18>
+        <el-col :span=14>
           <span class="publisher-text">{{title}}</span>
         </el-col>
-        <el-col :offset=4 :span=2>
-          <el-button v-if="userType==='admin' " type="danger" icon="el-icon-close" circle @click="deleteNews" ></el-button>
+        <el-col  :offset=6 :span=4>
+          <div v-if="userType==='admin'">
+          <el-button  v-if="isEdit==0"  type="info"  icon="el-icon-edit"  circle @click="editNews()" ></el-button>
+          <el-button  v-if="isEdit==1" type="success"  icon="el-icon-check"  circle @click="editNewsComplete()" ></el-button>
+          <el-button  type="danger" icon="el-icon-close" circle @click="deleteNews" ></el-button>
+          </div>
         </el-col>
       </el-row>
     </div>
-    <div style="text-align: left;text-indent:2em;">
+    <div v-if="isEdit==0" style="text-align: left;text-indent:2em;">
       {{content}}
     </div>
+    <el-input
+      v-if="isEdit==1"
+      type="textarea"
+      placeholder="请输入内容"
+      v-model="content"
+      maxlength="500"
+      :autosize="{ minRows: 5}"
+      show-word-limit
+    >
+    </el-input>
     <p style="text-align: right;"><span>{{time}}</span></p>
   </el-card>
 </template>
@@ -29,7 +43,8 @@ export default {
       content: this.newsData.content,
       time: this.newsData.time,
       newsId: this.newsData.newsId,
-      userType: sessionStorage.getItem('userType')
+      userType: sessionStorage.getItem('userType'),
+      isEdit: '0'
     }
   },
   methods: {
@@ -52,6 +67,12 @@ export default {
         console.log('删除新闻失败', error)
         this.$message.error('删除失败')
       })
+    },
+    editNews () {
+      this.isEdit = '1'
+    },
+    editNewsComplete () {
+      this.isEdit = '0'
     }
   }
 }

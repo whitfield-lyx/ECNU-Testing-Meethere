@@ -34,7 +34,7 @@ export default {
       isChecked: this.messagesData.isChecked,
       content: this.messagesData.content,
       time: this.messagesData.time,
-      nickname: this.messagesData.nickname,
+      nickname: this.messagesData.nickname
     }
   },
   computed: {

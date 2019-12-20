@@ -81,7 +81,8 @@ export default {
         checkPass: [
           { validator: validatePass2, trigger: 'blur' }
         ]
-      }
+      },
+      userId: sessionStorage.getItem('userId')
     }
   },
   mounted () {
@@ -89,10 +90,10 @@ export default {
     self.$axios
       .get('/user/info')
       .then(res => {
-        var obj = {}
-        obj.nickname = res.data.nickname
+        sessionStorage.setItem('userId', res.data.userId)
+        sessionStorage.setItem('userNickName', res.data.nickname)
         console.log('昵称获取成功', res)
-        this.personForm.userNickname = obj.nickname
+        this.personForm.userNickname = res.data.nickname
       })
       .catch(function (error) {
         console.log('昵称获取失败', error)
@@ -103,7 +104,26 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          this.$axios
+            .post('/user/info', {
+              userId: this.userId,
+              password: this.ruleForm.pass
+            })
+            .then(successResponse => {
+              this.$message({
+                message: '修改密码成功',
+                type: 'success'
+              })
+            }
+            )
+            .catch(failResponse => {
+              console.log('修改密码失败')
+              console.log(failResponse)
+              this.$message({
+                message: '修改密码失败',
+                type: 'warning'
+              })
+            })
         } else {
           console.log('error submit!!')
           return false

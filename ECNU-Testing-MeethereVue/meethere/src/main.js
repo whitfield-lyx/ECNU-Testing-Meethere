@@ -14,6 +14,7 @@ Vue.use(ElementUI)
 axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 axios.defaults.baseURL = '/api'
+axios.defaults.withCredentials = true
 
 /* eslint-disable no-new */
 new Vue({

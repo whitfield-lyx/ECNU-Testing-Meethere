@@ -66,7 +66,7 @@
                 <el-table-column
                   fixed="right"
                   label="操作"
-                  width="200">
+                  width="150">
                   <template slot-scope="scope">
                     <el-button type="info" round @click="ViewStadium">查看详情</el-button>
                   </template>
@@ -146,12 +146,6 @@ export default {
     },
     handleChange (value) {
       console.log(value)
-    },
-    BookStadium () {
-      this.$message({
-        type: 'success',
-        message: '预约成功!'
-      })
     },
     ViewStadium () {
       this.$message({

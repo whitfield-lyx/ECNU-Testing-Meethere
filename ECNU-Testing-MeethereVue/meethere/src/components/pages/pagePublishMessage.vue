@@ -6,8 +6,8 @@
           <i class="el-icon-menu"></i>
           <span slot="title">查看留言</span>
         </el-menu-item>
-        <el-menu-item index="Publish">
-          <i class="el-icon-menu"></i>
+        <el-menu-item index="Publish" v-if="userType==='user'">
+          <i class="el-icon-menu" ></i>
           <span slot="title">发布留言</span>
         </el-menu-item>
       <el-menu-item index="Verify" v-if="userType==='admin'">

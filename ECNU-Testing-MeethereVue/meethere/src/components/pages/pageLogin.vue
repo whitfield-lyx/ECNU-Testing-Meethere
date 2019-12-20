@@ -43,21 +43,25 @@ export default {
             if (successResponse.data.code === 200) {
               sessionStorage.setItem('userName', this.username)
               sessionStorage.setItem('userType', this.userType)
-              this.$router.replace({path: '/Main/Booking'})
               this.$message({
                 message: '用户登录成功',
                 type: 'success'
               })
+              this.$router.replace({path: '/Main/Booking'})
+            } else {
+              this.$message({
+                message: '用户登录失败',
+                type: 'warning'
+              })
             }
           })
           .catch(failResponse => {
-            console.log(this.username, this.password)
-            console.log('用户登录失败')
-            console.log(failResponse)
             this.$message({
               message: '用户登录失败',
               type: 'warning'
             })
+            console.log(this.username, this.password)
+            console.log('用户登录失败')
           })
       } else {
         this.$axios
@@ -68,12 +72,17 @@ export default {
           .then(successResponse => {
             this.responseResult = JSON.stringify(successResponse.data)
             if (successResponse.data.code === 200) {
-              this.$router.replace({path: '/Main/Booking'})
               sessionStorage.setItem('userName', this.username)
               sessionStorage.setItem('userType', this.userType)
+              this.$router.replace({path: '/Main/Booking'})
               this.$message({
                 message: '管理员登录成功',
                 type: 'success'
+              })
+            } else {
+              this.$message({
+                message: '管理员登录失败',
+                type: 'warning'
               })
             }
           })
