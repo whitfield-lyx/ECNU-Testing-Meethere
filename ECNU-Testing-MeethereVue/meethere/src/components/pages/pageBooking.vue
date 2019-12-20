@@ -36,7 +36,7 @@
                   label="操作"
                   width="150">
                   <template slot-scope="scope">
-                    <el-button type="info" round @click="ViewStadium">查看详情</el-button>
+                    <el-button type="info" round @click="ViewStadium(scope.row)">查看详情</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -50,18 +50,9 @@
 export default {
   data () {
     return {
-      pickerOptions: {
-        shortcuts: [{
-          text: '今天',
-          onClick (picker) {
-            picker.$emit('pick', new Date())
-          }
-        }]
-      },
-      timeLength: '',
-      day: '',
-      hour: '',
       stadiumId: '',
+      userId: sessionStorage.getItem('userId'),
+      userType: sessionStorage.getItem('userType'),
       placeData: [{
         stadiumId: '体育馆',
         price: '400',
@@ -101,6 +92,23 @@ export default {
       .catch(function (error) {
         console.log('场馆获取失败', error)
       })
+
+    if (this.userType == 'user') {
+      self.$axios
+        .get('/user/info')
+        .then(res => {
+          sessionStorage.setItem('userId', res.data.userId)
+          sessionStorage.setItem('userNickName', res.data.nickname)
+          console.log('昵称获取成功', res)
+        })
+        .catch(function (error) {
+          sessionStorage.setItem('userNickName', '无名')
+          console.log('昵称获取失败', error)
+        })
+    } else {
+      sessionStorage.setItem('userId', 'admin')
+      sessionStorage.setItem('userNickName', '管理员')
+    }
   },
   methods: {
     tableRowClassName ({row, rowIndex}) {
@@ -111,8 +119,12 @@ export default {
       }
       return ''
     },
-    ViewStadium () {
-      this.$router.replace({path: '/Main/StadiumDetail'})
+    ViewStadium (row) {
+      this.$router.replace({
+        name: 'StadiumDetail',
+        params: { stadiumId: row.stadiumId}
+      })
+      console.log(row)
       this.$message({
         type: 'success',
         message: '查看成功!'

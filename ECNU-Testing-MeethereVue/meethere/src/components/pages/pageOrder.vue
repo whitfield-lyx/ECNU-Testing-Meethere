@@ -23,19 +23,23 @@
         prop="isChecked"
         label="是否审核"
         width="180">
-        <span>{{checked}}</span>
+        <template slot-scope="scope">
+          <span v-if="scope.row.isChecked === 0">未审核</span>
+          <span v-else>已审核</span>
+        </template>
       </el-table-column>
       <el-table-column
+        prop="hour"
         label="时长"
         width="100">
-        <template>
-          {{this.tableData.hour}}
-        </template>
       </el-table-column>
       <el-table-column
         prop="price"
         label="总租金"
         width="100">
+        <template slot-scope="scope">
+          <span >{{scope.row.price * scope.row.hour}}</span>
+        </template>
       </el-table-column>
       <el-table-column
         prop="address"
@@ -46,10 +50,11 @@
         <template slot-scope="scope">
           <el-button type="primary"  v-if="userType==='admin'" icon="el-icon-check"  circle @click="checkOrder(scope.row)" ></el-button>
           <el-button type="danger" icon="el-icon-delete" circle @click="deleteOrder(scope.row)"></el-button>
-          <el-button type="info"  icon="el-icon-edit"  circle @click="editOrder(scope.row)" ></el-button>
+          <!--<el-button type="info"  icon="el-icon-edit"  circle @click="editOrder(scope.row)" ></el-button>-->
         </template>
       </el-table-column>
     </el-table>
+
   </el-main>
 </template>
 
@@ -73,11 +78,6 @@ export default {
       userId: sessionStorage.getItem('userId')
     }
   },
-  computed: {
-    checked: function () {
-      if (this.isChecked === 0) { return '未审核' } else { return '已审核' }
-    }
-  },
   methods: {
     checkOrder (row) {
       this.$confirm('确认审核吗？', '提示', {
@@ -94,6 +94,7 @@ export default {
           message: '审核订单成功',
           type: 'success'
         })
+        this.reload()
       }).catch(function (error) {
         console.log('审核订单失败', error)
         this.$message.error('审核订单失败')
@@ -110,6 +111,7 @@ export default {
         self.$axios
           .delete('/order/' + row.orderId)
         console.log('删除订单成功')
+        this.reload()
         this.$message({
           message: '删除订单成功',
           type: 'success'
@@ -138,7 +140,7 @@ export default {
           obj.startTime = res.data[i].time
           obj.price = res.data[i].price
           obj.hour = res.data[i].hour
-          if ( obj.userId == this.userId || this.userType == 'admin') {
+          if (obj.userId == this.userId || this.userType == 'admin') {
             order[i] = obj
           }
         }

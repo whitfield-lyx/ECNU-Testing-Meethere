@@ -72,6 +72,5 @@ public class NewsController {
     public Result updateNews(@PathVariable("id") Integer newsId, @RequestBody News news){
         /* 仅修改 content 字段*/
         return newsServiceImpl.updateNews(newsId, news);
-
     }
 }

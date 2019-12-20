@@ -75,6 +75,7 @@ export default {
           message: '发布新闻成功',
           type: 'success'
         })
+        this.reload()
       }).catch(function (error) {
         console.log('发布新闻失败', error)
         this.$message.error('发布失败')

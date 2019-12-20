@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  inject: ['reload'],
   name: 'messageCard',
   props: [
     'messagesData'],
@@ -50,9 +51,13 @@ export default {
     editMessageComplete () {
       var self = this
       self.$axios
-        .put('/messages/update/' + this.messageId, {
+        .put('/message/update/' + this.messageId, {
           userId: this.userId,
-          content: this.content
+          messageId: this.messageId,
+          isChecked: 0,
+          content: this.content,
+          time: this.time,
+          nickname: this.nickname
         })
       console.log('修改留言成功')
       this.$message({
@@ -60,6 +65,7 @@ export default {
         type: 'success'
       })
       this.isEdit = '0'
+      this.reload()
     }
   }
 }

@@ -70,6 +70,7 @@ export default {
           message: '发布留言成功',
           type: 'success'
         })
+        this.reload()
       }).catch(function (error) {
         console.log('发布留言失败', error)
         this.$message.error('发布留言')

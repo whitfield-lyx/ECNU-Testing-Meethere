@@ -49,7 +49,6 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.reload()
         var self = this
         self.$axios
           .put('/message/check/' + this.messageId)
@@ -58,10 +57,12 @@ export default {
           message: '审核留言成功',
           type: 'success'
         })
+        this.reload()
       }).catch(function (error) {
         console.log('审核留言失败', error)
         this.$message.error('审核留言失败')
       })
+      this.reload()
     },
     deleteMessage () {
       this.$confirm('确认删除吗？', '提示', {
@@ -69,7 +70,6 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.reload()
         var self = this
         self.$axios
           .delete('/message/' + this.messageId)
@@ -78,6 +78,7 @@ export default {
           message: '删除留言成功',
           type: 'success'
         })
+        this.reload()
       }).catch(function (error) {
         console.log('删除留言失败', error)
         this.$message.error('删除留言失败')

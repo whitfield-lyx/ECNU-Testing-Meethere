@@ -55,7 +55,6 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.reload()
         var self = this
         self.$axios
           .delete('/news/' + this.newsId)
@@ -64,6 +63,7 @@ export default {
           message: '删除新闻成功',
           type: 'success'
         })
+        this.reload()
       }).catch(function (error) {
         console.log('删除新闻失败', error)
         this.$message.error('删除失败')
@@ -76,8 +76,11 @@ export default {
       var self = this
       self.$axios
         .put('/news/update/' + this.newsId, {
-          adminId: this.userId,
-          content: this.content
+          title: this.title,
+          newsId: this.newsId,
+          name: this.userId,
+          content: this.content,
+          time: this.time
         })
       console.log('修改新闻成功')
       this.$message({

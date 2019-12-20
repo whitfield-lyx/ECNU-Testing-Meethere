@@ -22,7 +22,7 @@
               </el-radio-group>
             </el-form-item>
           </el-form>
-          <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+          <el-form v-if=" userType==='user' " :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="修改密码" prop="pass">
               <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
             </el-form-item>
@@ -43,6 +43,7 @@
 <script>
 export default {
   name: 'pageInformation',
+  inject: ['reload'],
   data () {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -87,7 +88,7 @@ export default {
     }
   },
   mounted () {
-    if (this.userType == 'user') {
+    if (this.userType === 'user') {
       var self = this
       self.$axios
         .get('/user/info')
@@ -112,7 +113,9 @@ export default {
           this.$axios
             .post('/user/info', {
               userId: this.userId,
-              password: this.ruleForm.pass
+              password: this.ruleForm.pass,
+              nickname: this.personForm.userNickname,
+              name: this.personForm.userName
             })
             .then(successResponse => {
               this.$message({
