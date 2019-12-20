@@ -26,9 +26,11 @@
         <span>{{checked}}</span>
       </el-table-column>
       <el-table-column
-        prop="hour"
         label="时长"
         width="100">
+        <template>
+          {{this.tableData.hour}}
+        </template>
       </el-table-column>
       <el-table-column
         prop="price"
@@ -68,7 +70,7 @@ export default {
         price: '400'
       }],
       userType: sessionStorage.getItem('userType'),
-      userId: sessionStorage.getItem('userId'),
+      userId: sessionStorage.getItem('userId')
     }
   },
   computed: {

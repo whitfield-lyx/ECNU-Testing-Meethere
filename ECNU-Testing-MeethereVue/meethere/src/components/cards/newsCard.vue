@@ -72,6 +72,17 @@ export default {
       this.isEdit = '1'
     },
     editNewsComplete () {
+      var self = this
+      self.$axios
+        .put('/news/update/' + this.newsId, {
+          content: this.content
+        })
+      console.log('修改新闻成功')
+      this.$message({
+        message: '修改新闻成功',
+        type: 'success'
+      })
+      this.reload()
       this.isEdit = '0'
     }
   }

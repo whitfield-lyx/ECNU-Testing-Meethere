@@ -49,6 +49,16 @@ export default {
     },
     editMessageComplete () {
       this.isEdit = '0'
+      var self = this
+      self.$axios
+        .put('/messages/update/' + this.newsId, {
+          content: this.content
+        })
+      console.log('修改新闻成功')
+      this.$message({
+        message: '修改新闻成功',
+        type: 'success'
+      })
     }
   }
 }

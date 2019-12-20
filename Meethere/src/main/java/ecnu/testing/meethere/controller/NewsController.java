@@ -4,6 +4,8 @@ import ecnu.testing.meethere.model.News;
 import ecnu.testing.meethere.service.AdminServiceImpl;
 import ecnu.testing.meethere.service.NewsServiceImpl;
 import ecnu.testing.meethere.util.Result;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +68,8 @@ public class NewsController {
     /**
      * 管理员 修改新闻
      */
-    @RequestMapping("/news/update/{id}")
+    @PutMapping("/news/update/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public Result updateNews(@PathVariable("id") Integer newsId, @RequestBody String content){
         return newsServiceImpl.updateNews(newsId, content);
     }
