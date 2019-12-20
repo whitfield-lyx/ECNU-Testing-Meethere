@@ -69,8 +69,8 @@ public class MessageController {
      * 用户 修改留言 仅可修改自己发表的留言
      */
     @PutMapping("/message/update/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Result updateMessage(@SessionAttribute Integer userId, @PathVariable("id") Integer messageId, @RequestBody String content){
-        return messageServiceImpl.updateMessage(userId, messageId, content);
+    public Result updateMessage(@SessionAttribute Integer userId, @PathVariable("id") Integer messageId, @RequestBody Message message){
+        /* 仅修改 content 字段*/
+        return messageServiceImpl.updateMessage(userId, messageId, message);
     }
 }

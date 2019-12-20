@@ -50,8 +50,9 @@ public class UserController {
      * 用户修改密码
      */
     @PostMapping("/info")
-    public int updatePassword(@SessionAttribute Integer userId, @RequestBody String password){
-        return userServiceImpl.updatePassword(userId, password);
+    public int updatePassword(@SessionAttribute Integer userId, @RequestBody User user){
+        /* 仅修改 password 字段 */
+        return userServiceImpl.updatePassword(userId, user);
     }
 
 }

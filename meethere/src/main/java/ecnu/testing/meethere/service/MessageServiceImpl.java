@@ -68,14 +68,15 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Result updateMessage(Integer userId, Integer messageId, String content) {
-        Message message = messageMapper.selectByPrimaryKey(messageId);
-        if(!userId.equals(message.getUserId())){
+    public Result updateMessage(Integer userId, Integer messageId, Message message) {
+        String content = message.getContent();
+        Message oldMessage = messageMapper.selectByPrimaryKey(messageId);
+        if(!userId.equals(oldMessage.getUserId())){
             return ResultFactory.buildFailResult("只能修改自己发布的留言！");
         }
-        message.setContent(content);
-        message.setTime(new Date());
-        messageMapper.updateByPrimaryKey(message);
+        oldMessage.setContent(content);
+        oldMessage.setTime(new Date());
+        messageMapper.updateByPrimaryKey(oldMessage);
         return ResultFactory.buildSuccessResult("修改留言成功");
     }
 }
