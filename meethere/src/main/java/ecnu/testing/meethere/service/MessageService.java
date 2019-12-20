@@ -17,5 +17,5 @@ public interface MessageService {
 
     public List<MessageInfo> selectAllMessage();
     public int checkMessage(Integer messageId);
-    public Result updateMessage(Integer userId,Integer messageId,String content);
+    public Result updateMessage(Integer userId,Integer messageId,Message message);
 }

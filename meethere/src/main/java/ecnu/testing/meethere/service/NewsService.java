@@ -15,5 +15,5 @@ public interface NewsService{
     public List<News> selectByExample(NewsExample example);
 
     public List<News> selectAllNews();
-    public Result updateNews(Integer newsId, String content);
+    public Result updateNews(Integer newsId, News news);
 }

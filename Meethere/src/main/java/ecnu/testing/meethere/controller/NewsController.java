@@ -67,7 +67,8 @@ public class NewsController {
      * 管理员 修改新闻
      */
     @RequestMapping("/news/update/{id}")
-    public Result updateNews(@SessionAttribute Integer adminId, @PathVariable("id") Integer newsId, @RequestBody String content){
-        return newsServiceImpl.updateNews(newsId, content);
+    public Result updateNews(@PathVariable("id") Integer newsId, @RequestBody News news){
+        /* 仅修改 content 字段*/
+        return newsServiceImpl.updateNews(newsId, news);
     }
 }

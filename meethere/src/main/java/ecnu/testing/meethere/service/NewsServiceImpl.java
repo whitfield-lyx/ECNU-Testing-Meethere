@@ -52,14 +52,15 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public Result updateNews(Integer newsId, String content) {
-        News news = newsMapper.selectByPrimaryKey(newsId);
-        if(news==null){
+    public Result updateNews(Integer newsId, News news) {
+        String content = news.getContent();
+        News oldNews = newsMapper.selectByPrimaryKey(newsId);
+        if(oldNews==null){
             return ResultFactory.buildFailResult("不存在新闻，修改失败");
         }
-        news.setContent(content);
+        oldNews.setContent(content);
         news.setTime(new Date());
-        newsMapper.updateByPrimaryKey(news);
+        newsMapper.updateByPrimaryKey(oldNews);
         return ResultFactory.buildSuccessResult("修改新闻成功");
     }
 }
