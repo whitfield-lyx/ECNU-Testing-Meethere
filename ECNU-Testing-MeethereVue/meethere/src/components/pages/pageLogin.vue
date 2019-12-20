@@ -66,7 +66,7 @@ export default {
       } else {
         this.$axios
           .post('/admin/login', {
-            adminId: this.username,
+            name: this.username,
             password: this.password
           })
           .then(successResponse => {

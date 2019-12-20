@@ -65,7 +65,7 @@ export default {
     }
     return {
       personForm: {
-        userNickname: '废柴阿翔',
+        userNickname: sessionStorage.getItem('userNickName'),
         userName: sessionStorage.getItem('userName'),
         userType: sessionStorage.getItem('userType')
       },
@@ -82,23 +82,28 @@ export default {
           { validator: validatePass2, trigger: 'blur' }
         ]
       },
-      userId: sessionStorage.getItem('userId')
+      userId: sessionStorage.getItem('userId'),
+      userType: sessionStorage.getItem('userType')
     }
   },
   mounted () {
-    var self = this
-    self.$axios
-      .get('/user/info')
-      .then(res => {
-        sessionStorage.setItem('userId', res.data.userId)
-        sessionStorage.setItem('userNickName', res.data.nickname)
-        console.log('昵称获取成功', res)
-        this.personForm.userNickname = res.data.nickname
-      })
-      .catch(function (error) {
-        console.log('昵称获取失败', error)
-        this.personForm.userNickname = '无名'
-      })
+    if (this.userType == 'user') {
+      var self = this
+      self.$axios
+        .get('/user/info')
+        .then(res => {
+          sessionStorage.setItem('userId', res.data.userId)
+          sessionStorage.setItem('userNickName', res.data.nickname)
+          console.log('昵称获取成功', res)
+        })
+        .catch(function (error) {
+          sessionStorage.setItem('userNickName', '无名')
+          console.log('昵称获取失败', error)
+        })
+    } else {
+      sessionStorage.setItem('userId', 'admin')
+      sessionStorage.setItem('userNickName', '管理员')
+    }
   },
   methods: {
     submitForm (formName) {

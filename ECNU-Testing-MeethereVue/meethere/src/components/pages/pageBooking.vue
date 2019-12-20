@@ -76,7 +76,6 @@
           </div>
       </div>
   </main>
-
 </template>
 
 <script>
@@ -148,6 +147,7 @@ export default {
       console.log(value)
     },
     ViewStadium () {
+      this.$router.replace({path: '/Main/Booking/StadiumDetail'})
       this.$message({
         type: 'success',
         message: '查看成功!'

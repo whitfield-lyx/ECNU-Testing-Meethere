@@ -11,6 +11,7 @@ import pagePublishMessage from '../components/pages/pagePublishMessage'
 import pagePublishNews from '../components/pages/pagePublishNews'
 import pageSignIn from '../components/pages/pageSignIn'
 import pageVerifyMessage from '../components/pages/pageVerifyMessage'
+import pageStadiumDetail from '../components/pages/pageStadiumDetail'
 
 Vue.use(Router)
 
@@ -38,7 +39,17 @@ export default new Router({
           component: pageBooking,
           meta: {
             keepalive: true
-          }
+          },
+          children: [
+            {
+              path: 'StadiumDetail',
+              name: 'StadiumDetail',
+              component: pageStadiumDetail,
+              meta: {
+                keepalive: true
+              }
+            }
+          ]
         },
         {
           path: 'Information',

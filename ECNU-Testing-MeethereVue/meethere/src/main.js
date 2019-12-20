@@ -6,10 +6,12 @@ import router from './router'
 import ElementUI from 'element-ui'
 import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css'
+import VueRouter from 'vue-router'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(VueRouter)
 
 axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
