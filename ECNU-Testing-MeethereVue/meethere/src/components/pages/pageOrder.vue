@@ -140,7 +140,7 @@ export default {
           obj.startTime = res.data[i].time
           obj.price = res.data[i].price
           obj.hour = res.data[i].hour
-          if (obj.userId == this.userId || this.userType == 'admin') {
+          if (obj.userId === this.userId || this.userType === 'admin') {
             order[i] = obj
           }
         }

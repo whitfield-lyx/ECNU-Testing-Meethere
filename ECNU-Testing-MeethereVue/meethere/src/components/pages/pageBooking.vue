@@ -93,7 +93,7 @@ export default {
         console.log('场馆获取失败', error)
       })
 
-    if (this.userType == 'user') {
+    if (this.userType === 'user') {
       self.$axios
         .get('/user/info')
         .then(res => {
@@ -122,7 +122,7 @@ export default {
     ViewStadium (row) {
       this.$router.replace({
         name: 'StadiumDetail',
-        params: { stadiumId: row.stadiumId}
+        params: {stadiumId: row.stadiumId}
       })
       console.log(row)
       this.$message({
