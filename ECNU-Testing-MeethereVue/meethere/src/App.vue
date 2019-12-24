@@ -1,7 +1,14 @@
 <template>
   <div id="app">
     <header class="header">
-      <el-link href="#/" style = "font-size: 30px" type="primary" >Welcome to the MeetHere System！</el-link>
+      <el-row>
+        <el-col :span="8" :offset="8">
+      <el-link  style = "font-size: 30px" type="primary" >Welcome to the MeetHere System！</el-link>
+        </el-col>
+        <el-col :span="4" :offset="4">
+      <el-button style="margin-right: 20px; margin-top: 5px" type="danger" size="mini" @click="logOut">退出登录</el-button>
+        </el-col>
+      </el-row>
       <el-row v-if="$route.meta.keepalive">
         <el-col :span="24">
           <el-menu default-active="" class="el-menu-demo" mode="horizontal"  :router="true">
@@ -51,6 +58,12 @@ export default {
       this.isRouterAlive = false
       this.$nextTick(function () {
         this.isRouterAlive = true
+      })
+    },
+    logOut () {
+      sessionStorage.clear()
+      this.$router.push({
+        name: 'Login'
       })
     }
   }

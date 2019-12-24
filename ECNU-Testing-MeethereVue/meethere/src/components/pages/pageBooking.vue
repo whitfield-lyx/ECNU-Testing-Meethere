@@ -54,21 +54,9 @@ export default {
       userId: sessionStorage.getItem('userId'),
       userType: sessionStorage.getItem('userType'),
       placeData: [{
-        stadiumId: '体育馆',
+        stadiumId: '场馆获取失败',
         price: '400',
         address: '上海市普陀区金沙江路 1515 弄'
-      }, {
-        stadiumId: '东操场',
-        price: '60',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }, {
-        stadiumId: '大学生活动中心',
-        price: '40',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        stadiumId: '篮球场',
-        price: '200',
-        address: '上海市普陀区金沙江路 1518 弄'
       }]
     }
   },
@@ -122,7 +110,7 @@ export default {
     ViewStadium (row) {
       this.$router.replace({
         name: 'StadiumDetail',
-        params: { stadiumId: row.stadiumId}
+        params: {stadiumId: row.stadiumId}
       })
       console.log(row)
       this.$message({

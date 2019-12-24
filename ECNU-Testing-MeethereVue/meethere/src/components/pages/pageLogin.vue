@@ -48,6 +48,11 @@ export default {
                 type: 'success'
               })
               this.$router.replace({path: '/Main/Booking'})
+            } else if (successResponse.data.code === 400) {
+              this.$message({
+                message: '账号密码错误',
+                type: 'warning'
+              })
             } else {
               this.$message({
                 message: '用户登录失败',
@@ -87,11 +92,13 @@ export default {
             }
           })
           .catch(failResponse => {
-            console.log('管理员登录失败')
-            this.$message({
-              message: '管理员登录失败',
-              type: 'warning'
-            })
+            if (failResponse.data.code === 400) {
+              console.log('管理员登录失败')
+              this.$message({
+                message: '管理员登录失败',
+                type: 'warning'
+              })
+            }
           })
       }
     },
