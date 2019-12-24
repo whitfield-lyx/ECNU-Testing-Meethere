@@ -7,21 +7,27 @@
       <el-table-column
         prop="orderId"
         label="订单号"
+        sortable
         width="100">
       </el-table-column>
       <el-table-column
         prop="stadiumId"
         label="场地"
+        sortable
+        :filters="[{text: '东操场', value: '东操场'}, {text: '中北乒乓球馆', value: '中北乒乓球馆'}, {text: '大活羽毛球馆', value: '大活羽毛球馆'}, {text: '篮球馆', value: '篮球馆'}]"
+        :filter-method="filterHandler"
         width="180">
       </el-table-column>
       <el-table-column
         prop="startTime"
+        sortable
         label="开始时间"
         width="180">
       </el-table-column>
       <el-table-column
         prop="isChecked"
         label="是否审核"
+        sortable
         width="180">
         <template slot-scope="scope">
           <span v-if="scope.row.isChecked === 0">未审核</span>
@@ -122,6 +128,10 @@ export default {
       })
     },
     editOrder (row) {
+    },
+    filterHandler (value, row, column) {
+      const property = column['property']
+      return row[property] === value
     }
   },
   mounted () {

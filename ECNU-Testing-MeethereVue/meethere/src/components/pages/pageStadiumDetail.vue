@@ -96,7 +96,8 @@ export default {
       hour: '',
       stadiumId: this.$route.params.stadiumId,
       stadium: '',
-      responseResult: ''
+      responseResult: '',
+      userType: sessionStorage.getItem('userType')
     }
   },
   computed: {
@@ -118,47 +119,54 @@ export default {
       })
     },
     makeOrder () {
-      if (this.day !== '' && this.hour !== '') {
-        this.$confirm('确认预约吗？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+      if (this.userType === 'admin') {
+        this.$message({
+          message: '场馆预约失败 管理员不能预约场馆',
           type: 'warning'
-        }).then(() => {
-          var self = this
-          self.$axios
-            .post('/order/newOrder', {
-              userId: sessionStorage.getItem('username'),
-              orderId: '1',
-              stadiumId: this.stadiumId,
-              time: this.timeString,
-              hour: this.timeLength,
-              isChecked: 0
-            }).then(successResponse => {
-              this.responseResult = JSON.stringify(successResponse.data)
-              if (successResponse.data.code === 200) {
-                console.log('场馆预约成功 请管理员审核')
-                this.$message({
-                  message: '场馆预约成功 请管理员审核',
-                  type: 'success'
-                })
-                this.$router.replace({name: 'Order'})
-              } else {
-                this.$message({
-                  message: '场馆预约失败 预约时间冲突',
-                  type: 'warning'
-                })
-              }
-            })
-            .catch(failResponse => {
-              this.$message({
-                message: '场馆预约失败',
-                type: 'warning'
-              })
-              console.log('场馆预约失败')
-            })
         })
       } else {
-        this.$message.error('场馆预约失败，请输入相应信息！')
+        if (this.day !== '' && this.hour !== '') {
+          this.$confirm('确认预约吗？', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            var self = this
+            self.$axios
+              .post('/order/newOrder', {
+                userId: sessionStorage.getItem('username'),
+                orderId: '1',
+                stadiumId: this.stadiumId,
+                time: this.timeString,
+                hour: this.timeLength,
+                isChecked: 0
+              }).then(successResponse => {
+                this.responseResult = JSON.stringify(successResponse.data)
+                if (successResponse.data.code === 200) {
+                  console.log('场馆预约成功 请管理员审核')
+                  this.$message({
+                    message: '场馆预约成功 请管理员审核',
+                    type: 'success'
+                  })
+                  this.$router.replace({name: 'Order'})
+                } else {
+                  this.$message({
+                    message: '场馆预约失败 预约时间冲突',
+                    type: 'warning'
+                  })
+                }
+              })
+              .catch(failResponse => {
+                this.$message({
+                  message: '场馆预约失败',
+                  type: 'warning'
+                })
+                console.log('场馆预约失败')
+              })
+          })
+        } else {
+          this.$message.error('场馆预约失败，请输入相应信息！')
+        }
       }
     }
   },
