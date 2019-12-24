@@ -12,12 +12,12 @@
     </div>
     <!-- 右侧主内容区 -->
     <div >
-      <div>
+      <div v-if="userType=='user'">
         <el-row  style="margin-top: 20px; margin-bottom: 20px" >
           <el-col :span=7 style="margin-left: 15px">
             <stadium-card v-bind:stadium="stadium" ></stadium-card>
           </el-col>
-          <el-col :span=8 style="margin-top: 80px;">
+          <el-col :span=8 style="margin-top: 80px;" >
             <el-date-picker
               v-model="day"
               type="date"
@@ -65,6 +65,13 @@
                 </el-form>
               </div>
             </el-card>
+          </el-col>
+        </el-row>
+      </div>
+      <div v-else>
+        <el-row  style="margin-top: 20px; margin-bottom: 20px" >
+          <el-col style="margin-left: 15px">
+            <stadium-card v-bind:stadium="stadium" ></stadium-card>
           </el-col>
         </el-row>
       </div>
