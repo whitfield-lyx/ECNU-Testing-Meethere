@@ -50,7 +50,7 @@ export default {
               this.$router.replace({path: '/Main/Booking'})
             } else if (successResponse.data.code === 400) {
               this.$message({
-                message: '账号密码错误',
+                message: '用户账号密码错误',
                 type: 'warning'
               })
             } else {
@@ -84,9 +84,9 @@ export default {
                 message: '管理员登录成功',
                 type: 'success'
               })
-            } else {
+            } else if (successResponse.data.code === 400) {
               this.$message({
-                message: '管理员登录失败',
+                message: '管理员账号密码错误',
                 type: 'warning'
               })
             }
@@ -125,5 +125,6 @@ export default {
   .login_style{
     width: 400px;
     margin-bottom: 10px;
+    margin-left: 0px;
   }
 </style>
