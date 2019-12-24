@@ -96,4 +96,15 @@ public class UserServiceImpl implements UserService {
         }
         return -1;
     }
+
+    @Override
+    public List<User> selectAllUser() {
+        return userMapper.selectAllUser();
+    }
+
+    @Override
+    public int updatePasswordByAdmin(User user) {
+        System.out.println("userId: "+user.getUserId()+" new password: "+user.getPassword());
+        return userMapper.updateByPrimaryKey(user);
+    }
 }

@@ -18,4 +18,7 @@ public interface UserService {
     public int updatePassword(Integer userId, User user);
     public String getNickname(Integer userId);
     public Integer getIdByName(String name);
+
+    public List<User> selectAllUser();
+    public int updatePasswordByAdmin(User user);
 }
