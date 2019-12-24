@@ -52,23 +52,26 @@
 <script>
 export default {
   name: 'pageUser',
+  inject: ['reload'],
   data () {
     return {
       stadiumId: '',
       userId: sessionStorage.getItem('userId'),
       userType: sessionStorage.getItem('userType'),
       UserData: [{
+        userId: '0',
         userName: '未获得账户名',
         nickName: '未获得昵称',
         password: '未获得密码'
-      }]
+      }],
+      firstPassword: '000000'
     }
   },
   mounted () {
     var self = this
     var users = []
     self.$axios
-      .get('/user')
+      .get('/user/userInfo')
       .then(res => {
         for (let i = 0; i < res.data.length; i++) {
           var obj = {}
@@ -86,10 +89,30 @@ export default {
       })
   },
   methods: {
-    ResetPass(row){
+    ResetPass (row) {
+      this.reload()
       var self = this
       self.$axios
-        .put('/user/reset')
+        .post('/user/userInfo', {
+          userId: row.userId,
+          name: row.userName,
+          nickname: row.nickName,
+          password: this.firstPassword
+        }).then(res => {
+          this.$message({
+            message: '重置密码成功',
+            type: 'success'
+          })
+          console.log('重置密码成功', res)
+        }).catch(function (error) {
+          console.log('重置密码失败', error)
+          this.$message({
+            message: '重置密码失败',
+            type: 'warning'
+          })
+        })
+      this.reload()
+      this.$forceUpdate()
     }
   }
 }

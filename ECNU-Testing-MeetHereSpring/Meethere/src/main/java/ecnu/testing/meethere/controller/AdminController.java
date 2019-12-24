@@ -34,21 +34,4 @@ public class AdminController {
         }
         return result;
     }
-
-    /**
-     * 显示所有用户信息
-     */
-    @GetMapping("/userInfo")
-    public List<User> UserInfo(){
-        return userServiceImpl.selectAllUser();
-    }
-
-    /**
-     * 管理员修改/重置用户密码
-     */
-    @PostMapping("/userInfo")
-    public int updatePassword(@RequestBody User user){
-        /* 仅修改 password 字段 */
-        return userServiceImpl.updatePasswordByAdmin(user);
-    }
 }

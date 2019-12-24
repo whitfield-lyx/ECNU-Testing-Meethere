@@ -83,6 +83,7 @@ export default {
       this.isEdit = '1'
     },
     editStadiumComplete () {
+      this.reload()
       var self = this
       self.$axios
         .put('/stadium/update', {
@@ -101,14 +102,14 @@ export default {
           } else if (res.data.code === 400) {
             this.$message({
               message: '修改场馆失败',
-              type: 'error'
+              type: 'warning'
             })
           }
         }).catch(function (error) {
           console.log('修改场馆失败', error)
           this.$message({
             message: '修改场馆失败',
-            type: 'error'
+            type: 'warning'
           })
         })
       this.isEdit = '0'

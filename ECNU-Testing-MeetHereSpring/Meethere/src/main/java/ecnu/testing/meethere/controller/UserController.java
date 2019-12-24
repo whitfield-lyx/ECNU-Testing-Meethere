@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -55,4 +56,20 @@ public class UserController {
         return userServiceImpl.updatePassword(userId, user);
     }
 
+    /**
+     * 显示所有用户信息
+     */
+    @GetMapping("/userInfo")
+    public List<User> UserInfo(){
+        return userServiceImpl.selectAllUser();
+    }
+
+    /**
+     * 管理员修改/重置用户密码
+     */
+    @PostMapping("/userInfo")
+    public int updatePassword(@RequestBody User user){
+        /* 仅修改 password 字段 */
+        return userServiceImpl.updatePasswordByAdmin(user);
+    }
 }

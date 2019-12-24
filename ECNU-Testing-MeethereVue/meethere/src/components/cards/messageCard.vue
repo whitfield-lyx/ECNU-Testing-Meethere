@@ -49,6 +49,7 @@ export default {
       this.isEdit = '1'
     },
     editMessageComplete () {
+      this.reload()
       var self = this
       self.$axios
         .put('/message/update/' + this.messageId, {

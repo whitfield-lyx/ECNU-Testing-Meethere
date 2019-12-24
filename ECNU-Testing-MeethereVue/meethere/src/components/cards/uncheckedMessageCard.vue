@@ -44,6 +44,7 @@ export default {
   },
   methods: {
     checkMessage () {
+      this.reload()
       this.$confirm('确认审核吗？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
