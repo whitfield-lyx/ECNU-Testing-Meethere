@@ -173,4 +173,7 @@
     from meethere.user
     where name = #{name,jdbcType=VARCHAR}
   </select>
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from meethere.user
+  </select>
 </mapper>

@@ -64,4 +64,5 @@ public interface UserMapper {
      */
     int updateByPrimaryKey(User record);
     List<User> selectByName(String name);
+    List<User> selectAllUser();
 }
