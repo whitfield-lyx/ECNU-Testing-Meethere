@@ -7,6 +7,10 @@
           <i class="el-icon-menu"></i>
           <span slot="title">场馆列表</span>
         </el-menu-item>
+        <el-menu-item v-if="userType=='admin' " index="User" >
+          <i class="el-icon-menu"></i>
+          <span slot="title">用户管理</span>
+        </el-menu-item>
       </el-menu>
     </div>
     <!-- 右侧主内容区 -->

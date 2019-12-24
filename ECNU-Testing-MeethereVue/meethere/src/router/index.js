@@ -12,6 +12,7 @@ import pagePublishNews from '../components/pages/pagePublishNews'
 import pageSignIn from '../components/pages/pageSignIn'
 import pageVerifyMessage from '../components/pages/pageVerifyMessage'
 import pageStadiumDetail from '../components/pages/pageStadiumDetail'
+import pageUser from '../components/pages/pageUser'
 
 Vue.use(Router)
 
@@ -33,6 +34,14 @@ export default new Router({
         keepalive: true
       },
       children: [
+        {
+          path: 'User',
+          name: 'User',
+          component: pageUser,
+          meta: {
+            keepalive: true
+          }
+        },
         {
           path: 'Booking',
           name: 'Booking',

@@ -17,15 +17,15 @@
               场馆预约
             </el-menu-item>
             <el-menu-item index= "/Main/Order">
-              <i class="el-icon-user-solid"></i>
+              <i class="el-icon-s-order"></i>
               订单管理
             </el-menu-item>
             <el-menu-item index= "/Main/News">
-              <i class="el-icon-download"></i>
+              <i class="el-icon-data-analysis"></i>
               查看新闻
             </el-menu-item>
             <el-menu-item index= "/Main/Message">
-              <i class="el-icon-thumb"></i>
+              <i class="el-icon-chat-line-round"></i>
               留言管理
             </el-menu-item>
             <el-menu-item index= "/Main/Information">
