@@ -136,15 +136,15 @@ export default {
             }).then(successResponse => {
               this.responseResult = JSON.stringify(successResponse.data)
               if (successResponse.data.code === 200) {
-                console.log('场馆预约成功')
+                console.log('场馆预约成功 请管理员审核')
                 this.$message({
-                  message: '场馆预约成功',
+                  message: '场馆预约成功 请管理员审核',
                   type: 'success'
                 })
                 this.$router.replace({name: 'Order'})
               } else {
                 this.$message({
-                  message: '场馆预约失败',
+                  message: '场馆预约失败 预约时间冲突',
                   type: 'warning'
                 })
               }

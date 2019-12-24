@@ -65,9 +65,9 @@ export default {
             time: '2019-08-08 08:00:00',
             isChecked: '0'
           })
-        console.log('发布留言成功')
+        console.log('发布留言成功 请管理员审核')
         this.$message({
-          message: '发布留言成功',
+          message: '发布留言成功 请管理员审核',
           type: 'success'
         })
         this.reload()
