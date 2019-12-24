@@ -81,7 +81,7 @@ export default {
         console.log('场馆获取失败', error)
       })
 
-    if (this.userType == 'user') {
+    if (this.userType === 'user') {
       self.$axios
         .get('/user/info')
         .then(res => {
