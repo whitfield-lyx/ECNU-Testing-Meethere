@@ -21,11 +21,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result save(User user) {
         List<User> userList = userMapper.selectByName(user.getName());
-        if(userList==null){
+        if(userList.size()==0){
             userMapper.insert(user);
             return ResultFactory.buildSuccessResult("用户注册成功");
         }
         else {
+            //System.out.println(userList);
             return ResultFactory.buildFailResult("已存在该用户名的用户");
         }
     }
