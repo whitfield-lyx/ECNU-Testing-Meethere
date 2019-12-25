@@ -33,7 +33,7 @@ public class UserController {
     /**
      * 用户注册
      */
-    @RequestMapping("/register")
+    @PostMapping("/register")
     @ResponseBody
     public Result Register(@RequestBody User user) {
         return userServiceImpl.save(user);

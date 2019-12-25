@@ -77,8 +77,7 @@ export default {
             .post('/user/register', {
               nickname: this.ruleForm.userNickName,
               password: this.ruleForm.pass,
-              name: this.ruleForm.userName,
-              userID: '1'
+              name: this.ruleForm.userName
             })
             .then(res => {
               console.log(this.username, this.password)
