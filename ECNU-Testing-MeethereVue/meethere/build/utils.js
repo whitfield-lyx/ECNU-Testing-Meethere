@@ -47,7 +47,8 @@ exports.cssLoaders = function (options) {
     if (options.extract) {
       return ExtractTextPlugin.extract({
         use: loaders,
-        fallback: 'vue-style-loader'
+        fallback: 'vue-style-loader',
+        publicPath: '…/…/' //解决ElemntUI图标显示问题
       })
     } else {
       return ['vue-style-loader'].concat(loaders)
