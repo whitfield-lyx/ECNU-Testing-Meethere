@@ -11,7 +11,7 @@
       </el-row>
       <el-row v-if="$route.meta.keepalive">
         <el-col :span="24">
-          <el-menu default-active="" class="el-menu-demo" mode="horizontal"  :router="true">
+          <el-menu default-active="$route.path" class="el-menu-demo" mode="horizontal"  :router="true">
             <el-menu-item index= "/Main/Booking">
               <i class="el-icon-star-on"></i>
               场馆预约

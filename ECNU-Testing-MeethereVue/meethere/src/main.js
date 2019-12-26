@@ -15,7 +15,7 @@ Vue.use(VueRouter)
 
 axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = 'http://47.97.173.237:8080/api'
 axios.defaults.withCredentials = true
 
 /* eslint-disable no-new */

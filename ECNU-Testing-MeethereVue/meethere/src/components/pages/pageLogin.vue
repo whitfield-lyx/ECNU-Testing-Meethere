@@ -92,7 +92,7 @@ export default {
             }
           })
           .catch(failResponse => {
-            if (failResponse.data.code === 400) {
+            if (failResponse.code === 400) {
               console.log('管理员登录失败')
               this.$message({
                 message: '管理员登录失败',
