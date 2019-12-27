@@ -170,4 +170,5 @@ public class Message {
     public void setIsChecked(Byte isChecked) {
         this.isChecked = isChecked;
     }
+
 }
