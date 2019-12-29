@@ -52,24 +52,14 @@ class AdminServiceImplTest {
 
     @Test
     void save() {
-        Admin admin=new Admin();
-        admin.setName("admin10");
-        admin.setPassword("111111");
-        admin.setAdminId(0);
-        adminServiceImpl.save(admin);
+
     }
 
     @Test
     void delete() {
-        adminServiceImpl.delete(1);
     }
 
     @Test
     void login() {
-        Admin admin=new Admin();
-        admin.setName("admin10");
-        admin.setPassword("111111");
-        admin.setAdminId(0);
-        adminServiceImpl.login(admin);
     }
 }

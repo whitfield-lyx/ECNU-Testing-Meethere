@@ -31,9 +31,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int delete(Integer key) {
         Order order = selectByKey(key);
-        if (order == null){
-            return -1;
-        }
         Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());
         String deleteTime = "";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -96,9 +93,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Result addOrder(Order order) {
         Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());
-        if (stadium == null){
-            return ResultFactory.buildFailResult("查询结果为空");
-        }
         String bookedTime = stadium.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT+0"));
@@ -129,7 +123,7 @@ public class OrderServiceImpl implements OrderService {
     public Result updateMyOrder(Integer userId, Integer orderId, Integer hour) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
         //System.out.println("orderId: "+orderId+" user id: "+order.getUserId());
-        if(order == null || !userId.equals(order.getUserId())){
+        if(!userId.equals(order.getUserId())){
             return ResultFactory.buildFailResult("用户只能修改自己的订单");
         }
         Order newOrder = order; /* newOrder is not redundant */

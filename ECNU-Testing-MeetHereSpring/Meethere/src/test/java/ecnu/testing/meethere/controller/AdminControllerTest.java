@@ -4,8 +4,8 @@ import ecnu.testing.meethere.model.Admin;
 import ecnu.testing.meethere.service.AdminService;
 import ecnu.testing.meethere.service.AdminServiceImpl;
 import ecnu.testing.meethere.service.UserServiceImpl;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +16,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @RunWith(SpringRunner.class)
-@WebMvcTest(AdminController.class)
+@WebMvcTest(MessageController.class)
 class AdminControllerTest {
     @Autowired
     private MockMvc mockMvc;

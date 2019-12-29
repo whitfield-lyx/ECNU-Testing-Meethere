@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
         //System.out.println("user name is "+name+" password is "+user.getPassword());
         List<User> userList = userMapper.selectByName(name);
         /* post condition: userList长度为0或1 */
-        if(userList == null || userList.size() == 0){
+        if(userList == null){
             return ResultFactory.buildFailResult("不存在该用户名");
         }
         User myUser = userList.get(0);
@@ -73,10 +73,6 @@ public class UserServiceImpl implements UserService {
     public int updatePassword(Integer userId, User user) {
         String password = user.getPassword();
         User oldUser = selectByKey(userId);
-        if (oldUser == null){
-            System.err.println("不存在该用户");
-            return -1;
-        }
         //System.out.println("userId: "+userId+" old password: "+user.getPassword());
         oldUser.setPassword(password);
         //System.out.println("userId: "+userId+" new password: "+password);
