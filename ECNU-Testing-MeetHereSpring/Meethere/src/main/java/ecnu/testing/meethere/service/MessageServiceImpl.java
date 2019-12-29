@@ -71,7 +71,7 @@ public class MessageServiceImpl implements MessageService {
     public Result updateMessage(Integer userId, Integer messageId, Message message) {
         String content = message.getContent();
         Message oldMessage = messageMapper.selectByPrimaryKey(messageId);
-        if(!userId.equals(oldMessage.getUserId())){
+        if(oldMessage == null || !userId.equals(oldMessage.getUserId())){
             return ResultFactory.buildFailResult("只能修改自己发布的留言！");
         }
         oldMessage.setContent(content);
