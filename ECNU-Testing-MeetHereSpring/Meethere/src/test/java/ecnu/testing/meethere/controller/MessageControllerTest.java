@@ -3,28 +3,30 @@ package ecnu.testing.meethere.controller;
 import ecnu.testing.meethere.model.Message;
 import ecnu.testing.meethere.service.MessageService;
 import ecnu.testing.meethere.service.MessageServiceImpl;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.Date;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @RunWith(SpringRunner.class)
 @WebMvcTest(MessageController.class)
-
-
+@ContextConfiguration(locations = {"classpath:application.properties", "classpath:generatorConfig.xml"})
 class MessageControllerTest {
 
     @Autowired
@@ -38,8 +40,14 @@ class MessageControllerTest {
 
     @Test
     @DisplayName("Testing addMessage()")
-    void addMessage() throws Exception{
+    void addMessage() throws Exception {
         Message message=new Message();
+        message.setTime(new Date());
+        message.setContent("!");
+        message.setUserId(1);
+        byte isChecked =1;
+        message.setIsChecked(isChecked);
+        message.setMessageId(1);
         ResultActions perform=mockMvc.perform(post("/api/message"));
         perform.andExpect(status().isCreated());
         verify(messageServiceImpl,times(1)).save(message);
@@ -68,6 +76,9 @@ class MessageControllerTest {
         ResultActions perform=mockMvc.perform(get("/api/message/update/5"));
         perform.andExpect(status().isOk());
         Message message=new Message();
+        Byte isCheched = 1;
+        message.setIsChecked(isCheched);
+        message.setContent("2");
         verify(messageServiceImpl,times(1)).updateMessage(1,2,message);
     }
 
@@ -82,8 +93,8 @@ class MessageControllerTest {
     @Test
     @DisplayName("Testing getMessageByID()")
     void getMessageByID() throws Exception{
-         ResultActions perform=mockMvc.perform(get("/api/message/1"));
-         perform.andExpect(status().isOk());
-         verify(messageServiceImpl,times(1)).selectByKey(1);
+        ResultActions perform=mockMvc.perform(get("/api/message/1"));
+        perform.andExpect(status().isOk());
+        verify(messageServiceImpl,times(1)).selectByKey(1);
     }
 }
