@@ -2,7 +2,6 @@ package ecnu.testing.meethere.service;
 
 import ecnu.testing.meethere.mapper.StadiumMapper;
 import ecnu.testing.meethere.model.Stadium;
-import ecnu.testing.meethere.model.StadiumExample;
 import ecnu.testing.meethere.util.Result;
 import ecnu.testing.meethere.util.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +37,6 @@ public class StadiumServiceImpl implements StadiumService {
     @Override
     public int updateNotNull(Stadium entity) {
         return stadiumMapper.updateByPrimaryKeySelective(entity);
-    }
-
-    @Override
-    public List<Stadium> selectByExample(StadiumExample example) {
-        return stadiumMapper.selectByExample(example);
     }
 
     @Override

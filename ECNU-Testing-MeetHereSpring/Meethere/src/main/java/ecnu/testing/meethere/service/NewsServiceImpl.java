@@ -2,7 +2,6 @@ package ecnu.testing.meethere.service;
 
 import ecnu.testing.meethere.mapper.NewsMapper;
 import ecnu.testing.meethere.model.News;
-import ecnu.testing.meethere.model.NewsExample;
 import ecnu.testing.meethere.util.Result;
 import ecnu.testing.meethere.util.ResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +38,6 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public int updateNotNull(News entity) {
         return newsMapper.updateByPrimaryKeySelective(entity);
-    }
-
-    @Override
-    public List<News> selectByExample(NewsExample example) {
-        return newsMapper.selectByExample(example);
     }
 
     @Override

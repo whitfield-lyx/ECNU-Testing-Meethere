@@ -203,4 +203,16 @@ public class Order {
     public void setIsChecked(Byte isChecked) {
         this.isChecked = isChecked;
     }
+
+    public Order(Integer orderId, Integer userId, String stadiumId, Date time, Integer hour, Byte isChecked) {
+        this.orderId = orderId;
+        this.userId = userId;
+        this.stadiumId = stadiumId;
+        this.time = time;
+        this.hour = hour;
+        this.isChecked = isChecked;
+    }
+
+    public Order(){
+    }
 }

@@ -170,4 +170,15 @@ public class News {
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
+
+    public News(Integer newsId, String title, String content, Date time, String name) {
+        this.newsId = newsId;
+        this.title = title;
+        this.content = content;
+        this.time = time;
+        this.name = name;
+    }
+
+    public News(){
+    }
 }

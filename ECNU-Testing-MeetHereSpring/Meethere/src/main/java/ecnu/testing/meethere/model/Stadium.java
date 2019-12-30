@@ -165,4 +165,15 @@ public class Stadium {
     public void setInformation(String information) {
         this.information = information == null ? null : information.trim();
     }
+
+    public Stadium(String stadiumId, String time, Integer price, String address, String information) {
+        this.stadiumId = stadiumId;
+        this.time = time;
+        this.price = price;
+        this.address = address;
+        this.information = information;
+    }
+
+    public Stadium(){
+    }
 }

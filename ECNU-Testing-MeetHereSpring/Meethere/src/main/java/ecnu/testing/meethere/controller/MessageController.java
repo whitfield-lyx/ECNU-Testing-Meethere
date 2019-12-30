@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class MessageController {
-    final
+    private final
     MessageServiceImpl messageServiceImpl;
 
     public MessageController(MessageServiceImpl messageServiceImpl) {
