@@ -100,4 +100,13 @@ public class Admin {
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
+
+    public Admin(Integer adminId, String password, String name) {
+        this.adminId = adminId;
+        this.password = password;
+        this.name = name;
+    }
+
+    public Admin() {
+    }
 }

@@ -14,8 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
-    @Autowired
-    private OrderServiceImpl orderServiceImpl;
+    private final OrderServiceImpl orderServiceImpl;
+
+    public OrderController(OrderServiceImpl orderServiceImpl) {
+        this.orderServiceImpl = orderServiceImpl;
+    }
 
     /**
      * 对管理员 显示所有订单
