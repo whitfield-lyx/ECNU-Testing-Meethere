@@ -171,4 +171,14 @@ public class Message {
         this.isChecked = isChecked;
     }
 
+    public Message(Integer messageId, Integer userId, Date time, String content, Byte isChecked) {
+        this.messageId = messageId;
+        this.userId = userId;
+        this.time = time;
+        this.content = content;
+        this.isChecked = isChecked;
+    }
+
+    public Message() {
+    }
 }

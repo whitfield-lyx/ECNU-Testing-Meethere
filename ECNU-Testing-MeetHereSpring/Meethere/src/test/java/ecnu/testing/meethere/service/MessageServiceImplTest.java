@@ -85,8 +85,8 @@ public class MessageServiceImplTest {
     @Test
     public void updateMessage() {
         Message message=new Message();
-        Byte isCheched = 1;
-        message.setIsChecked(isCheched);
+        Byte isChecked = 1;
+        message.setIsChecked(isChecked);
         message.setContent("2");
         messageServiceImpl.updateMessage(1,1,message);
         System.out.println("更新成功");

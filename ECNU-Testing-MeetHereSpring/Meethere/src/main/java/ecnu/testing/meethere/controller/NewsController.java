@@ -16,9 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class NewsController {
-    final
+    private final
     NewsServiceImpl newsServiceImpl;
-    final
+    private final
     AdminServiceImpl adminServiceImpl;
 
     public NewsController(NewsServiceImpl newsServiceImpl, AdminServiceImpl adminServiceImpl) {

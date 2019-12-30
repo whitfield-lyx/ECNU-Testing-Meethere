@@ -2,7 +2,6 @@ package ecnu.testing.meethere.service;
 
 import ecnu.testing.meethere.mapper.UserMapper;
 import ecnu.testing.meethere.model.User;
-import ecnu.testing.meethere.model.UserExample;
 import ecnu.testing.meethere.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,11 +43,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateNotNull(User entity) {
         return userMapper.updateByPrimaryKeySelective(entity);
-    }
-
-    @Override
-    public List<User> selectByExample(UserExample example) {
-        return userMapper.selectByExample(example);
     }
 
     @Override

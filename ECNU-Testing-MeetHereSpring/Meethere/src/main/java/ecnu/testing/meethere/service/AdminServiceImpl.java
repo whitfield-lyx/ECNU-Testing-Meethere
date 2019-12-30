@@ -2,12 +2,9 @@ package ecnu.testing.meethere.service;
 
 import ecnu.testing.meethere.mapper.AdminMapper;
 import ecnu.testing.meethere.model.Admin;
-import ecnu.testing.meethere.model.AdminExample;
 import ecnu.testing.meethere.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -54,15 +51,6 @@ public class AdminServiceImpl implements AdminService {
      *  @return */
     public int updateNotNull(Admin entity) {
         return adminMapper.updateByPrimaryKeySelective(entity);
-    }
-
-    /**
-     *  说明：根据Example条件进行查询
-     *  重点：这个查询支持通过Example类指定查询列，通过selectProperties方法指定查询列 *
-     *  @param example
-     *  @return */
-    public List<Admin> selectByExample(AdminExample example) {
-        return adminMapper.selectByExample(example);
     }
 
     @Override

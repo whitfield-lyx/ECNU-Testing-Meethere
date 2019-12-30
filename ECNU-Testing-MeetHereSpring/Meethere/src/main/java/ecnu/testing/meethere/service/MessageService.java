@@ -1,7 +1,6 @@
 package ecnu.testing.meethere.service;
 
 import ecnu.testing.meethere.model.Message;
-import ecnu.testing.meethere.model.MessageExample;
 import ecnu.testing.meethere.util.MessageInfo;
 import ecnu.testing.meethere.util.Result;
 
@@ -13,7 +12,6 @@ public interface MessageService {
     public int delete(Integer key);
     public int updateAll(Message entity);
     public int updateNotNull(Message entity);
-    public List<Message> selectByExample(MessageExample example);
 
     public List<MessageInfo> selectAllMessage();
     public int checkMessage(Integer messageId);
