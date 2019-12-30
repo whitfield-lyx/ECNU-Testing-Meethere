@@ -35,7 +35,7 @@ class AdminControllerTest {
     void happy_path_testing_login() throws Exception{ //方法名按照课件的测试方法命名规范修改
         Admin admin=new Admin(1,"111111","admin10");
         //构造要测试的类
-        when(adminServiceImpl.login(any(Admin.class))).thenReturn(new Result(200,"test","test"));
+        when(adminServiceImpl.login(any(Admin.class))).thenReturn(new Result(200,"AdminLoginTest","AdminLoginTest"));
         //用when打桩 表示 当前者函数调用时 返回一个Result
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);

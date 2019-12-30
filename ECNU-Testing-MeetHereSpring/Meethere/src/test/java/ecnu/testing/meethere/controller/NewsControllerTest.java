@@ -32,15 +32,12 @@ class NewsControllerTest {
 
     private AdminServiceImpl adminServiceImpl;
 
-   //private AdminService adminService;
-
     private NewsServiceImpl newsServiceImpl;
     private MockHttpSession session;
 
     @BeforeEach
     void  setUp(){
         adminServiceImpl = mock(AdminServiceImpl.class);
-        //adminService = mock(AdminService.class);
         newsServiceImpl = mock(NewsServiceImpl.class);
         mockMvc = MockMvcBuilders.standaloneSetup(new NewsController(newsServiceImpl, adminServiceImpl)).build();
         session = new MockHttpSession();

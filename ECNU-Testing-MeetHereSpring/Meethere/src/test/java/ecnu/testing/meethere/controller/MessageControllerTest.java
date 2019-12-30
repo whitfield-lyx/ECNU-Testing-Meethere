@@ -2,9 +2,11 @@ package ecnu.testing.meethere.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import ecnu.testing.meethere.model.Admin;
 import ecnu.testing.meethere.model.Message;
 import ecnu.testing.meethere.service.MessageService;
 import ecnu.testing.meethere.service.MessageServiceImpl;
+import ecnu.testing.meethere.util.Result;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -55,9 +57,12 @@ class MessageControllerTest {
     @Test
     @DisplayName("happy_path_testing_addMessage()")
     void happy_path_testing_addMessage() throws Exception {
+
         Message message=new Message(1, 0, new Date(), "test message", (byte)1);
         Integer userId = 1;
         message.setUserId(userId);
+
+        when(messageServiceImpl.save(any(Message.class))).thenReturn(1);
 
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
@@ -74,30 +79,32 @@ class MessageControllerTest {
     @Test
     @DisplayName("happy_path_testing_deleteMessageByID(int key)")
     void happy_path_testing_deleteMessageByID() throws Exception{
-        ResultActions perform =mockMvc.perform(delete("/api/message/3"));
-        perform.andExpect(status().isNoContent());
-        verify(messageServiceImpl,times(1)).delete(3);
-
+        when(messageServiceImpl.delete(anyInt())).thenReturn(1);
+        ResultActions perform =mockMvc.perform(delete("/api/message/1"))
+        .andExpect(status().isNoContent());
+        verify(messageServiceImpl,times(1)).delete(anyInt());
     }
 
     @Test
     @DisplayName("happy_path_testing_checkMessage()")
     void happy_path_testing_checkMessage() throws Exception{
+        when(messageServiceImpl.checkMessage(anyInt())).thenReturn(1);
         ResultActions perform=mockMvc.perform(put("/api/message/check/5"));
         perform.andExpect(status().isOk());
-        verify(messageServiceImpl,times(1)).checkMessage(5);
+        verify(messageServiceImpl,times(1)).checkMessage(anyInt());
     }
 
     @Test
     @DisplayName("happy_path_testing_updateMessage()")
     void happy_path_testing_updateMessage() throws Exception{
+        when(messageServiceImpl.updateMessage(anyInt(),anyInt(),any(Message.class))).thenReturn(new Result(200,"test","test"));
         ResultActions perform=mockMvc.perform(get("/api/message/update/5"));
         perform.andExpect(status().isOk());
         Message message=new Message();
         Byte isChecked = 1;
         message.setIsChecked(isChecked);
         message.setContent("2");
-        verify(messageServiceImpl,times(1)).updateMessage(1,2,message);
+        verify(messageServiceImpl,times(1)).updateMessage(anyInt(),anyInt(),any(Message.class));
     }
 
     @Test
@@ -113,6 +120,6 @@ class MessageControllerTest {
     void happy_path_testing_getMessageByID() throws Exception{
         ResultActions perform=mockMvc.perform(get("/api/message/1"));
         perform.andExpect(status().isOk());
-        verify(messageServiceImpl,times(1)).selectByKey(1); 
+        verify(messageServiceImpl,times(1)).selectByKey(1);
     }
 }
