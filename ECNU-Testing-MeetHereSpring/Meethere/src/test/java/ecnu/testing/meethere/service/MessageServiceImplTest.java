@@ -3,6 +3,7 @@ package ecnu.testing.meethere.service;
 import ecnu.testing.meethere.mapper.MessageMapper;
 import ecnu.testing.meethere.model.Message;
 import ecnu.testing.meethere.util.MessageInfo;
+import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +17,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.List;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @RunWith(SpringRunner.class)
@@ -35,8 +39,16 @@ public class MessageServiceImplTest {
 
     @Test
     public void selectByKey() {
-        Message message = messageServiceImpl.selectByKey(1);
-        System.out.println(message);
+        Message message=new Message();
+        message.setTime(new Date());
+        message.setContent("!");
+        message.setUserId(1);
+        byte isChecked =1;
+        message.setIsChecked(isChecked);
+        message.setMessageId(5);
+        when(messageMapper.selectByPrimaryKey(5)).thenReturn(message);
+        Message selectByKey = messageServiceImpl.selectByKey(5);
+        assertEquals(message.getMessageId(), selectByKey.getMessageId());
     }
 
     @Test
@@ -48,14 +60,16 @@ public class MessageServiceImplTest {
         byte isChecked =1;
         message.setIsChecked(isChecked);
         message.setMessageId(5);
-        messageServiceImpl.save(message);
-        System.out.println("保存成功：" + message);
+        when(messageServiceImpl.save(message)).thenReturn(1);
+        Message selectByKey = messageServiceImpl.selectByKey(5);
+        assertNull(selectByKey);
     }
 
     @Test
     public void delete() {
-        messageServiceImpl.delete(5);
-        System.out.println("删除成功");
+        when(messageServiceImpl.delete(5)).thenReturn(1);
+        Message message = messageServiceImpl.selectByKey(5);
+        assertNull(message);
     }
 
     @Test
@@ -72,23 +86,27 @@ public class MessageServiceImplTest {
 
     @Test
     public void selectAllMessage() {
-        List<MessageInfo> messageInfos = messageServiceImpl.selectAllMessage();
-        System.out.println("查询出结果数为：" + messageInfos == null?0:messageInfos.size());
+        List<MessageInfo> messageInfos = Lists.newArrayList();
+        when(messageServiceImpl.selectAllMessage()).thenReturn(messageInfos);
+        assertNotNull(messageInfos);
     }
 
     @Test
     public void checkMessage() {
-        int i = messageServiceImpl.checkMessage(5);
-        System.out.println(i);
+        int i = 1;
+        when(messageServiceImpl.checkMessage(5)).thenReturn(i);
+        int checkMessage = messageServiceImpl.checkMessage(5);
+        assertEquals(checkMessage, i);
     }
 
     @Test
-    public void updateMessage() {
+   public  void updateMessage() {
         Message message=new Message();
         Byte isCheched = 1;
         message.setIsChecked(isCheched);
         message.setContent("2");
+        when(messageMapper.updateByPrimaryKey(message)).thenReturn(1);
         messageServiceImpl.updateMessage(1,1,message);
-        System.out.println("更新成功");
+        assertNotNull(message);
     }
 }

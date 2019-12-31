@@ -3,6 +3,7 @@ package ecnu.testing.meethere.service;
 
 import ecnu.testing.meethere.mapper.NewsMapper;
 import ecnu.testing.meethere.model.News;
+import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,17 +11,14 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -40,12 +38,20 @@ public class NewsServiceImplTest {
 
     @Test
     public void  selectAllNews() {
-        newsServiceImpl.selectAllNews();
+        List<News> news = Lists.newArrayList();
+        when(newsServiceImpl.selectAllNews()).thenReturn(news);
+        assertNotNull(news);
     }
 
     @Test
     public void  selectByKey() {
-        newsServiceImpl.selectByKey(1);
+        News news = new News();
+        news.setContent("!");
+        news.setName("1");
+        news.setTime(new Date());
+        news.setNewsId(1);
+        when(newsServiceImpl.selectByKey(1)).thenReturn(news);
+        assertNotNull(news);
     }
 
     @Test
@@ -55,7 +61,9 @@ public class NewsServiceImplTest {
         news.setName("1");
         news.setTime(new Date());
         news.setNewsId(1);
-        newsServiceImpl.save(news);
+        when(newsServiceImpl.save(news)).thenReturn(1);
+        News selectByKey = newsServiceImpl.selectByKey(1);
+        assertNull(selectByKey);
     }
 
     @Test
@@ -70,7 +78,8 @@ public class NewsServiceImplTest {
         news.setName("1");
         news.setTime(new Date());
         news.setNewsId(1);
-        newsServiceImpl.updateNews(1,news);
+        when(newsServiceImpl.updateNews(1,news)).thenReturn(null);
+        assertNotNull(news);
     }
 
 }

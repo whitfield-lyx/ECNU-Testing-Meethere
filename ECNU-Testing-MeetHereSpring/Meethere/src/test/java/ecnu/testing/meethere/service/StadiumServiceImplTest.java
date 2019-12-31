@@ -1,9 +1,10 @@
 package ecnu.testing.meethere.service;
 
 
-import ecnu.testing.meethere.mapper.AdminMapper;
 import ecnu.testing.meethere.mapper.StadiumMapper;
 import ecnu.testing.meethere.model.Stadium;
+import ecnu.testing.meethere.util.Result;
+import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,16 +12,13 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -37,9 +35,11 @@ public class StadiumServiceImplTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @org.junit.Test
+    @Test
     public void  selectAllStadium() {
-        stadiumServiceImpl.selectAllStadium();
+        List<Stadium> stadiums = Lists.newArrayList();
+        when(stadiumServiceImpl.selectAllStadium()).thenReturn(stadiums);
+        assertNotNull(stadiums);
     }
 
     @Test
@@ -50,6 +50,8 @@ public class StadiumServiceImplTest {
         stadium.setPrice(1);
         stadium.setTime("1");
         stadium.setStadiumId("1");
-        stadiumServiceImpl.updateStadium(stadium);
+        when(stadiumServiceImpl.save(stadium)).thenReturn(1);
+        Result result = stadiumServiceImpl.updateStadium(stadium);
+        assertNotNull(result);
     }
 }
