@@ -29,6 +29,6 @@
 项目访问地址：http://47.97.173.237:8081  
   
 测试用用户以及管理员账号密码：  
-普通用户：  账号：user01 密码：111111
-管理员： 账号：admin10 密码：111111
+普通用户：  账号：user01 密码：111111  
+管理员： 账号：admin10 密码：111111  
 配置库入口：https://github.com/whitfield-lyx/ECNU-Testing-Meethere  
