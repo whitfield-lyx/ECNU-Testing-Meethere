@@ -12,8 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class StadiumController {
-    @Autowired
-    private StadiumServiceImpl stadiumServiceImpl;
+    private final StadiumServiceImpl stadiumServiceImpl;
+
+    public StadiumController(StadiumServiceImpl stadiumServiceImpl) {
+        this.stadiumServiceImpl = stadiumServiceImpl;
+    }
 
     /**
      * 预约界面 显示所有场馆

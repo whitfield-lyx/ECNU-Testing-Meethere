@@ -132,4 +132,14 @@ public class User {
     public void setNickname(String nickname) {
         this.nickname = nickname == null ? null : nickname.trim();
     }
+
+    public User(Integer userId, String password, String name, String nickname) {
+        this.userId = userId;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+    }
+
+    public User(){
+    }
 }

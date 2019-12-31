@@ -60,11 +60,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> selectByExample(OrderExample example) {
-        return orderMapper.selectByExample(example);
-    }
-
-    @Override
     public List<OrderInfo> selectAllOrder() {
         List<Order> orderList = orderMapper.selectAllOrder();
         List<OrderInfo> orderInfoList = new ArrayList<OrderInfo>();

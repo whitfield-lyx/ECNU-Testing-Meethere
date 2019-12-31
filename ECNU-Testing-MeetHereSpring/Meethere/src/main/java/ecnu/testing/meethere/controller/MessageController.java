@@ -14,8 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class MessageController {
-    @Autowired
+    private final
     MessageServiceImpl messageServiceImpl;
+
+    public MessageController(MessageServiceImpl messageServiceImpl) {
+        this.messageServiceImpl = messageServiceImpl;
+    }
 
     /**
      * 获取所有留言

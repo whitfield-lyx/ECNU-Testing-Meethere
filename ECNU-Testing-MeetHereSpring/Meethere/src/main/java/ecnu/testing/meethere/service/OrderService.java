@@ -1,7 +1,6 @@
 package ecnu.testing.meethere.service;
 
 import ecnu.testing.meethere.model.Order;
-import ecnu.testing.meethere.model.OrderExample;
 import ecnu.testing.meethere.util.OrderInfo;
 import ecnu.testing.meethere.util.Result;
 
@@ -13,7 +12,6 @@ public interface OrderService{
     public int delete(Integer key);
     public int updateAll(Order entity);
     public int updateNotNull(Order entity);
-    public List<Order> selectByExample(OrderExample example);
 
     public List<OrderInfo> selectAllOrder();
     public int checkOrder(Integer orderId);

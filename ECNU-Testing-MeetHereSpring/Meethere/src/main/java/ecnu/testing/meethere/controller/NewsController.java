@@ -16,10 +16,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class NewsController {
-    @Autowired
+    private final
     NewsServiceImpl newsServiceImpl;
-    @Autowired
+    private final
     AdminServiceImpl adminServiceImpl;
+
+    public NewsController(NewsServiceImpl newsServiceImpl, AdminServiceImpl adminServiceImpl) {
+        this.newsServiceImpl = newsServiceImpl;
+        this.adminServiceImpl = adminServiceImpl;
+    }
 
     /**
      * 获取所有新闻
