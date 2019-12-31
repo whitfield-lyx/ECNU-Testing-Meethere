@@ -1,5 +1,6 @@
 # ECNU-Testing-Meethere  
 软件测试期末项目 MeetHere  
+  
 小组成员：  
 17级软件工程 王晋 10161511427  
 17级软件工程 罗亦翔 10175101277  
@@ -20,12 +21,12 @@
 接口测试：Postman  
 性能测试：LoadRunner  
 系统测试：Selenium  
-其他：,SonarLint , P3C  
+其他：SonarLint , P3C  
 数据库管理：Navicat Premium  
 浏览器：Google Chrome、Firefox  
 
 服务器：操作系统 CentOs 7.2  
-服务器Ip：47.97.173.237 （2020年1月26日 23:59 到期）
+服务器Ip：47.97.173.237 （2020年1月26日 23:59 到期）  
 项目访问地址：http://47.97.173.237:8081  
   
 测试用用户以及管理员账号密码：  
