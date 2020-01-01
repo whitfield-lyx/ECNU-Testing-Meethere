@@ -14,10 +14,6 @@ class StadiumTest {
     }
 
     @Test
-    void setTime() {
-    }
-
-    @Test
     void setPrice() {
         Stadium stadium=new Stadium();
         stadium.setPrice(100);

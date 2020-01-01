@@ -31,7 +31,7 @@ public class StadiumController {
      * 管理员 修改场馆信息
      * 只能修改 address price info 信息
      */
-    @RequestMapping("/stadium/update")
+    @PostMapping("/stadium/update")
     public Result updateStadium(@RequestBody Stadium stadium){
         return stadiumServiceImpl.updateStadium(stadium);
     }

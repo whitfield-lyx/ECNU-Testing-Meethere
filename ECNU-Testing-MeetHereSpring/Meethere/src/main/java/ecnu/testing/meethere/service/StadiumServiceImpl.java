@@ -4,10 +4,12 @@ import ecnu.testing.meethere.mapper.StadiumMapper;
 import ecnu.testing.meethere.model.Stadium;
 import ecnu.testing.meethere.util.Result;
 import ecnu.testing.meethere.util.ResultFactory;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class StadiumServiceImpl implements StadiumService {
@@ -46,7 +48,9 @@ public class StadiumServiceImpl implements StadiumService {
 
     @Override
     public Result updateStadium(Stadium stadium) {
-        System.out.println("stadium id: "+stadium.getStadiumId());
+        Logger logger = (Logger) LoggerFactory.getLogger(getClass());
+        logger.info("stadium id: "+stadium.getStadiumId());
+        //System.out.println("stadium id: "+stadium.getStadiumId());
         Stadium oldStadium = stadiumMapper.selectByPrimaryKey(stadium.getStadiumId());
         if(oldStadium==null){
             return ResultFactory.buildFailResult("修改场馆信息失败，不存在该场馆");

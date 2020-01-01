@@ -2,6 +2,8 @@ package ecnu.testing.meethere.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrderTest {
@@ -30,8 +32,9 @@ class OrderTest {
     @Test
     void setTime() {
         Order order=new Order();
-        //order.setTime(2019-12-27 10:00:00);
-        //assertEquals("2019-12-27 10:00:00",order.getTime());
+        Date date = new Date() ;
+        order.setTime(date);
+        assertEquals(date,order.getTime());
     }
 
     @Test
@@ -44,7 +47,7 @@ class OrderTest {
     @Test
     void setIsChecked() {
          Order order=new Order();
-         //order.setIsChecked();
-         //assertEquals(0,order.getIsChecked());
+         order.setIsChecked((byte)1);
+         assertEquals((byte)1,order.getIsChecked());
     }
 }

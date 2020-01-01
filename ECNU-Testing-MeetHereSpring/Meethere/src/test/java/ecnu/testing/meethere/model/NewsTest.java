@@ -28,10 +28,6 @@ class NewsTest {
     }
 
     @Test
-    void setTime() {
-    }
-
-    @Test
     void setName() {
         News news=new News();
         news.setName("flora");

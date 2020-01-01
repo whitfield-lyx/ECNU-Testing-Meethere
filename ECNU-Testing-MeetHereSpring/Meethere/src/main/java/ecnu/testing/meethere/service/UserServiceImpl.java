@@ -3,10 +3,12 @@ package ecnu.testing.meethere.service;
 import ecnu.testing.meethere.mapper.UserMapper;
 import ecnu.testing.meethere.model.User;
 import ecnu.testing.meethere.util.*;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result save(User user) {
         List<User> userList = userMapper.selectByName(user.getName());
-        if(userList.size()==0){
+        if(userList.isEmpty()){
             userMapper.insert(user);
             return ResultFactory.buildSuccessResult("用户注册成功");
         }
@@ -52,7 +54,7 @@ public class UserServiceImpl implements UserService {
         //System.out.println("user name is "+name+" password is "+user.getPassword());
         List<User> userList = userMapper.selectByName(name);
         /* post condition: userList长度为0或1 */
-        if(userList == null || userList.size() == 0){
+        if(userList == null || userList.isEmpty()){
             return ResultFactory.buildFailResult("不存在该用户名");
         }
         User myUser = userList.get(0);
@@ -68,7 +70,9 @@ public class UserServiceImpl implements UserService {
         String password = user.getPassword();
         User oldUser = selectByKey(userId);
         if (oldUser == null){
-            System.err.println("不存在该用户");
+            Logger logger = (Logger) LoggerFactory.getLogger(getClass());
+            logger.info("不存在该用户");
+            //System.err.println("不存在该用户");
             return -1;
         }
         //System.out.println("userId: "+userId+" old password: "+user.getPassword());
@@ -87,7 +91,9 @@ public class UserServiceImpl implements UserService {
         List<User> userList = userMapper.selectByName(name);
         /* post condition: userList长度为0或1 */
         if(userList==null){
-            System.out.println("不存在该用户名");
+            Logger logger = (Logger) LoggerFactory.getLogger(getClass());
+            logger.info("不存在该用户名");
+            //System.out.println("不存在该用户名");
             return 0;
         }
         else if(userList.size()==1&&userList.get(0)!=null){
@@ -103,7 +109,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updatePasswordByAdmin(User user) {
-        System.out.println("userId: "+user.getUserId()+" new password: "+user.getPassword());
+        Logger logger = (Logger) LoggerFactory.getLogger(getClass());
+        logger.info("userId: "+user.getUserId()+" new password: "+user.getPassword());
+        //System.out.println("userId: "+user.getUserId()+" new password: "+user.getPassword());
         return userMapper.updateByPrimaryKey(user);
     }
 }

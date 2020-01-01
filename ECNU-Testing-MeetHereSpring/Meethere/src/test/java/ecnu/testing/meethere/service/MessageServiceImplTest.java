@@ -73,18 +73,6 @@ public class MessageServiceImplTest {
     }
 
     @Test
-    public void updateAll() {
-    }
-
-    @Test
-    public void updateNotNull() {
-    }
-
-    @Test
-    public void selectByExample() {
-    }
-
-    @Test
     public void selectAllMessage() {
         List<MessageInfo> messageInfos = Lists.newArrayList();
         when(messageServiceImpl.selectAllMessage()).thenReturn(messageInfos);

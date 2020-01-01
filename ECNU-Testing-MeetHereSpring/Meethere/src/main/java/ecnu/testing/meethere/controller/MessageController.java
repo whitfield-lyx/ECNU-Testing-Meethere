@@ -1,10 +1,9 @@
 package ecnu.testing.meethere.controller;
 
-import ecnu.testing.meethere.model.*;
+import ecnu.testing.meethere.model.Message;
 import ecnu.testing.meethere.service.MessageServiceImpl;
 import ecnu.testing.meethere.util.MessageInfo;
 import ecnu.testing.meethere.util.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

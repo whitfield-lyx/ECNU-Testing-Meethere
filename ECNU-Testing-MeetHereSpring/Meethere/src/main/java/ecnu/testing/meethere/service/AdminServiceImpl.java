@@ -57,7 +57,7 @@ public class AdminServiceImpl implements AdminService {
     public Result login(Admin admin){
         /* 此处只含有name与password信息 */
         String name = admin.getName();
-        System.out.println("admin name is "+name+" password is "+admin.getPassword());
+        //System.out.println("admin name is "+name+" password is "+admin.getPassword());
         Admin myAdmin = adminMapper.selectByName(name);
         if(myAdmin == null){
             return ResultFactory.buildFailResult("不存在该管理员名");
@@ -73,7 +73,7 @@ public class AdminServiceImpl implements AdminService {
     public Integer getIdByName(String name) {
         Admin admin = adminMapper.selectByName(name);
         if(admin==null){
-            System.out.println("不存在该管理员名");
+            //System.out.println("不存在该管理员名");
             return 0;
         }
         else{

@@ -13,8 +13,9 @@ public class DateUtils {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        if (date == null)
+        if (date == null) {
             return "";
+        }
         //System.out.println("front:" + format.format(date)); //显示输入的日期
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);

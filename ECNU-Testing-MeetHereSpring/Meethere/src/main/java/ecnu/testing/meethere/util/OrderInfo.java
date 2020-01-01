@@ -3,8 +3,10 @@ package ecnu.testing.meethere.util;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import ecnu.testing.meethere.model.Order;
 import ecnu.testing.meethere.model.Stadium;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 public class OrderInfo {
     private Integer orderId;
@@ -94,7 +96,10 @@ public class OrderInfo {
     }
 
     public void display(){
-        System.out.println("orderId: "+orderId+" userId: "+userId+" stadiumId: "+stadiumId+" time: "
-                +time+" isChecked: "+isChecked+" address: "+address+" price: "+price);
+        Logger logger = (Logger) LoggerFactory.getLogger(getClass());
+        logger.info("orderId: "+orderId+" userId: "+userId+" stadiumId: "+stadiumId+" time: "
+                 +time+" isChecked: "+isChecked+" address: "+address+" price: "+price);
+        //System.out.println("orderId: "+orderId+" userId: "+userId+" stadiumId: "+stadiumId+" time: "
+               // +time+" isChecked: "+isChecked+" address: "+address+" price: "+price);
     }
 }

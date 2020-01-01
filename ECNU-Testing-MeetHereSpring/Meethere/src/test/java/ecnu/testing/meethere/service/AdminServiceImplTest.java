@@ -1,25 +1,22 @@
 package ecnu.testing.meethere.service;
 
 import ecnu.testing.meethere.mapper.AdminMapper;
-import org.junit.Before;
 import ecnu.testing.meethere.model.Admin;
+import ecnu.testing.meethere.util.Result;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @RunWith(SpringRunner.class)
@@ -46,7 +43,7 @@ class AdminServiceImplTest {
         admin.setAdminId(0);
         when(adminMapper.selectByPrimaryKey(0)).thenReturn(admin);
         Integer result=adminServiceImpl.getIdByName("admin10");
-        System.out.println(result);
+        //System.out.println(result);
         assertEquals(result,admin.getAdminId());
     }
 
@@ -56,12 +53,20 @@ class AdminServiceImplTest {
         admin.setName("admin10");
         admin.setPassword("111111");
         admin.setAdminId(0);
-        adminServiceImpl.save(admin);
+        int id =adminServiceImpl.save(admin);
+        when(adminServiceImpl.save(any(Admin.class))).thenReturn(anyInt());
+        assertEquals(id,anyInt());
+        assertNotNull(id);
+        //verify(adminServiceImpl,times(1)).save(any(Admin.class));
     }
 
     @Test
     void delete() {
-        adminServiceImpl.delete(1);
+        int id = adminServiceImpl.delete(1);
+        when(adminServiceImpl.save(any(Admin.class))).thenReturn(anyInt());
+        assertNotNull(id);
+        //verify(adminServiceImpl,times(1)).delete(anyInt());
+
     }
 
     @Test
@@ -70,6 +75,7 @@ class AdminServiceImplTest {
         admin.setName("admin10");
         admin.setPassword("111111");
         admin.setAdminId(0);
-        adminServiceImpl.login(admin);
+        Result result= adminServiceImpl.login(admin);
+        assertNotNull(result);
     }
 }

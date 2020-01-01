@@ -1,17 +1,12 @@
 package ecnu.testing.meethere.controller;
 
 import ecnu.testing.meethere.model.Admin;
-import ecnu.testing.meethere.model.User;
 import ecnu.testing.meethere.service.AdminServiceImpl;
-import ecnu.testing.meethere.service.UserServiceImpl;
-import ecnu.testing.meethere.util.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import ecnu.testing.meethere.util.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @CrossOrigin
@@ -28,7 +23,7 @@ public class AdminController {
      */
     @PostMapping("/login")
     @ResponseBody
-    public Result Login(@RequestBody Admin admin /* 此处只含有name与password信息 */, HttpSession session) {
+    public Result login(@RequestBody Admin admin /* 此处只含有name与password信息 */, HttpSession session) {
         Result result = adminServiceImpl.login(admin);
         if (result != null) {
             /* SUCCESS CODE */

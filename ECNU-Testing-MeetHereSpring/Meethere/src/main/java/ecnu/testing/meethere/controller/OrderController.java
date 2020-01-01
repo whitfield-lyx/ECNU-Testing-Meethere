@@ -4,7 +4,6 @@ import ecnu.testing.meethere.model.Order;
 import ecnu.testing.meethere.service.OrderServiceImpl;
 import ecnu.testing.meethere.util.OrderInfo;
 import ecnu.testing.meethere.util.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,7 +68,7 @@ public class OrderController {
      * 对用户 显示该用户的所有订单页面中
      * 可以修改且只能修改自己订单的时长
      */
-    @RequestMapping("/myOrder/{id}")
+    @GetMapping("/myOrder/{id}")
     public Result updateMyOrder(@SessionAttribute Integer userId, @PathVariable("id") Integer orderId, @RequestBody Integer hour)
     {
         return orderServiceImpl.updateMyOrder(userId, orderId, hour);

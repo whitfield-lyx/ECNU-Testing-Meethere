@@ -19,7 +19,8 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 @RunWith(SpringRunner.class)
@@ -69,6 +70,7 @@ public class NewsServiceImplTest {
     @Test
     public void  delete() {
         newsServiceImpl.delete(1);
+        verify(newsServiceImpl,times(1)).delete(anyInt());
     }
 
     @Test
