@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @CrossOrigin
-@RestController
+@Controller
 @RequestMapping("/api/user")
 public class UserController {
     private final UserServiceImpl userServiceImpl;
@@ -27,11 +27,16 @@ public class UserController {
     @ResponseBody
     public Result Login(@RequestBody User user /* 此处只含有name与password信息 */, HttpSession session){
         Result result = userServiceImpl.login(user);
-        if(result.getCode()==200 /* SUCCESS CODE */){
-            Integer userId = userServiceImpl.getIdByName(user.getName());
-            session.setAttribute("userId",userId);
+        if (result != null) {
+            /* SUCCESS CODE */
+            if (result.getCode() == 200) {
+                Integer userId = userServiceImpl.getIdByName(user.getName());
+                session.setAttribute("userId",userId);
+            }
+            return result;
+        } else {
+            return new Result(400,"null",null);
         }
-        return result;
     }
 
     /**

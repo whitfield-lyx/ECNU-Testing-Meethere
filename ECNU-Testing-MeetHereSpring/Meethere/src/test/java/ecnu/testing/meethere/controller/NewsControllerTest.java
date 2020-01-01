@@ -1,15 +1,19 @@
 package ecnu.testing.meethere.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import ecnu.testing.meethere.model.News;
 import ecnu.testing.meethere.service.AdminService;
 import ecnu.testing.meethere.service.AdminServiceImpl;
 import ecnu.testing.meethere.service.NewsServiceImpl;
+import ecnu.testing.meethere.util.Result;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,6 +25,7 @@ import java.util.Date;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //@ExtendWith(SpringExtension.class)
@@ -61,37 +66,61 @@ class NewsControllerTest {
         verify(newsServiceImpl,times(1)).selectByKey(1);
     }
 
+
     @Test
     @DisplayName("happy_path_testing_addNews(int key)")
     void happy_path_testing_addNews() throws Exception {
-        ResultActions perform= mockMvc.perform(post("/api/news"));
-        News news = new News();
-        news.setContent("!");
-        news.setName("1");
-        news.setTime(new Date());
-        news.setNewsId(1);
-        perform.andExpect(status().isOk());
-        verify(newsServiceImpl,times(1)).save(news);
+        News news = new News(1,"title","new news",new Date(),"news name");
+        Integer newsId = 1;
+        news.setNewsId(newsId);
+        when(newsServiceImpl.save(any(News.class))).thenReturn(0);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
+        String requestJson = objectWriter.writeValueAsString(news);
+        ResultActions perform=mockMvc.perform(post("/api/news")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestJson).characterEncoding("UTF-8"))
+                .andExpect(status().isCreated());
+        verify(news,times(1)).setNewsId(newsId);
+        verify(newsServiceImpl,times(1)).save(any(News.class));
     }
 
     @Test
     @DisplayName("happy_path_testing_deleteNewsByID(int key)")
     void happy_path_testing_deleteNewsByID() throws Exception {
+        when(newsServiceImpl.delete(anyInt())).thenReturn(1);
         ResultActions perform= mockMvc.perform(delete("/api/news/1"));
         perform.andExpect(status().isNoContent());
         verify(newsServiceImpl,times(1)).delete(1);
     }
 
     @Test
+    void news_doesnt_exist_when_delete_a_news() throws Exception{
+        when(newsServiceImpl.selectByKey(2)).thenReturn(null);
+        when(newsServiceImpl.delete(2)).thenReturn(0);
+       // mockMvc.perform(delete("/api/news/2"))
+                //.andExpect(status().isOk())
+               // .andExpect(status().isBadRequest());
+        verify(newsServiceImpl,times(1)).delete(1);
+    }
+
+    @Test
     @DisplayName("happy_path_testing_updateNews(int key)")
     void happy_path_testing_updateNews() throws Exception {
-        ResultActions perform= mockMvc.perform(put("/api/update/1"));
         News news = new News();
         news.setContent("happy_path_testing_updateNews");
         news.setName("1");
         news.setTime(new Date());
         news.setNewsId(1);
-        perform.andExpect(status().isOk());
+        when(newsServiceImpl.updateNews(anyInt(),any(News.class))).thenReturn(new Result(200,"test","test"));
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
+        String requestJson = objectWriter.writeValueAsString(news);
+        mockMvc.perform(put("/api/update/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(requestJson))
+                .andExpect(status().isOk());
         verify(newsServiceImpl,times(1)).updateNews(1,news);
     }
 }
