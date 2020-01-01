@@ -1,0 +1,510 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>FindBugs Report</title>
+<style type="text/css">
+		.tablerow0 {
+			background: #EEEEEE;
+		}
+
+		.tablerow1 {
+			background: white;
+		}
+
+		.detailrow0 {
+			background: #EEEEEE;
+		}
+
+		.detailrow1 {
+			background: white;
+		}
+
+		.tableheader {
+			background: #b9b9fe;
+			font-size: larger;
+		}
+		</style>
+</head>
+<body>
+<h1>FindBugs Report</h1>
+<p>Produced using <a href="http://findbugs.sourceforge.net">FindBugs</a>3.0.1.</p>
+<p>Project: 
+			meethere[meethere]</p>
+<h2>Metrics</h2>
+<p>917 lines of code analyzed,
+	in 39 classes, 
+	in 6 packages.</p>
+<table width="500" cellpadding="5" cellspacing="2">
+<tr class="tableheader">
+<th align="left">Metric</th>
+<th align="right">Total</th>
+<th align="right">Density*</th>
+</tr>
+<tr class="tablerow0">
+<td>High Priority Warnings</td>
+<td align="right"/>
+<td align="right">NaN</td>
+</tr>
+<tr class="tablerow1">
+<td>Medium Priority Warnings</td>
+<td align="right">18</td>
+<td align="right">19.63</td>
+</tr>
+<tr class="$totalClass">
+<td>
+<b>Total Warnings</b>
+</td>
+<td align="right">
+<b>18</b>
+</td>
+<td align="right">
+<b>19.63</b>
+</td>
+</tr>
+</table>
+<p>
+<i>(* Defects per Thousand lines of non-commenting source statements)</i>
+</p>
+<p>
+<br/>
+<br/>
+</p>
+<h2>Summary</h2>
+<table width="500" cellpadding="5" cellspacing="2">
+<tr class="tableheader">
+<th align="left">Warning Type</th>
+<th align="right">Number</th>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</td>
+<td align="right">1</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</td>
+<td align="right">13</td>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_PERFORMANCE">Performance Warnings</a>
+</td>
+<td align="right">2</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<a href="#Warnings_STYLE">Dodgy code Warnings</a>
+</td>
+<td align="right">2</td>
+</tr>
+<tr class="tablerow0">
+<td>
+<b>Total</b>
+</td>
+<td align="right">
+<b>18</b>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h1>Warnings</h1>
+<p>Click on each warning link to see a full description of the issue, and
+	    details of how to resolve it.</p>
+<h2>
+<a name="Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#ME_MUTABLE_ENUM_FIELD">Enum field is public and mutable</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.util.ResultCode.code field is public and mutable<br/>
+<br/>
+<br/>In file ResultCode.java,
+					
+						lines 
+						    to <br/>In class ecnu.testing.meethere.util.ResultCode<br/>Field ecnu.testing.meethere.util.ResultCode.code<br/>In ResultCode.java</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.model.Message.getTime() may expose internal representation by returning Message.time<br/>
+<br/>
+<br/>In file Message.java,
+					
+						line 111<br/>In class ecnu.testing.meethere.model.Message<br/>In method ecnu.testing.meethere.model.Message.getTime()<br/>Field ecnu.testing.meethere.model.Message.time<br/>At Message.java:[line 111]<br/>At Message.java:[line 111]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.model.News.getTime() may expose internal representation by returning News.time<br/>
+<br/>
+<br/>In file News.java,
+					
+						line 135<br/>In class ecnu.testing.meethere.model.News<br/>In method ecnu.testing.meethere.model.News.getTime()<br/>Field ecnu.testing.meethere.model.News.time<br/>At News.java:[line 135]<br/>At News.java:[line 135]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.model.Order.getTime() may expose internal representation by returning Order.time<br/>
+<br/>
+<br/>In file Order.java,
+					
+						line 144<br/>In class ecnu.testing.meethere.model.Order<br/>In method ecnu.testing.meethere.model.Order.getTime()<br/>Field ecnu.testing.meethere.model.Order.time<br/>At Order.java:[line 144]<br/>At Order.java:[line 144]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.util.MessageInfo.getTime() may expose internal representation by returning MessageInfo.time<br/>
+<br/>
+<br/>In file MessageInfo.java,
+					
+						line 35<br/>In class ecnu.testing.meethere.util.MessageInfo<br/>In method ecnu.testing.meethere.util.MessageInfo.getTime()<br/>Field ecnu.testing.meethere.util.MessageInfo.time<br/>At MessageInfo.java:[line 35]<br/>At MessageInfo.java:[line 35]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.util.OrderInfo.getTime() may expose internal representation by returning OrderInfo.time<br/>
+<br/>
+<br/>In file OrderInfo.java,
+					
+						line 56<br/>In class ecnu.testing.meethere.util.OrderInfo<br/>In method ecnu.testing.meethere.util.OrderInfo.getTime()<br/>Field ecnu.testing.meethere.util.OrderInfo.time<br/>At OrderInfo.java:[line 56]<br/>At OrderInfo.java:[line 56]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>new ecnu.testing.meethere.model.Message(Integer, Integer, Date, String, Byte) may expose internal representation by storing an externally mutable object into Message.time<br/>
+<br/>
+<br/>In file Message.java,
+					
+						line 177<br/>In class ecnu.testing.meethere.model.Message<br/>In method new ecnu.testing.meethere.model.Message(Integer, Integer, Date, String, Byte)<br/>Field ecnu.testing.meethere.model.Message.time<br/>Local variable named time<br/>At Message.java:[line 177]<br/>At Message.java:[line 177]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.model.Message.setTime(Date) may expose internal representation by storing an externally mutable object into Message.time<br/>
+<br/>
+<br/>In file Message.java,
+					
+						line 123<br/>In class ecnu.testing.meethere.model.Message<br/>In method ecnu.testing.meethere.model.Message.setTime(Date)<br/>Field ecnu.testing.meethere.model.Message.time<br/>Local variable named time<br/>At Message.java:[line 123]<br/>At Message.java:[line 123]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>new ecnu.testing.meethere.model.News(Integer, String, String, Date, String) may expose internal representation by storing an externally mutable object into News.time<br/>
+<br/>
+<br/>In file News.java,
+					
+						line 178<br/>In class ecnu.testing.meethere.model.News<br/>In method new ecnu.testing.meethere.model.News(Integer, String, String, Date, String)<br/>Field ecnu.testing.meethere.model.News.time<br/>Local variable named time<br/>At News.java:[line 178]<br/>At News.java:[line 178]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.model.News.setTime(Date) may expose internal representation by storing an externally mutable object into News.time<br/>
+<br/>
+<br/>In file News.java,
+					
+						line 147<br/>In class ecnu.testing.meethere.model.News<br/>In method ecnu.testing.meethere.model.News.setTime(Date)<br/>Field ecnu.testing.meethere.model.News.time<br/>Local variable named time<br/>At News.java:[line 147]<br/>At News.java:[line 147]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>new ecnu.testing.meethere.model.Order(Integer, Integer, String, Date, Integer, Byte) may expose internal representation by storing an externally mutable object into Order.time<br/>
+<br/>
+<br/>In file Order.java,
+					
+						line 211<br/>In class ecnu.testing.meethere.model.Order<br/>In method new ecnu.testing.meethere.model.Order(Integer, Integer, String, Date, Integer, Byte)<br/>Field ecnu.testing.meethere.model.Order.time<br/>Local variable named time<br/>At Order.java:[line 211]<br/>At Order.java:[line 211]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.model.Order.setTime(Date) may expose internal representation by storing an externally mutable object into Order.time<br/>
+<br/>
+<br/>In file Order.java,
+					
+						line 156<br/>In class ecnu.testing.meethere.model.Order<br/>In method ecnu.testing.meethere.model.Order.setTime(Date)<br/>Field ecnu.testing.meethere.model.Order.time<br/>Local variable named time<br/>At Order.java:[line 156]<br/>At Order.java:[line 156]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.util.MessageInfo.setTime(Date) may expose internal representation by storing an externally mutable object into MessageInfo.time<br/>
+<br/>
+<br/>In file MessageInfo.java,
+					
+						line 39<br/>In class ecnu.testing.meethere.util.MessageInfo<br/>In method ecnu.testing.meethere.util.MessageInfo.setTime(Date)<br/>Field ecnu.testing.meethere.util.MessageInfo.time<br/>Local variable named time<br/>At MessageInfo.java:[line 39]<br/>At MessageInfo.java:[line 39]</p>
+</td>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.util.OrderInfo.setTime(Date) may expose internal representation by storing an externally mutable object into OrderInfo.time<br/>
+<br/>
+<br/>In file OrderInfo.java,
+					
+						line 60<br/>In class ecnu.testing.meethere.util.OrderInfo<br/>In method ecnu.testing.meethere.util.OrderInfo.setTime(Date)<br/>Field ecnu.testing.meethere.util.OrderInfo.time<br/>Local variable named time<br/>At OrderInfo.java:[line 60]<br/>At OrderInfo.java:[line 60]</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="Warnings_PERFORMANCE">Performance Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#SBSC_USE_STRINGBUFFER_CONCATENATION">Method concatenates strings using + in a loop</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.service.OrderServiceImpl.addOrder(Order) concatenates strings using + in a loop<br/>
+<br/>
+<br/>In file OrderServiceImpl.java,
+					
+						line 113<br/>In class ecnu.testing.meethere.service.OrderServiceImpl<br/>In method ecnu.testing.meethere.service.OrderServiceImpl.addOrder(Order)<br/>At OrderServiceImpl.java:[line 113]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#SBSC_USE_STRINGBUFFER_CONCATENATION">Method concatenates strings using + in a loop</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>ecnu.testing.meethere.service.OrderServiceImpl.delete(Integer) concatenates strings using + in a loop<br/>
+<br/>
+<br/>In file OrderServiceImpl.java,
+					
+						line 41<br/>In class ecnu.testing.meethere.service.OrderServiceImpl<br/>In method ecnu.testing.meethere.service.OrderServiceImpl.delete(Integer)<br/>At OrderServiceImpl.java:[line 41]</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="Warnings_STYLE">Dodgy code Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="2" cellpadding="5">
+<tr class="tableheader">
+<th align="left">Warning</th>
+<th align="left">Priority</th>
+<th align="left">Details</th>
+</tr>
+<tr class="tablerow1">
+<td width="20%" valign="top">
+<a href="#RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE">Redundant nullcheck of value known to be non-null</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Redundant nullcheck of result, which is known to be non-null in ecnu.testing.meethere.controller.AdminController.login(Admin, HttpSession)<br/>
+<br/>
+<br/>In file AdminController.java,
+					
+						line 28<br/>In class ecnu.testing.meethere.controller.AdminController<br/>In method ecnu.testing.meethere.controller.AdminController.login(Admin, HttpSession)<br/>Value loaded from result<br/>Return value of ecnu.testing.meethere.service.AdminServiceImpl.login(Admin) of type ecnu.testing.meethere.util.Result<br/>Redundant null check at AdminController.java:[line 28]<br/>Redundant null check at AdminController.java:[line 28]</p>
+</td>
+</tr>
+<tr class="tablerow0">
+<td width="20%" valign="top">
+<a href="#RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE">Redundant nullcheck of value known to be non-null</a>
+</td>
+<td width="10%" valign="top">Medium</td>
+<td width="70%">
+<p>Redundant nullcheck of result, which is known to be non-null in ecnu.testing.meethere.controller.UserController.Login(User, HttpSession)<br/>
+<br/>
+<br/>In file UserController.java,
+					
+						line 30<br/>In class ecnu.testing.meethere.controller.UserController<br/>In method ecnu.testing.meethere.controller.UserController.Login(User, HttpSession)<br/>Value loaded from result<br/>Return value of ecnu.testing.meethere.service.UserServiceImpl.login(User) of type ecnu.testing.meethere.util.Result<br/>Redundant null check at UserController.java:[line 30]<br/>Redundant null check at UserController.java:[line 30]</p>
+</td>
+</tr>
+</table>
+<p>
+<br/>
+<br/>
+</p>
+<p>
+<br/>
+<br/>
+</p>
+<h1>
+<a name="Details">Warning Types</a>
+</h1>
+<h2>
+<a name="EI_EXPOSE_REP">May expose internal representation by returning reference to mutable object</a>
+</h2>
+
+  <p> Returning a reference to a mutable object value stored in one of the object's fields
+  exposes the internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Returning a new copy of the object is better approach in many situations.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="EI_EXPOSE_REP2">May expose internal representation by incorporating reference to mutable object</a>
+</h2>
+
+  <p> This code stores a reference to an externally mutable object into the
+  internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Storing a copy of the object is better approach in many situations.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="ME_MUTABLE_ENUM_FIELD">Enum field is public and mutable</a>
+</h2>
+
+  <p>A mutable public field is defined inside a public enum, thus can be changed by malicious code or by accident from another package.
+  Though mutable enum fields may be used for lazy initialization, it's a bad practice to expose them to the outer world.
+  Consider declaring this field final and/or package-private.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE">Redundant nullcheck of value known to be non-null</a>
+</h2>
+
+<p> This method contains a redundant check of a known non-null value against
+the constant null.</p>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+<h2>
+<a name="SBSC_USE_STRINGBUFFER_CONCATENATION">Method concatenates strings using + in a loop</a>
+</h2>
+
+<p> The method seems to be building a String using concatenation in a loop.
+In each iteration, the String is converted to a StringBuffer/StringBuilder,
+   appended to, and converted back to a String.
+   This can lead to a cost quadratic in the number of iterations,
+   as the growing string is recopied in each iteration. </p>
+
+<p>Better performance can be obtained by using
+a StringBuffer (or StringBuilder in Java 1.5) explicitly.</p>
+
+<p> For example:</p>
+<pre>
+  // This is bad
+  String s = "";
+  for (int i = 0; i &lt; field.length; ++i) {
+    s = s + field[i];
+  }
+
+  // This is better
+  StringBuffer buf = new StringBuffer();
+  for (int i = 0; i &lt; field.length; ++i) {
+    buf.append(field[i]);
+  }
+  String s = buf.toString();
+</pre>
+
+    
+<p>
+<br/>
+<br/>
+</p>
+</body>
+</html>
