@@ -33,6 +33,7 @@ public class AdminServiceImpl implements AdminService {
      *  说明：根据主键字段进行删除，方法参数必须包含完整的主键属性 *
      *  @param key
      *  @return */
+    @Override
     public int delete(Integer key) {
         return adminMapper.deleteByPrimaryKey(key);
     }
@@ -41,6 +42,7 @@ public class AdminServiceImpl implements AdminService {
      *  说明：根据主键更新实体全部字段，null值会被更新 *
      *  @param entity
      *  @return */
+    @Override
     public int updateAll(Admin entity) {
         return adminMapper.updateByPrimaryKey(entity);
     }
@@ -49,6 +51,7 @@ public class AdminServiceImpl implements AdminService {
      *  根据主键更新属性不为null的值 *
      *  @param entity
      *  @return */
+    @Override
     public int updateNotNull(Admin entity) {
         return adminMapper.updateByPrimaryKeySelective(entity);
     }
