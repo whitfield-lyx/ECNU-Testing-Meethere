@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">meethere</a> &gt; <a href="index.source.html" class="el_package">ecnu.testing.meethere.service</a> &gt; <span class="el_source">UserServiceImpl.java</span></div><h1>UserServiceImpl.java</h1><pre class="source lang-java linenums">package ecnu.testing.meethere.service;
+
+import ecnu.testing.meethere.mapper.UserMapper;
+import ecnu.testing.meethere.model.User;
+import ecnu.testing.meethere.util.*;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+@Service
+<span class="fc" id="L14">public class UserServiceImpl implements UserService {</span>
+    @Autowired
+    private UserMapper userMapper;
+    @Override
+    public User selectByKey(Integer key) {
+<span class="fc" id="L19">        return userMapper.selectByPrimaryKey(key);</span>
+    }
+
+    @Override
+    public Result save(User user) {
+<span class="fc" id="L24">        List&lt;User&gt; userList = userMapper.selectByName(user.getName());</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if(userList.isEmpty()){</span>
+<span class="fc" id="L26">            userMapper.insert(user);</span>
+<span class="fc" id="L27">            return ResultFactory.buildSuccessResult(&quot;用户注册成功&quot;);</span>
+        }
+        else {
+            //System.out.println(userList);
+<span class="nc" id="L31">            return ResultFactory.buildFailResult(&quot;已存在该用户名的用户&quot;);</span>
+        }
+    }
+
+    @Override
+    public int delete(Integer key) {
+<span class="nc" id="L37">        return userMapper.deleteByPrimaryKey(key);</span>
+    }
+
+    @Override
+    public int updateAll(User entity) {
+<span class="nc" id="L42">        return userMapper.updateByPrimaryKey(entity);</span>
+    }
+
+    @Override
+    public int updateNotNull(User entity) {
+<span class="nc" id="L47">        return userMapper.updateByPrimaryKeySelective(entity);</span>
+    }
+
+    @Override
+    public Result login(User user){
+        /* 此处只含有name与password信息 */
+<span class="fc" id="L53">        String name= user.getName();</span>
+        //System.out.println(&quot;user name is &quot;+name+&quot; password is &quot;+user.getPassword());
+<span class="fc" id="L55">        List&lt;User&gt; userList = userMapper.selectByName(name);</span>
+        /* post condition: userList长度为0或1 */
+<span class="pc bpc" id="L57" title="2 of 4 branches missed.">        if(userList == null || userList.isEmpty()){</span>
+<span class="fc" id="L58">            return ResultFactory.buildFailResult(&quot;不存在该用户名&quot;);</span>
+        }
+<span class="nc" id="L60">        User myUser = userList.get(0);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if(!myUser.getPassword().equals(user.getPassword())){</span>
+<span class="nc" id="L62">            return ResultFactory.buildFailResult(&quot;用户名或密码错误&quot;);</span>
+        }else {
+<span class="nc" id="L64">            return ResultFactory.buildSuccessResult(&quot;用户登录成功&quot;);</span>
+        }
+    }
+
+    @Override
+    public int updatePassword(Integer userId, User user) {
+<span class="fc" id="L70">        String password = user.getPassword();</span>
+<span class="fc" id="L71">        User oldUser = selectByKey(userId);</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if (oldUser == null){</span>
+<span class="nc" id="L73">            Logger logger = (Logger) LoggerFactory.getLogger(getClass());</span>
+<span class="nc" id="L74">            logger.info(&quot;不存在该用户&quot;);</span>
+            //System.err.println(&quot;不存在该用户&quot;);
+<span class="nc" id="L76">            return -1;</span>
+        }
+        //System.out.println(&quot;userId: &quot;+userId+&quot; old password: &quot;+user.getPassword());
+<span class="nc" id="L79">        oldUser.setPassword(password);</span>
+        //System.out.println(&quot;userId: &quot;+userId+&quot; new password: &quot;+password);
+<span class="nc" id="L81">        return userMapper.updateByPrimaryKey(user);</span>
+    }
+
+    @Override
+    public String getNickname(Integer userId) {
+<span class="nc" id="L86">        return selectByKey(userId).getNickname();</span>
+    }
+
+    @Override
+    public Integer getIdByName(String name) {
+<span class="nc" id="L91">        List&lt;User&gt; userList = userMapper.selectByName(name);</span>
+        /* post condition: userList长度为0或1 */
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if(userList==null){</span>
+<span class="nc" id="L94">            Logger logger = (Logger) LoggerFactory.getLogger(getClass());</span>
+<span class="nc" id="L95">            logger.info(&quot;不存在该用户名&quot;);</span>
+            //System.out.println(&quot;不存在该用户名&quot;);
+<span class="nc" id="L97">            return 0;</span>
+        }
+<span class="nc bnc" id="L99" title="All 4 branches missed.">        else if(userList.size()==1&amp;&amp;userList.get(0)!=null){</span>
+<span class="nc" id="L100">            return userList.get(0).getUserId();</span>
+        }
+<span class="nc" id="L102">        return -1;</span>
+    }
+
+    @Override
+    public List&lt;User&gt; selectAllUser() {
+<span class="fc" id="L107">        return userMapper.selectAllUser();</span>
+    }
+
+    @Override
+    public int updatePasswordByAdmin(User user) {
+<span class="nc" id="L112">        Logger logger = (Logger) LoggerFactory.getLogger(getClass());</span>
+<span class="nc" id="L113">        logger.info(&quot;userId: &quot;+user.getUserId()+&quot; new password: &quot;+user.getPassword());</span>
+        //System.out.println(&quot;userId: &quot;+user.getUserId()+&quot; new password: &quot;+user.getPassword());
+<span class="nc" id="L115">        return userMapper.updateByPrimaryKey(user);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

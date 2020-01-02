@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">meethere</a> &gt; <a href="index.source.html" class="el_package">ecnu.testing.meethere.util</a> &gt; <span class="el_source">OrderInfo.java</span></div><h1>OrderInfo.java</h1><pre class="source lang-java linenums">package ecnu.testing.meethere.util;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import ecnu.testing.meethere.model.Order;
+import ecnu.testing.meethere.model.Stadium;
+import org.slf4j.LoggerFactory;
+
+import java.util.Date;
+import java.util.logging.Logger;
+
+public class OrderInfo {
+    private Integer orderId;
+    private Integer userId;
+    private String stadiumId;
+    @JsonFormat(locale=&quot;zh&quot;, timezone=&quot;GMT+8&quot;, pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;)
+    private Date time;
+    private Byte isChecked;
+    private String address;
+    private Integer price;
+
+    public Integer getHour() {
+<span class="nc" id="L22">        return hour;</span>
+    }
+
+    public void setHour(Integer hour) {
+<span class="nc" id="L26">        this.hour = hour;</span>
+<span class="nc" id="L27">    }</span>
+
+    private Integer hour;
+
+    public Integer getOrderId() {
+<span class="nc" id="L32">        return orderId;</span>
+    }
+
+    public void setOrderId(Integer orderId) {
+<span class="nc" id="L36">        this.orderId = orderId;</span>
+<span class="nc" id="L37">    }</span>
+
+    public Integer getUserId() {
+<span class="nc" id="L40">        return userId;</span>
+    }
+
+    public void setUserId(Integer userId) {
+<span class="nc" id="L44">        this.userId = userId;</span>
+<span class="nc" id="L45">    }</span>
+
+    public String getStadiumId() {
+<span class="nc" id="L48">        return stadiumId;</span>
+    }
+
+    public void setStadiumId(String stadiumId) {
+<span class="nc" id="L52">        this.stadiumId = stadiumId;</span>
+<span class="nc" id="L53">    }</span>
+
+    public Date getTime() {
+<span class="nc" id="L56">        return time;</span>
+    }
+
+    public void setTime(Date time) {
+<span class="nc" id="L60">        this.time = time;</span>
+<span class="nc" id="L61">    }</span>
+
+    public Byte getIsChecked() {
+<span class="nc" id="L64">        return isChecked;</span>
+    }
+
+    public void setIsChecked(Byte isChecked) {
+<span class="nc" id="L68">        this.isChecked = isChecked;</span>
+<span class="nc" id="L69">    }</span>
+
+    public String getAddress() {
+<span class="nc" id="L72">        return address;</span>
+    }
+
+    public void setAddress(String address) {
+<span class="nc" id="L76">        this.address = address;</span>
+<span class="nc" id="L77">    }</span>
+
+    public Integer getPrice() {
+<span class="nc" id="L80">        return price;</span>
+    }
+
+    public void setPrice(Integer price) {
+<span class="nc" id="L84">        this.price = price;</span>
+<span class="nc" id="L85">    }</span>
+
+<span class="nc" id="L87">    public OrderInfo(Order order, Stadium stadium){</span>
+<span class="nc" id="L88">        this.orderId = order.getOrderId();</span>
+<span class="nc" id="L89">        this.userId = order.getUserId();</span>
+<span class="nc" id="L90">        this.stadiumId = order.getStadiumId();</span>
+<span class="nc" id="L91">        this.time = order.getTime();</span>
+<span class="nc" id="L92">        this.isChecked = order.getIsChecked();</span>
+<span class="nc" id="L93">        this.address = stadium.getAddress();</span>
+<span class="nc" id="L94">        this.price = stadium.getPrice();</span>
+<span class="nc" id="L95">        this.hour = order.getHour();</span>
+<span class="nc" id="L96">    }</span>
+
+    public void display(){
+<span class="nc" id="L99">        Logger logger = (Logger) LoggerFactory.getLogger(getClass());</span>
+<span class="nc" id="L100">        logger.info(&quot;orderId: &quot;+orderId+&quot; userId: &quot;+userId+&quot; stadiumId: &quot;+stadiumId+&quot; time: &quot;</span>
+                 +time+&quot; isChecked: &quot;+isChecked+&quot; address: &quot;+address+&quot; price: &quot;+price);
+        //System.out.println(&quot;orderId: &quot;+orderId+&quot; userId: &quot;+userId+&quot; stadiumId: &quot;+stadiumId+&quot; time: &quot;
+               // +time+&quot; isChecked: &quot;+isChecked+&quot; address: &quot;+address+&quot; price: &quot;+price);
+<span class="nc" id="L104">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

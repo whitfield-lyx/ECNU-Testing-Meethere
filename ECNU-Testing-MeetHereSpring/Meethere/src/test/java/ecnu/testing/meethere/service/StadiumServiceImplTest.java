@@ -5,32 +5,24 @@ import ecnu.testing.meethere.mapper.StadiumMapper;
 import ecnu.testing.meethere.model.Stadium;
 import ecnu.testing.meethere.util.Result;
 import org.assertj.core.util.Lists;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class StadiumServiceImplTest {
     @Mock
     private StadiumMapper stadiumMapper;
     @InjectMocks
     private StadiumServiceImpl stadiumServiceImpl;
 
-    @Before
+    @BeforeEach
     public void  setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
     }

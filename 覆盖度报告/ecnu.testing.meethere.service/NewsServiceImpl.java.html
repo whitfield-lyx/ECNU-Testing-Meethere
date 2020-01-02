@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NewsServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">meethere</a> &gt; <a href="index.source.html" class="el_package">ecnu.testing.meethere.service</a> &gt; <span class="el_source">NewsServiceImpl.java</span></div><h1>NewsServiceImpl.java</h1><pre class="source lang-java linenums">package ecnu.testing.meethere.service;
+
+import ecnu.testing.meethere.mapper.NewsMapper;
+import ecnu.testing.meethere.model.News;
+import ecnu.testing.meethere.util.Result;
+import ecnu.testing.meethere.util.ResultFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+
+@Service
+<span class="fc" id="L14">public class NewsServiceImpl implements NewsService {</span>
+    @Autowired
+    private NewsMapper newsMapper;
+    @Override
+    public News selectByKey(Integer key) {
+<span class="fc" id="L19">        return newsMapper.selectByPrimaryKey(key);</span>
+    }
+
+    @Override
+    public int save(News entity) {
+<span class="fc" id="L24">        entity.setTime(new Date());</span>
+<span class="fc" id="L25">        return newsMapper.insert(entity);</span>
+    }
+
+    @Override
+    public int delete(Integer key) {
+<span class="fc" id="L30">        return newsMapper.deleteByPrimaryKey(key);</span>
+    }
+
+    @Override
+    public int updateAll(News entity) {
+<span class="nc" id="L35">        return newsMapper.updateByPrimaryKey(entity);</span>
+    }
+
+    @Override
+    public int updateNotNull(News entity) {
+<span class="nc" id="L40">        return newsMapper.updateByPrimaryKeySelective(entity);</span>
+    }
+
+    @Override
+    public List&lt;News&gt; selectAllNews(){
+<span class="fc" id="L45">        return newsMapper.selectAllNews();</span>
+    }
+
+    @Override
+    public Result updateNews(Integer newsId, News news) {
+<span class="fc" id="L50">        String content = news.getContent();</span>
+<span class="fc" id="L51">        News oldNews = newsMapper.selectByPrimaryKey(newsId);</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if(oldNews==null){</span>
+<span class="fc" id="L53">            return ResultFactory.buildFailResult(&quot;不存在新闻，修改失败&quot;);</span>
+        }
+<span class="nc" id="L55">        oldNews.setContent(content);</span>
+<span class="nc" id="L56">        news.setTime(new Date());</span>
+<span class="nc" id="L57">        newsMapper.updateByPrimaryKey(oldNews);</span>
+<span class="nc" id="L58">        return ResultFactory.buildSuccessResult(&quot;修改新闻成功&quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

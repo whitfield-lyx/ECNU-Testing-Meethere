@@ -3,24 +3,19 @@ package ecnu.testing.meethere.service;
 import ecnu.testing.meethere.mapper.AdminMapper;
 import ecnu.testing.meethere.model.Admin;
 import ecnu.testing.meethere.util.Result;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(SpringExtension.class)
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@ExtendWith(SpringExtension.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 class AdminServiceImplTest {
 
 
@@ -30,7 +25,7 @@ class AdminServiceImplTest {
     @InjectMocks
     private AdminServiceImpl adminServiceImpl;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception{
         MockitoAnnotations.initMocks(this);
     }

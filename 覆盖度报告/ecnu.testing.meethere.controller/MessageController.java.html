@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MessageController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">meethere</a> &gt; <a href="index.source.html" class="el_package">ecnu.testing.meethere.controller</a> &gt; <span class="el_source">MessageController.java</span></div><h1>MessageController.java</h1><pre class="source lang-java linenums">package ecnu.testing.meethere.controller;
+
+import ecnu.testing.meethere.model.Message;
+import ecnu.testing.meethere.service.MessageServiceImpl;
+import ecnu.testing.meethere.util.MessageInfo;
+import ecnu.testing.meethere.util.Result;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@CrossOrigin
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class MessageController {
+    private final
+    MessageServiceImpl messageServiceImpl;
+
+<span class="fc" id="L19">    public MessageController(MessageServiceImpl messageServiceImpl) {</span>
+<span class="fc" id="L20">        this.messageServiceImpl = messageServiceImpl;</span>
+<span class="fc" id="L21">    }</span>
+
+    /**
+     * 获取所有留言
+     */
+    @GetMapping(&quot;/message&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    public List&lt;MessageInfo&gt; getMessageList()
+    {
+<span class="nc" id="L30">        return messageServiceImpl.selectAllMessage();</span>
+    }
+
+    /**
+     * 获取指定留言 仅测试用
+     */
+    @GetMapping(&quot;/message/{id}&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    public Message getMessageByID(@PathVariable(&quot;id&quot;) Integer id)
+    {
+<span class="nc" id="L40">        return messageServiceImpl.selectByKey(id);</span>
+    }
+
+    /**
+     * 用户 发表一个留言
+     */
+    @PostMapping(&quot;/message&quot;)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addMessage(@SessionAttribute Integer userId, @RequestBody Message message)
+    {
+<span class="nc" id="L50">        message.setUserId(userId);</span>
+<span class="nc" id="L51">        messageServiceImpl.save(message);</span>
+<span class="nc" id="L52">    }</span>
+
+    /**
+     * 管理员 删除某个留言
+     */
+    @DeleteMapping(&quot;/message/{id}&quot;)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public int deleteMessageByID(@PathVariable(&quot;id&quot;) Integer id){
+<span class="nc" id="L60">        return messageServiceImpl.delete(id);</span>
+    }
+
+    /**
+     * 管理员 审核通过某个留言
+     */
+    @PutMapping(&quot;/message/check/{id}&quot;)
+    public int checkMessage(@PathVariable(&quot;id&quot;) Integer messageId)
+    {
+<span class="nc" id="L69">        return messageServiceImpl.checkMessage(messageId);</span>
+    }
+
+    /**
+     * 用户 修改留言 仅可修改自己发表的留言
+     */
+    @PutMapping(&quot;/message/update/{id}&quot;)
+    public Result updateMessage(@SessionAttribute Integer userId, @PathVariable(&quot;id&quot;) Integer messageId, @RequestBody Message message){
+        /* 仅修改 content 字段*/
+<span class="nc" id="L78">        return messageServiceImpl.updateMessage(userId, messageId, message);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">meethere</a> &gt; <a href="index.source.html" class="el_package">ecnu.testing.meethere.service</a> &gt; <span class="el_source">OrderServiceImpl.java</span></div><h1>OrderServiceImpl.java</h1><pre class="source lang-java linenums">package ecnu.testing.meethere.service;
+
+import ecnu.testing.meethere.mapper.*;
+import ecnu.testing.meethere.model.*;
+import ecnu.testing.meethere.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+@Service
+<span class="fc" id="L13">public class OrderServiceImpl implements OrderService {</span>
+    @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private StadiumMapper stadiumMapper;
+
+    @Override
+    public Order selectByKey(Integer key) {
+<span class="fc" id="L21">        return orderMapper.selectByPrimaryKey(key);</span>
+    }
+
+    @Override
+    public int save(Order entity) {
+<span class="nc" id="L26">        return orderMapper.insert(entity);</span>
+    }
+
+    @Override
+    public int delete(Integer key) {
+<span class="fc" id="L31">        Order order = selectByKey(key);</span>
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if (order == null){</span>
+<span class="fc" id="L33">            return -1;</span>
+        }
+<span class="nc" id="L35">        Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());</span>
+<span class="nc" id="L36">        String deleteTime = &quot;&quot;;</span>
+<span class="nc" id="L37">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="nc" id="L38">        sdf.setTimeZone(TimeZone.getTimeZone(&quot;GMT+0&quot;));</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        for(int i=0; i&lt;order.getHour(); i++){</span>
+<span class="nc" id="L40">            String time = DateUtils.addHours(sdf.format(order.getTime()),i);</span>
+<span class="nc" id="L41">            deleteTime = deleteTime + time;</span>
+
+        }
+<span class="nc" id="L44">        String time = stadium.getTime();</span>
+<span class="nc" id="L45">        stadium.setTime(time.replace(deleteTime,&quot;&quot;));</span>
+<span class="nc" id="L46">        stadiumMapper.updateByPrimaryKey(stadium);</span>
+<span class="nc" id="L47">        return orderMapper.deleteByPrimaryKey(key);</span>
+    }
+
+    @Override
+    public int updateAll(Order entity) {
+<span class="nc" id="L52">        return orderMapper.updateByPrimaryKey(entity);</span>
+    }
+
+    @Override
+    public int updateNotNull(Order entity) {
+<span class="nc" id="L57">        return orderMapper.updateByPrimaryKeySelective(entity);</span>
+    }
+
+    @Override
+    public List&lt;OrderInfo&gt; selectAllOrder() {
+<span class="fc" id="L62">        List&lt;Order&gt; orderList = orderMapper.selectAllOrder();</span>
+<span class="fc" id="L63">        List&lt;OrderInfo&gt; orderInfoList = new ArrayList&lt;OrderInfo&gt;();</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        for(Order order : orderList){</span>
+<span class="nc" id="L65">            Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());</span>
+<span class="nc" id="L66">            OrderInfo orderInfo = new OrderInfo(order,stadium);</span>
+<span class="nc" id="L67">            orderInfoList.add(orderInfo);</span>
+<span class="nc" id="L68">            orderInfo.display();</span>
+<span class="nc" id="L69">        }</span>
+<span class="fc" id="L70">        return orderInfoList;</span>
+    }
+
+    @Override
+    public int checkOrder(Integer orderId) {
+<span class="fc" id="L75">        return orderMapper.updateIsChecked(orderId);</span>
+    }
+
+    @Override
+    public List&lt;OrderInfo&gt; selectMyOrder(Integer userId) {
+<span class="fc" id="L80">        List&lt;Order&gt; orderList = orderMapper.selectMyOrder(userId);</span>
+<span class="fc" id="L81">        List&lt;OrderInfo&gt; orderInfoList = new ArrayList&lt;OrderInfo&gt;();</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        for(Order order : orderList){</span>
+<span class="nc" id="L83">            Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());</span>
+<span class="nc" id="L84">            orderInfoList.add(new OrderInfo(order, stadium));</span>
+<span class="nc" id="L85">        }</span>
+<span class="fc" id="L86">        return orderInfoList;</span>
+    }
+
+    @Override
+    public Result addOrder(Order order) {
+<span class="fc" id="L91">        Stadium stadium = stadiumMapper.selectByPrimaryKey(order.getStadiumId());</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if (stadium == null){</span>
+<span class="fc" id="L93">            return ResultFactory.buildFailResult(&quot;查询结果为空&quot;);</span>
+        }
+<span class="nc" id="L95">        String bookedTime = stadium.getTime();</span>
+<span class="nc" id="L96">        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span>
+<span class="nc" id="L97">        sdf.setTimeZone(TimeZone.getTimeZone(&quot;GMT+0&quot;));</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        for(int i=0; i&lt;order.getHour(); i++){</span>
+<span class="nc" id="L99">            String time = DateUtils.addHours(sdf.format(order.getTime()),i);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">            if(bookedTime==null){</span>
+<span class="nc" id="L101">                bookedTime=&quot;&quot;;</span>
+<span class="nc" id="L102">                break;</span>
+            }
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if(bookedTime.contains(time)){</span>
+<span class="nc" id="L105">                return ResultFactory.buildFailResult(&quot;该时间已被预约，新增订单失败，请选择其他时间&quot;);</span>
+            }
+        }
+        //若无重合的时间，则新增order
+<span class="nc" id="L109">        save(order);</span>
+        //并在bookedTime中加入新的时间
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        for(int i=0; i&lt;order.getHour(); i++){</span>
+<span class="nc" id="L112">            String time = DateUtils.addHours(sdf.format(order.getTime()),i);</span>
+<span class="nc" id="L113">            bookedTime = bookedTime + time;</span>
+        }
+<span class="nc" id="L115">        stadium.setTime(bookedTime);</span>
+        //更新stadium中的time字段
+<span class="nc" id="L117">        stadiumMapper.updateByPrimaryKey(stadium);</span>
+<span class="nc" id="L118">        return ResultFactory.buildSuccessResult(&quot;新增订单成功&quot;);</span>
+    }
+
+    @Override
+    public Result updateMyOrder(Integer userId, Integer orderId, Integer hour) {
+<span class="fc" id="L123">        Order order = orderMapper.selectByPrimaryKey(orderId);</span>
+        //System.out.println(&quot;orderId: &quot;+orderId+&quot; user id: &quot;+order.getUserId());
+<span class="pc bpc" id="L125" title="3 of 4 branches missed.">        if(order == null || !userId.equals(order.getUserId())){</span>
+<span class="fc" id="L126">            return ResultFactory.buildFailResult(&quot;用户只能修改自己的订单&quot;);</span>
+        }
+<span class="nc" id="L128">        Order newOrder = order; /* newOrder is not redundant */</span>
+<span class="nc" id="L129">        newOrder.setHour(hour);</span>
+<span class="nc" id="L130">        delete(orderId);</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">        if(addOrder(newOrder).getCode()==200 /* SUCCESS CODE */){</span>
+<span class="nc" id="L132">            return ResultFactory.buildSuccessResult(&quot;修改订单时长成功&quot;);</span>
+        }
+        else {
+<span class="nc" id="L135">            addOrder(order);</span>
+<span class="nc" id="L136">            return ResultFactory.buildFailResult(&quot;该时间已被预约，修改订单失败，请选择其他时间&quot;);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>
