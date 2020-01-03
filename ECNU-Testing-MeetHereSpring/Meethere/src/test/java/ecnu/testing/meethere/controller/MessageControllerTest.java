@@ -56,9 +56,8 @@ class MessageControllerTest {
     @DisplayName("happy_path_testing_addMessage()")
     void happy_path_testing_addMessage() throws Exception {
 
-        Message message=new Message(1, 0, new Date(), "test message", (byte)1);
-        Integer userId = 1;
-        message.setUserId(userId);
+        Message message=new Message(1, 1, new Date(), "test message", (byte)1);
+
 
         when(messageServiceImpl.save(any(Message.class))).thenReturn(1);
 
@@ -66,11 +65,11 @@ class MessageControllerTest {
         ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
         String requestJson = objectWriter.writeValueAsString(message);
 
-        ResultActions perform=mockMvc.perform(post("/api/message")
+        mockMvc.perform(post("/api/message")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestJson).characterEncoding("UTF-8"))
                 .andExpect(status().isCreated());
-        verify(message,times(1)).setUserId(userId);
+        verify(message,times(1)).setUserId(1);
         verify(messageServiceImpl,times(1)).save(any(Message.class));
     }
 
