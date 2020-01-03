@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">meethere</a> &gt; <a href="index.source.html" class="el_package">ecnu.testing.meethere.controller</a> &gt; <span class="el_source">OrderController.java</span></div><h1>OrderController.java</h1><pre class="source lang-java linenums">package ecnu.testing.meethere.controller;
+
+import ecnu.testing.meethere.model.Order;
+import ecnu.testing.meethere.service.OrderServiceImpl;
+import ecnu.testing.meethere.util.OrderInfo;
+import ecnu.testing.meethere.util.Result;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@CrossOrigin
+@RestController
+@RequestMapping(&quot;/api/order&quot;)
+public class OrderController {
+    private final OrderServiceImpl orderServiceImpl;
+
+<span class="fc" id="L18">    public OrderController(OrderServiceImpl orderServiceImpl) {</span>
+<span class="fc" id="L19">        this.orderServiceImpl = orderServiceImpl;</span>
+<span class="fc" id="L20">    }</span>
+
+    /**
+     * 对管理员 显示所有订单
+     */
+    @GetMapping(&quot;/all&quot;)
+    public List&lt;OrderInfo&gt; getAllOrderList()
+    {
+<span class="nc" id="L28">        return orderServiceImpl.selectAllOrder();</span>
+    }
+
+    /**
+     * 对管理员 审核通过某个订单
+     */
+    @PutMapping(&quot;/check/{id}&quot;)
+    public int checkOrder(@PathVariable(&quot;id&quot;) Integer orderId)
+    {
+<span class="nc" id="L37">        return orderServiceImpl.checkOrder(orderId);</span>
+    }
+
+    /**
+     * 对用户 显示该用户的所有订单
+     */
+    @GetMapping(&quot;/myOrder&quot;)
+    public List&lt;OrderInfo&gt; getMyOrderList(@SessionAttribute Integer userId)
+    {
+<span class="nc" id="L46">        return orderServiceImpl.selectMyOrder(userId);</span>
+    }
+
+    /**
+     * 对用户 新增一个订单
+     */
+    @PostMapping(&quot;/newOrder&quot;)
+    public Result addOrder(@SessionAttribute Integer userId, @RequestBody Order order){
+<span class="nc" id="L54">        order.setUserId(userId);</span>
+<span class="nc" id="L55">        return orderServiceImpl.addOrder(order);</span>
+    }
+
+    /**
+     * 用户和管理员都可 取消某个订单
+     */
+    @DeleteMapping(&quot;/{id}&quot;)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public int deleteOrderByID(@PathVariable(&quot;id&quot;) Integer orderId){
+<span class="nc" id="L64">        return orderServiceImpl.delete(orderId);</span>
+    }
+
+    /**
+     * 对用户 显示该用户的所有订单页面中
+     * 可以修改且只能修改自己订单的时长
+     */
+    @GetMapping(&quot;/myOrder/{id}&quot;)
+    public Result updateMyOrder(@SessionAttribute Integer userId, @PathVariable(&quot;id&quot;) Integer orderId, @RequestBody Integer hour)
+    {
+<span class="nc" id="L74">        return orderServiceImpl.updateMyOrder(userId, orderId, hour);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.8.201612092310</span></div></body></html>
